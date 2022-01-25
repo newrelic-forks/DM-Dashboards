@@ -1,0 +1,151 @@
+{
+  "template" : {
+    "filter" : {
+      "event_types" : [ "NginxSample" ],
+      "filter_first" : false,
+      "key_names" : [ "entityName", "label.env", "label.role", "software.edition", "software.version", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ]
+    },
+    "id" : "{{dashboard_id}}",
+    "title" : "Nginx",
+    "widgets" : [ {
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 0
+      },
+      "name" : "1",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "NginxSample" ],
+        "query" : "SELECT average(`nginx.server.net.requestsPerSecond`) * uniqueCount(entityName) as 'Requests' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Requests per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "name" : "2",
+      "props" : {
+        "actions" : false,
+        "containerNames" : [ "beyond" ],
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **NGINX** \n\nNGINX is a free, open-source, high-performance HTTP server, reverse proxy, and IMAP/POP3 proxy server.\n\n\n:::",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        }
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "name" : "3",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "NginxSample" ],
+        "query" : "SELECT average(`nginx.server.net.requestsPerSecond`) as 'Requests' FROM Metric facet entityName TIMESERIES until 1 minutes ago",
+        "title" : "Requests per second, by server",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "name" : "4",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "NginxSample" ],
+        "query" : "SELECT average(`nginx.server.net.connectionsActive`) * uniqueCount(entityName) as 'Active Connections' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Active Connections",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "name" : "5",
+      "props" : {
+        "accountId" : "{{account_id}}",
+        "actions" : {
+          "expand-item" : true,
+          "get-image" : false,
+          "pin-to-insights" : false,
+          "view-cds-query" : false,
+          "view-in-insights" : false,
+          "view-nrql-query" : false
+        },
+        "endpoint" : "/v2/nrql",
+        "filterBySource" : [ "config/nginx" ],
+        "footerDisabled" : true,
+        "pathsCount" : 600,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "title" : "Nginx Inventory",
+        "showTimezone" : true
+      },
+      "renderer" : "inventory"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "name" : "6",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "NginxSample" ],
+        "query" : "SELECT average(`nginx.server.net.connectionsAcceptedPerSecond`) * uniqueCount(entityName) as 'Connections Accepted' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Connections Accepted per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "name" : "7",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "NginxSample" ],
+        "query" : "SELECT average(`nginx.server.net.connectionsDroppedPerSecond`) * uniqueCount(entityName) as 'Connections Dropped' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Connections Dropped per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

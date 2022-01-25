@@ -1,0 +1,184 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "HashiCorp Consul",
+    "filter" : {
+      "key_names" : [ "entityName", "displayName", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "ConsulAgentSample", "ConsulDatacenterSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`consul.datacenter.catalog.registeredNodes`) as 'Registered', latest(`consul.datacenter.catalog.upNodes`) as 'Up', latest(`consul.datacenter.catalog.passingNodes`) as 'Passing', latest(`consul.datacenter.catalog.warningNodes`) as 'Warning', latest(`consul.datacenter.catalog.criticalNodes`) as 'Critical' FROM Metric facet displayName since 5 minutes ago",
+        "title" : "Node Status Per Cluster",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ConsulDatacenterSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **HashiCorp Consul** \n\nConsul is a distributed service mesh to connect, secure, and configure services across any runtime platform and public or private cloud\n\nThe Consul integration collects a wide array of metrics which facilitate the diagnosis of performance bottlenecks.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`leader`) as 'Current Leader' FROM Metric facet displayName since 5 minutes ago",
+        "title" : "Current Leader",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ConsulDatacenterSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`consul.datacenter.raft.lastContactAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "title" : "Average Time Since Leader Contact",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ConsulDatacenterSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`consul.datacenter.raft.commitTimeAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "title" : "Average Leader Raft Log Commit",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ConsulDatacenterSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`consul.datacenter.raft.txns`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "title" : "Raft Transactions",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ConsulDatacenterSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`consul.agent.txnAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "title" : "Average Transaction Operation Duration",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ConsulAgentSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`consul.agent.consul.agent.runtime.allocationsInBytes`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "title" : "Memory Allocated",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ConsulAgentSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`consul.agent.runtime.virtualAddressSpaceInBytes`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "title" : "Total Virtual Address Space Size",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ConsulAgentSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`consul.agent.kvStoresAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "title" : "Average KV Store Update Duration",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ConsulAgentSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "Kafka",
+    "filter" : {
+      "key_names" : [ "entityName", "displayName", "topic", "host", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "KafkaBrokerSample", "KafkaProducerSample", "KafkaConsumerSample", "KafkaTopicSample", "KafkaOffsetSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniqueCount(entityName) as 'Brokers' FROM Metric where entityName like 'broker:%'",
+        "title" : "Number of Brokers",
+        "showTimezone" : true,
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaBrokerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.broker.messagesInPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago where entityName like 'broker:%' facet entityName",
+        "title" : "Messages In Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaBrokerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **Kafka** \n\nApache Kafka is an open source distributed streaming platform which aims to provide a high-throughput, low-latency platform for managing message feeds.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.broker.ioInPerSecond`) FROM Metric timeseries 10 minute since 12 hours ago where entityName like 'broker:%' facet entityName",
+        "title" : "Broker Bytes In Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaBrokerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.broker.ioOutPerSecond`) FROM Metric timeseries 10 minute since 12 hours ago where entityName like 'broker:%' facet entityName",
+        "title" : "Broker Bytes Out Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaBrokerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.broker.replication.leaderElectionPerSecond`) FROM Metric timeseries 10 minute since 12 hours ago where entityName like 'broker:%' facet entityName",
+        "title" : "Leader Election Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaBrokerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.broker.replication.uncleanLeaderElectionPerSecond`) FROM Metric timeseries 10 minute since 12 hours ago where entityName like 'broker:%' facet entityName",
+        "title" : "Unclean Leader Election Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaBrokerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.broker.bytesWrittenToTopicPerSecond`) FROM Metric timeseries 10 minute since 12 hours ago where entityName like 'broker:%' facet topic",
+        "title" : "Topic Bytes Written",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaBrokerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.consumer.fetchPerSecond`) FROM Metric TIMESERIES 10 minute since 12 hours ago where entityName like 'consumer:%' FACET entityName",
+        "title" : "Consumer Minimum Requests Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaConsumerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.consumer.maxLag`) FROM Metric TIMESERIES 10 minute since 12 hours ago where entityName like 'consumer:%' FACET entityName",
+        "title" : "Consumer Max Lag",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaConsumerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.broker.replication.unreplicatedPartitions`) FROM Metric timeseries 10 minute since 12 hours ago where entityName like 'broker:%' facet entityName",
+        "title" : "Unreplicated Partitions",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaBrokerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`kafka.consumer.totalLag`) FROM Metric TIMESERIES 10 minute since 12 hours ago facet displayName",
+        "title" : "Consumer Lag",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaOffsetSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.consumer.messageConsumptionPerSecond`) FROM Metric TIMESERIES 10 minute since 12 hours ago where entityName like 'consumer:%' FACET entityName",
+        "title" : "Consumer Messages Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaConsumerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "14",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELEct latest(`kafka.topic.underReplicatedPartitions`) as 'Under Replicated Partitions' FROM Metric facet entityName where entityName like 'topic%'",
+        "title" : "Number of Underreplicated Partitions",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaTopicSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "15",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.consumer.bytesInPerSecond`) FROM Metric TIMESERIES 10 minute since 12 hours ago where entityName like 'consumer:%' FACET entityName",
+        "title" : "Consumer Bytes In Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaConsumerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "16",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.producer.avgRequestLatency`) FROM Metric TIMESERIES 10 minute since 12 hours ago where entityName like 'producer:%' FACET entityName",
+        "title" : "Producer Request Avg Latency Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaProducerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "17",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`kafka.producer.ioWaitTime`) FROM Metric TIMESERIES 10 minute since 12 hours ago where entityName like 'producer:%' FACET entityName",
+        "title" : "Producer IO Wait Time in Milliseconds",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "KafkaProducerSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

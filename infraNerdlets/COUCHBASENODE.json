@@ -1,0 +1,97 @@
+{
+  "template" : {
+    "title" : "CouchbaseNodeSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Node_status",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Node status",
+        "hint" : "",
+        "query" : "SELECT latest(`node.status`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Memory_free",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Memory free",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.node.memoryFreeInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Swap_used",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Swap used",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.node.swapUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "CPU_utilization",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "CPU utilization",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.node.cpuUtilization`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memory_total",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Memory total",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.node.memoryTotalInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Swap_total",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Swap total",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.node.swapTotalInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

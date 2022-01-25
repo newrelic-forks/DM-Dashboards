@@ -1,0 +1,152 @@
+{
+  "template": {
+    "title": "Metric",
+    "filter": {},
+    "widgets": [
+      {
+        "name": "CPU_usage_(cores)",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 6,
+          "x": 0,
+          "y": 0
+        },
+        "props": {
+          "type": "line",
+          "title": "CPU usage (cores)",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "SELECT max(docker.container.cpuUsedCores) or max(k8s.container.cpuUsedCores) AS 'CPU usage' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto",
+            "offset": 0
+          },
+          "config": {
+            "legend": {
+              "enabled": false
+            },
+            "yScale": {
+              "domain": [
+                0,
+                100
+              ],
+              "static": true
+            }
+          }
+        }
+      },
+      {
+        "name": "CPU_utilization_(%)",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 6,
+          "x": 6,
+          "y": 0
+        },
+        "props": {
+          "type": "line",
+          "title": "CPU utilization (%)",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "SELECT max(docker.container.cpuPercent) or max(k8s.container.cpuCoresUtilization) AS 'CPU utilization' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto",
+            "offset": 0
+          },
+          "config": {
+            "legend": {
+              "enabled": false
+            },
+            "yScale": {
+              "domain": [
+                0,
+                100
+              ],
+              "static": true
+            }
+          }
+        }
+      },
+      {
+        "name": "Memory_usage_(bytes)",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 6,
+          "x": 0,
+          "y": 3
+        },
+        "props": {
+          "type": "line",
+          "title": "Memory usage (bytes)",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "SELECT max(docker.container.memoryUsageBytes) or max(k8s.container.memoryWorkingSetBytes) AS 'Memory usage' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto",
+            "offset": 0,
+            "events": {
+              "agent_ids": [
+                "{{entity.domainId}}"
+              ]
+            }
+          },
+          "config": {
+            "legend": {
+              "enabled": false
+            }
+          }
+        }
+      },
+      {
+        "name": "Storage_usage_(bytes)",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 6,
+          "x": 6,
+          "y": 3
+        },
+        "props": {
+          "type": "line",
+          "title": "Storage usage (bytes)",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "SELECT max(docker.container.ioTotalBytes) or max(k8s.container.fsUsedBytes) AS 'Storage used' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto",
+            "offset": 0,
+            "events": {
+              "agent_ids": [
+                "{{entity.domainId}}"
+              ]
+            }
+          },
+          "config": {
+            "legend": {
+              "enabled": false
+            }
+          }
+        }
+      },
+      {
+        "name": "Network_traffic_(bytes)",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 12,
+          "x": 0,
+          "y": 6
+        },
+        "props": {
+          "type": "area",
+          "title": "Network traffic (bytes)",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "SELECT average(docker.container.networkRxBytesPerSecond) AS 'Transmit bytes per second', average(docker.container.networkTxBytesPerSecond) AS 'Receive bytes per second' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto",
+            "offset": 0
+          }
+        }
+      }
+    ]
+  }
+}

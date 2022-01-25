@@ -1,0 +1,127 @@
+{
+  "template" : {
+    "title" : "OracleDatabaseSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Executions",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Executions",
+        "hint" : "Executions per second.",
+        "query" : "SELECT average(`oracle.database.executionsPerSecond`) as 'Executions' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Session_count",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Session count",
+        "hint" : "Session count.",
+        "query" : "SELECT latest(`oracle.database.sessionCount`) AS `Sessions` FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Transactions",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Transactions",
+        "hint" : "User transaction per second.",
+        "query" : "SELECT average(`oracle.database.query.transactionsPerSecond`) as 'Transactions' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Disk_reads_and_writes",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Disk reads and writes",
+        "hint" : "Total number of physical reads and writes.",
+        "query" : "SELECT average(`oracle.database.disk.readsPerSecond`) as 'Reads',average(`oracle.database.disk.writesPerSecond`) as 'Writes' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_physical_reads_and_writes_in_bytes",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total physical reads and writes in bytes",
+        "hint" : "Total physical reads and writes in bytes per second.",
+        "query" : "SELECT average(`oracle.database.disk.physicalReadBytesPerSecond`) as 'Physical reads', average(`oracle.database.disk.physicalWritesPerSecond`) as 'Physical writes' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "IO_megabytes",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "IO megabytes",
+        "hint" : "I/O megabytes per second.",
+        "query" : "SELECT average(`oracle.database.network.ioMegabytesPerSecond`) as 'IO megabytes' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Host_CPU_utilization",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Host CPU utilization",
+        "hint" : "Host CPU utilization (percentage).",
+        "query" : "SELECT average(`oracle.database.hostCpuUtilization`) as 'CPU utilization' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Global_bound_memory",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Global bound memory",
+        "hint" : "Maximum size of a work area executed in automatic mode.",
+        "query" : "SELECT average(`memory.pgaMaxSize`) as 'Max size' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

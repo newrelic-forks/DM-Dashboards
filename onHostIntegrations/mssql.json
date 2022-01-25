@@ -1,0 +1,229 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "MSSQL",
+    "filter" : {
+      "key_names" : [ "entityName", "displayName", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "MssqlInstanceSample", "MssqlDatabaseSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.bufferpool.batchRequestsPerSecond`) FROM Metric SINCE 1 hour AGO TIMESERIES FACET entityName",
+        "title" : "Average Batch Requests Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.stats.connections`) FROM Metric SINCE 1 hour AGO TIMESERIES FACET entityName",
+        "title" : "Average User Connections",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **Microsoft SQL Server** \n\nMicrosoft SQL Server is a relational database management system built by Microsoft.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.system.bufferPoolHitPercent`) as 'Buffer Cache Hit Ratio' FROM Metric SINCE 1 hour AGO TIMESERIES FACET entityName",
+        "title" : "Buffer Cache Hit Ratio",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.stats.lockWaitsPerSecond`) FROM Metric timeseries since 1 hour ago FACET entityName",
+        "title" : "Lock Waits Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.stats.sqlCompilationsPerSecond`) FROM Metric timeseries since 1 hour ago facet entityName",
+        "title" : "SQL Compilations Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.bufferpool.pageLifeExpectancyInMilliseconds`) / 1000 FROM Metric SINCE 1 hour AGO TIMESERIES FACET entityName",
+        "title" : "Page Life Expectancy in Seconds",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.instance.blockedProcessesCount`) FROM Metric timeseries since 1 hour ago FACET entityName",
+        "title" : "Number of Blocked Processes",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.stats.sqlRecompilationsPerSecond`) FROM Metric timeseries since 1 hour ago facet entityName",
+        "title" : "SQL Recompilations Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.access.pageSplitsPerSecond`) FROM Metric timeseries since 1 hour ago FACET entityName",
+        "title" : "Page Splits Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`mssql.instance.buffer.checkpointPagesPerSecond`) FROM Metric timeseries since 1 hour ago FACET entityName",
+        "title" : "Checkpoint Pages Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT sum(`mssql.instance.system.waitTimeInMillisecondsPerSecond`) FROM Metric since 1 hour ago timeseries facet entityName",
+        "title" : "Total Wait Time in Milliseconds Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MssqlInstanceSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

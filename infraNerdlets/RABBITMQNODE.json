@@ -1,0 +1,52 @@
+{
+  "template" : {
+    "title" : "RabbitmqNodeSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Total_used_file_descriptors",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total used file descriptors",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsTotalUsed`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "File_descriptors_used_sockets",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "File descriptors used sockets",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsUsedSockets`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_memory_usage",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total memory usage",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.node.totalMemoryUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "template" : {
+    "title" : "RabbitmqNodeSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Node_health_summary",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Node health summary",
+        "hint" : "",
+        "query" : "SELECT uniqueCount(entityName) as 'Total', filter(uniqueCount(entityName), where `rabbitmq.node.running` = 1) as 'Running', filter(uniqueCount(entityName), where `rabbitmq.node.hostMemoryAlarm` = 1) as 'Memory Alarms', filter(uniqueCount(entityName), where `rabbitmq.node.diskAlarm` = 1) as 'Disk Alarms' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_memory_used",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total memory used",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.node.totalMemoryUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_file_descriptors_used",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total file descriptors used",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsTotalUsed`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "File_descriptors_used_as_sockets",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 9,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "File descriptors used as sockets",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsUsedSockets`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

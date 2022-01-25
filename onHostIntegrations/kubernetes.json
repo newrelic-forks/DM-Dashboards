@@ -1,0 +1,391 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "Kubernetes",
+    "filter" : {
+      "key_names" : [ "clusterName", "namespace", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "K8sContainerSample", "K8sDeploymentSample", "K8sNamespaceSample", "K8sNodeSample", "K8sPodSample", "K8sReplicasetSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT (average(k8s.node.cpuUsedCores) * uniqueCount(entityName)) AS 'CPU cores', (average(k8s.node.memoryWorkingSetBytes) * uniqueCount(entityName)) / 1000000000 AS 'Mem GB', (average(k8s.node.k8s.node.allocatable*CpuCores) * uniqueCount(entityName)) as 'Allocatable CPU cores', (average(k8s.node.k8s.node.allocatable*MemoryBytes) * uniqueCount(entityName)) / 1000000000 as 'Allocatable Mem GB' FROM Metric UNTIL 1 minute ago",
+        "title" : "Resources Used",
+        "showTimezone" : true,
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sNodeSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "config" : {
+          "billboard" : {
+            "decimals" : 0
+          }
+        },
+        "query" : "SELECT filter(uniqueCount(K8sNodeSample.entityId), WHERE `label.eks.amazonaws.com/compute-type` IS NULL) AS 'Nodes', filter(uniqueCount(K8sNodeSample.entityId), WHERE `label.eks.amazonaws.com/compute-type` IS NOT NULL) as 'Serverless Nodes', uniqueCount(K8sNamespaceSample.clusterName) as 'Clusters', uniqueCount(K8sNamespaceSample.entityId) as 'Namespaces', uniqueCount(K8sDeploymentSample.entityId) as 'Deployments', uniqueCount(K8sPodSample.entityId) as 'Pods', uniqueCount(K8sContainerSample.containerID) as 'Containers' FROM Metric, K8sNamespaceSample, K8sDeploymentSample, K8sPodSample, K8sContainerSample UNTIL 1 minute ago",
+        "title" : "# of K8s Objects",
+        "showTimezone" : true,
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sNodeSample", "K8sNamespaceSample", "K8sDeploymentSample", "K8sPodSample", "K8sContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **Kubernetes** \n\nThis dashboard provides an overview of your Kubernetes platform health. Apply filters to focus on a specific cluster or namespace.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "FROM Metric SELECT uniqueCount(namespace) FACET clusterName UNTIL 1 minute ago limit 100",
+        "title" : "Namespaces per Cluster",
+        "showTimezone" : true,
+        "type" : "bar",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sNamespaceSample" ],
+        "config" : {
+          "bar" : {
+            "tooltipEnabled" : false
+          }
+        }
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "FROM Metric SELECT uniqueCount(entityId) as 'pod' FACET namespace UNTIL 1 minute ago limit 100",
+        "title" : "Pods by Namespace",
+        "showTimezone" : true,
+        "type" : "bar",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sPodSample" ],
+        "config" : {
+          "bar" : {
+            "tooltipEnabled" : false
+          }
+        }
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "FROM Metric SELECT latest(k8s.container.cpuUsedCores/k8s.container.cpuLimitCores) * 100 as '% CPU' FACET clusterName, podName, containerName UNTIL 1 minute ago TIMESERIES limit 50",
+        "title" : "Container CPU Usage - % Used vs Limit",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "FROM Metric SELECT latest(k8s.container.memoryWorkingSetUtilization) as '% Memory' FACET clusterName, podName, containerName UNTIL 1 minute ago TIMESERIES limit 50",
+        "title" : "Container Memory Usage - % Used vs Limit",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "FROM Metric SELECT max(k8s.container.restartCount)-min(k8s.container.restartCount) as 'Restarts' FACET clusterName, podName, containerName UNTIL 1 minute ago TIMESERIES limit 50",
+        "title" : "Container Restarts",
+        "showTimezone" : true,
+        "type" : "area",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(k8s.container.cpuUsedCores) as 'CPU Cores Used' FROM Metric FACET clusterName, podName, containerName timeseries since 60 minutes ago UNTIL 1 minute ago limit 50",
+        "title" : "Container CPU Cores Used",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(k8s.container.memoryWorkingSetBytes / 1000000) as 'MB of Mem' FROM Metric FACET clusterName, podName, containerName timeseries since 60 minutes ago UNTIL 1 minute ago limit 50",
+        "title" : "Container MBytes of Memory Used",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(k8s.replicaset.podsDesired) - latest(k8s.replicaset.podsReady) as 'Missing Pods' FROM Metric since 10 minutes ago UNTIL 1 minute ago facet clusterName, deploymentName timeseries limit 50",
+        "title" : "Missing Pods by Deployment",
+        "showTimezone" : true,
+        "type" : "area",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sReplicasetSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(status) as 'Status', max(timestamp) as 'Timestamp' FROM Metric WHERE status NOT IN ('Running', 'Succeeded') facet clusterName, namespace, podName since 10 minutes ago UNTIL 1 minute ago limit 100",
+        "title" : "Latest pods not Running by Cluster/Namespace",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sPodSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniqueCount(containerID) FROM Metric SINCE 10 minutes AGO UNTIL 1 minute ago facet namespace TIMESERIES",
+        "title" : "Containers by Namespace",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "14",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "FROM Metric, K8sPodSample SELECT latest(k8s.node.cpuUsedCores) as 'Used Cores', latest(k8s.node.memoryWorkingSetBytes) / 1000000 as 'Used Memory MB', uniqueCount(podName) as 'Pods' FACET nodeName since 10 minutes ago UNTIL 1 minute ago limit 100",
+        "title" : "Node Resource Consumption",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sNodeSample", "K8sPodSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "15",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniqueCount(podName) FROM Metric where status='Running' SINCE 10 minutes AGO UNTIL 1 minute ago facet clusterName, deploymentName WHERE deploymentName IS NOT NULL TIMESERIES limit 50",
+        "title" : "Active Pods by Deployment",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sPodSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "16",
+      "layout" : {
+        "height" : 3,
+        "width" : 12,
+        "x" : 0,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`k8s.pod.netRxBytesPerSecond`)/1000 as 'Received KBps', latest(`k8s.pod.netTxBytesPerSecond`)/1000 as 'Transmitted KBps', latest(`k8s.pod.netErrorsPerSecond`) as 'Errors / sec' FROM Metric FACET podName since 10 minutes ago UNTIL 1 minute ago limit 100",
+        "title" : "Pod Network Status",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sPodSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "17",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniquecount(podName) FROM Metric where status='Running' facet nodeName since 10 minutes ago UNTIL 1 minute ago",
+        "title" : "Pod Count by Node",
+        "showTimezone" : true,
+        "type" : "bar",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sPodSample" ],
+        "config" : {
+          "bar" : {
+            "tooltipEnabled" : false
+          }
+        }
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "18",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "title" : "Volume Usage - % Used",
+        "showTimezone" : true,
+        "actions" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sVolumeSample" ],
+        "query" : "FROM Metric select latest(k8s.volume.fsUsedPercent) facet podName, volumeName, pvcName timeseries"
+      }
+    }, {
+      "name" : "19",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 18
+      },
+      "props" : {
+        "title" : "Volumes Usage > 90%",
+        "showTimezone" : true,
+        "actions" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sVolumeSample" ],
+        "query" : "FROM Metric select latest(k8s.volume.fsUsedPercent) facet podName, volumeName, pvcName where k8s.volume.fsUsedPercent > 90 SINCE 10 minutes ago UNTIL 1 minute ago"
+      }
+    }, {
+      "name" : "20",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 12,
+        "x" : 0,
+        "y" : 24
+      },
+      "props" : {
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "K8sNodeSample" ],
+        "query" : "SELECT latest(clusterName) FROM (SELECT uniqueCount(displayName) as 'Nodes' FROM Metric FACET clusterName, nodeName, displayName, cases(WHERE k8s.node.condition*.Ready = 1 as 'True',WHERE k8s.node.condition*.Ready=0 as 'False',WHERE k8s.node.condition*.Ready=-1 as 'Unknown') as 'Ready', cases(WHERE k8s.node.condition*.MemoryPressure=0 as 'False', WHERE k8s.node.condition*.MemoryPressure=1 as 'True',WHERE k8s.node.condition*.MemoryPressure=-1 as 'Unknown') as 'MemoryPressure' , cases(WHERE k8s.node.condition*.DiskPressure = 1 as 'True',WHERE k8s.node.condition*.DiskPressure=0 as 'False',WHERE k8s.node.condition*.DiskPressure=-1 as 'Unknown') as 'DiskPressure' , cases(WHERE k8s.node.condition*.PIDPressure = 1 as 'True',WHERE k8s.node.condition*.PIDPressure=0 as 'False',WHERE k8s.node.condition*.PIDPressure=-1 as 'Unknown') as 'PIDPressure' WHERE (k8s.node.condition*.Ready IN (0,-1) OR k8s.node.condition*.MemoryPressure IN (1,-1) OR k8s.node.condition*.DiskPressure IN (1,-1) OR k8s.node.condition*.PIDPressure IN (1,-1))) WHERE Ready IS NOT NULL ORDER BY displayName FACET displayName, Ready, MemoryPressure, DiskPressure, PIDPressure",
+        "title" : "Nodes with problematic conditions"
+      }
+    } ]
+  }
+}

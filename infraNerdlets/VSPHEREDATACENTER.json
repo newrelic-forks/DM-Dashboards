@@ -1,0 +1,157 @@
+{
+  "template" : {
+    "title" : "VSphereDatacenterSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Datacenter_resources_count",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "bar",
+        "title" : "Datacenter resources count",
+        "hint" : "",
+        "query" : "SELECT latest(`vsphere.datacenter.hostCount`),latest(`vsphere.datacenter.vmCount`),latest(`vsphere.datacenter.clusters`),latest(`vsphere.datacenter.resourcePools`),latest(`vsphere.datacenter.datastores`),latest(`vsphere.datacenter.networks`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Overall_status",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Overall status",
+        "hint" : "",
+        "query" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "CPU_cores",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "CPU cores",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datacenter.cpu.cores`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "CPU_overall_usage_and_total_MHz",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 9,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "CPU overall usage and total MHz",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datacenter.cpu.overallUsage`),average(`vsphere.datacenter.cpu.totalMhz`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "CPU_overall_usage_%",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "CPU overall usage %",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datacenter.vsphere.datacenter.cpu.overallUsagePercentage`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Datastore_capacity_GiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Datastore capacity GiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datacenter.datastore.totalGiB`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Datastore_used_space_GiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 6,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Datastore used space GiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datacenter.datastore.totalUsedGiB`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Datastore_free_space_GiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 9,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Datastore free space GiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datacenter.datastore.totalFreeGiB`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memory_usage_%",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Memory usage %",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datacenter.vsphere.datacenter.mem.usagePercentage`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memory_usage_and_size_MiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Memory usage and size MiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datacenter.mem.usage`),average(`vsphere.datacenter.mem.size`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

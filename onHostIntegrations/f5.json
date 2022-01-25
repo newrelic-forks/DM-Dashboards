@@ -1,0 +1,548 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "F5 BIG-IP",
+    "filter" : {
+      "key_names" : [ "entityName", "displayName", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName", "reportingAgent", "reportingEndpoint" ],
+      "event_types" : [ "F5BigIpSystemSample", "F5BigIpPoolMemberSample", "F5BigIpVirtualServerSample", "F5BigIpPoolSample", "F5BigIpNodeSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`f5.system.memoryUsedInBytes`) FROM Metric TIMESERIES 10 minutes",
+        "title" : "Memory Used",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpSystemSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`f5.system.cpuUserTicksPerSecond`) FROM Metric TIMESERIES 1 minute",
+        "title" : "CPU Usage Ticks: User",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "hint" : "User ticks per second",
+        "event_types" : [ "F5BigIpSystemSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **F5 BIG-IP** \n\nBIG-IP is a collection of hardware platforms and software solutions providing services focused on security, reliability, and performance.\n\nThe BIG-IP integration collects a wide array of metrics which facilitate the diagnosis of performance bottlenecks.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`f5.system.cpuSystemTicksPerSecond`) FROM Metric TIMESERIES 1 minute",
+        "title" : "CPU Usage Ticks: System",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "hint" : "System ticks per second",
+        "event_types" : [ "F5BigIpSystemSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`f5.system.cpuIdleTicksPerSecond`) FROM Metric TIMESERIES 1 minute",
+        "title" : "CPU Usage Ticks: Idle",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "hint" : "System ticks per second",
+        "event_types" : [ "F5BigIpSystemSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "# Virtual Servers",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`virtualserver.connections`) FROM `F5BigIpVirtualServerSample` FACET displayName"
+        },
+        "title" : "Virtual Server Connections",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpVirtualServerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 2) AS `Online` FROM Metric",
+        "title" : "Virtual Server Availability Status",
+        "showTimezone" : true,
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpVirtualServerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`f5.virtualserver.inDataInBytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Virtual Server Data In",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpVirtualServerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`f5.virtualserver.outDataInBytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Virtual Server Data Out",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpVirtualServerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`f5.virtualserver.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Virtual Server Requests",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpVirtualServerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "# Pools",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`virtualserver.connections`) FROM `F5BigIpVirtualServerSample` FACET displayName"
+        },
+        "title" : "Pool Connections",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpVirtualServerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "14",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.pool.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.pool.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.pool.availabilityState` = 2) AS `Online` FROM Metric",
+        "title" : "Pool Availability Status",
+        "showTimezone" : true,
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "15",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.pool.packetsReceivedPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Pool Packets In",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "16",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.pool.packetsSentPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Pool Packets Out",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "17",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.pool.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Pool Requests",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "18",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "# Pool Members",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "19",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.poolMember.connections`) FROM Metric FACET displayName",
+        "title" : "Pool Member Connections",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolMemberSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "20",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.poolMember.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.poolMember.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.poolMember.availabilityState` = 2) AS `Online` FROM Metric",
+        "title" : "Pool Member Availability Status",
+        "showTimezone" : true,
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolMemberSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "21",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.poolMember.packetsReceivedPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Pool Member Packets In",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolMemberSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "22",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.poolMember.packetsSentPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Pool Member Packets Out",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolMemberSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "23",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.poolMember.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Pool Member Requests",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolMemberSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "24",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 24
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "# Nodes",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "25",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 24
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.node.connections`) FROM Metric FACET displayName",
+        "title" : "Node Connections",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpNodeSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "26",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 24
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.node.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.node.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.node.availabilityState` = 2) AS `Online` FROM Metric",
+        "title" : "Node Availability Status",
+        "showTimezone" : true,
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpNodeSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "27",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 27
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.poolMember.packetsReceivedPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Node Packets In",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpPoolMemberSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "28",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 27
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.node.packetsSentPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Node Packets Out",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpNodeSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "29",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 27
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`f5.node.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Node Requests",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "F5BigIpNodeSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

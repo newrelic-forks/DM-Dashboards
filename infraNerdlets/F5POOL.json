@@ -1,0 +1,82 @@
+{
+  "template" : {
+    "title" : "F5BigIpPoolSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Pool_availability_status",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Pool availability status",
+        "hint" : "",
+        "query" : "SELECT latest(`f5.pool.availabilityState`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Pool_requests",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Pool requests",
+        "hint" : "",
+        "query" : "SELECT average(`f5.pool.requestsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Pool_connections",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Pool connections",
+        "hint" : "",
+        "query" : "SELECT average(`f5.pool.connections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Pool_packets_in",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 4
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Pool packets in",
+        "hint" : "",
+        "query" : "SELECT average(`f5.pool.packetsReceivedPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Pool_packets_out",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 4
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Pool packets out",
+        "hint" : "",
+        "query" : "SELECT average(`f5.pool.packetsSentPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "VMware vSphere",
+    "filter" : {
+      "key_names" : [ ],
+      "event_types" : [ "VSphereVmSample", "VSphereDatacenterSample", "VSphereHostSample", "VSphereDatastoreSample", "VSphereClusterSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(vsphere.vm.mem.usage)/average(vsphere.vm.mem.size)*100 as 'Memory Usage %', average(vsphere.vm.mem.usage) as 'Memory Usage MiB', average(vsphere.vm.mem.size) as 'Memory Size MiB' FROM Metric facet displayName, vmConfigName, datacenterName , clusterName limit 10 since 1 day ago",
+        "title" : "Top 10 Virtual Machines by average memory consumption",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereVmSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **VMware vSphere** \n\nThis dashboard provides an overview of your VMware vSphere platform health.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(vsphere.vm.cpu.hostUsagePercent) as 'CPU Usage %', max(vsphere.vm.cpu.cores) as 'CPU cores allocated' FROM Metric facet displayName, vmConfigName, datacenterName , clusterName limit 10 since 1 hour ago",
+        "title" : "Top 10 Virtual Machines by average CPU consumption",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereVmSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(vsphere.host.mem.usage/vsphere.host.mem.size)*100 as 'MEM consumption %' FROM Metric facet displayName, hypervisorHostname, datacenterName, clusterName limit 10 since 10 minutes ago",
+        "title" : "Top 10 Hosts by average memory consumption",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereHostSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT filter(uniqueCount(entityId), where powerState = 'poweredOn') as 'Vm poweredOn' , filter(uniqueCount(entityId), where powerState = 'poweredOff') as 'Vm poweredOff' FROM Metric",
+        "title" : "VM Power Status",
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereVmSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(vsphere.host.cpu.percent) as 'CPU consumption %' FROM Metric facet displayName, hypervisorHostname, datacenterName, clusterName limit 10 since 10 minutes ago",
+        "title" : "Top 10 Hosts by average CPU consumption",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereHostSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniqueCount(entityName) FROM Metric facet operatingSystem",
+        "title" : "Operating system of virtual machines",
+        "type" : "pie",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereVmSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(100-vsphere.datastore.freeSpace/vsphere.datastore.capacity*100) as 'Datastore Utilization %' FROM Metric facet displayName limit 10",
+        "title" : "Top 10 Datastores by utilization",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereDatastoreSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT 100-(average(vsphere.datacenter.datastore.totalFreeGiB)/average(vsphere.datacenter.datastore.totalGiB)*100) as 'Datastore utilization (%)' FROM Metric facet displayName as 'datacenter'",
+        "title" : "Datastore utilization per datacenter %",
+        "type" : "bar",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereDatacenterSample" ],
+        "config" : {
+          "bar" : {
+            "tooltipEnabled" : false
+          }
+        }
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "select max(vsphere.datacenter.cpu.totalMhz)/1000 as 'total CPU GHz', max(vsphere.datacenter.mem.size)/1024 as 'total Memory GiB', max(vsphere.datacenter.datastore.totalGiB)/1024 as 'total Disk TiB' FROM Metric facet displayName",
+        "title" : "Total CPU, Memory, Disk per datacenter",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereDatacenterSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(vsphere.datacenter.vsphere.datacenter.mem.usagePercentage) as 'Memory utilization (%)' FROM Metric facet displayName as 'datacenter'",
+        "title" : "Host memory utilization per datacenter %",
+        "type" : "bar",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereDatacenterSample" ],
+        "config" : {
+          "bar" : {
+            "tooltipEnabled" : false
+          }
+        }
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniqueCount(entityId) FROM Metric facet overallStatus",
+        "title" : "VMs Overall Status",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereVmSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniqueCount(entityId) FROM Metric facet overallStatus",
+        "title" : "Datastores Overall Status",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereDatastoreSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "14",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(overallStatus) FROM Metric, VSphereDatacenterSample, VSphereDatastoreSample, VSphereHostSample, VSphereResourcePoolSample, VSphereVmSample where overallStatus = 'yellow' OR overallStatus = 'red' facet displayName since 1 hour ago",
+        "title" : "List of problematic entities in vSphere",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereClusterSample", "VSphereDatacenterSample", "VSphereDatastoreSample", "VSphereHostSample", "VSphereResourcePoolSample", "VSphereVmSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "15",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniqueCount(entityId) FROM Metric facet overallStatus",
+        "title" : "Hosts Overall Status",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereHostSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "16",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniqueCount(entityId) FROM Metric facet overallStatus",
+        "title" : "Clusters Overall Status",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VSphereClusterSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

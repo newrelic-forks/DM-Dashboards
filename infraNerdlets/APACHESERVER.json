@@ -1,0 +1,82 @@
+{
+  "template" : {
+    "title" : "ApacheSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Requests_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Requests per second",
+        "hint" : "Rate of the number of client requests, in requests per second.",
+        "query" : "SELECT average(`apache.server.net.requestsPerSecond`) as 'Requests' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Bytes_sent_per_request",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Bytes sent per request",
+        "hint" : "Bytes sent per request.",
+        "query" : "SELECT (average(`apache.server.net.bytesPerSecond`)/average(`apache.server.net.requestsPerSecond`)) as 'Bytes sent per request' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Status",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 12,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Status",
+        "hint" : "Current number of idle workers.",
+        "query" : "SELECT latest(`apache.server.idleWorkers` * 1) as 'Idle workers', latest(`apache.server.busyWorkers`) as 'Busy workers', latest(`apache.server.scoreboard.totalWorkers`) as 'Total workers', latest(`apache.server.scoreboard.readingWorkers`) as 'Reading request', latest(`apache.server.scoreboard.writingWorkers`) as 'Writing', latest(`apache.server.scoreboard.loggingWorkers`) as 'Logging', latest(`apache.server.scoreboard.finishingWorkers`) as 'Finishing', latest(`apache.server.scoreboard.closingWorkers`) as 'Closing connection', latest(`apache.server.scoreboard.keepAliveWorkers`) as 'Keep alive', latest(`apache.server.scoreboard.dnsLookupWorkers`) as 'DNS lookup', latest(`apache.server.scoreboard.idleCleanupWorkers`) as 'Idle cleanup', latest(`apache.server.scoreboard.startingWorkers`) as 'Starting' FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Busy_worker_status",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Busy worker status",
+        "hint" : "Current number of busy workers.",
+        "query" : "SELECT average(`apache.server.scoreboard.readingWorkers`) as 'Reading request', average(`apache.server.scoreboard.writingWorkers`) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) as 'Closing connection', average(`apache.server.scoreboard.keepAliveWorkers`) as 'Keep alive', average(`apache.server.scoreboard.dnsLookupWorkers`) as 'DNS lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) as 'Idle cleanup', average(`apache.server.scoreboard.startingWorkers`) as 'Starting' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_vs_idle_vs_busy_workers",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total vs idle vs busy workers",
+        "hint" : "Total vs idle vs busy workers.",
+        "query" : "SELECT average(`apache.server.idleWorkers`) as 'Idle workers', average(`apache.server.busyWorkers`) as 'Busy workers', average(`apache.server.scoreboard.totalWorkers`) as 'Total workers' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

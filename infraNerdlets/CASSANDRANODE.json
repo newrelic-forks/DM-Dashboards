@@ -1,0 +1,187 @@
+{
+  "template" : {
+    "title" : "CassandraSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Client_request_rates",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 12,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Client request rates",
+        "hint" : "Transaction write latency in requests per second.",
+        "query" : "SELECT average(`cassandra.node.query.casWriteRequestsPerSecond`) AS 'CAS write', average(`cassandra.node.query.casReadRequestsPerSecond`) AS 'CAS read', average(`cassandra.node.query.viewWriteRequestsPerSecond`) AS 'View write', average(`cassandra.node.query.rangeSliceRequestsPerSecond`) AS 'Range slice', average(`cassandra.node.query.readRequestsPerSecond`) AS 'Read', average(`cassandra.node.query.writeRequestsPerSecond`) AS 'Write' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Pending_request_pool_tasks",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Pending request pool tasks",
+        "hint" : "Number of pending request pool tasks.",
+        "query" : "SELECT average(`cassandra.node.threadPool.counterMutationStage.pendingTasks`) AS 'Counter mutation stage', average(`cassandra.node.threadPool.viewMutationStage.pendingTasks`) AS 'View mutation stage', average(`cassandra.node.threadPool.readRepairStage.pendingTasks`) AS 'Read repair stage', average(`cassandra.node.threadPool.readStage.pendingTasks`) AS 'Read stage', average(`cassandra.node.threadPool.requestResponseStage.pendingTasks`) AS 'Request response stage', average(`cassandra.node.threadPool.mutationStage.pendingTasks`) AS 'Mutation stage' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Active_request_pool_threads",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Active request pool threads",
+        "hint" : "Number of active request pool tasks.",
+        "query" : "SELECT average(`cassandra.node.threadPool.counterMutationStage.activeTasks`) AS 'Counter mutation stage', average(`cassandra.node.threadPool.viewMutationStage.activeTasks`) AS 'View mutation stage', average(`cassandra.node.threadPool.readRepairStage.activeTasks`) AS 'Read repair stage', average(`cassandra.node.threadPool.readStage.activeTasks`) AS 'Read stage', average(`cassandra.node.threadPool.requestResponseStage.activeTasks`) AS 'Request response stage', average(`cassandra.node.threadPool.mutationStage.activeTasks`) AS 'Mutation stage' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Pending_read_tasks",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Pending read tasks",
+        "hint" : "Number of pending read tasks.",
+        "query" : "SELECT max(`cassandra.node.threadPool.readStage.pendingTasks`) AS 'Read stage' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Active_read_tasks",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Active read tasks",
+        "hint" : "Number of active read tasks.",
+        "query" : "SELECT max(`cassandra.node.threadPool.readStage.activeTasks`) AS 'Read stage' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Write_latency_(ms)",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Write latency (ms)",
+        "hint" : "Write latency in milliseconds, 50th percentile.",
+        "query" : "SELECT average(`cassandra.node.query.writeLatency50ThPercentileMilliseconds`) as '50th', average(`cassandra.node.query.writeLatency75ThPercentileMilliseconds`) as '75th', average(`cassandra.node.query.writeLatency95ThPercentileMilliseconds`) as '95th', average(`cassandra.node.query.writeLatency98ThPercentileMilliseconds`) as '98th', average(`cassandra.node.query.writeLatency99ThPercentileMilliseconds`) as '99th' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Active_internal_threadpool_tasks",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Active internal threadpool tasks",
+        "hint" : "Number of active internal threadpool tasks.",
+        "query" : "SELECT average(`cassandra.node.threadPool.antiEntropyStage.activeTasks`) AS 'AntiEntropyStage', average(`cassandra.node.threadPool.cacheCleanupExecutor.activeTasks`) AS 'CacheCleanupExecutor', average(`cassandra.node.threadPool.compactionExecutor.activeTasks`) AS 'CompactionExecutor', average(`cassandra.node.threadPool.gossipStage.activeTasks`) AS 'GossipStage', average(`cassandra.node.threadPool.hintsDispatcher.activeTasks`) AS 'HintsDispatcher', average(`cassandra.node.threadPool.internalResponseStage.activeTasks`) AS 'InternalResponseStage', average(`cassandra.node.threadPool.memtableFlushWriter.activeTasks`) AS 'MemtableFlushWriter', average(`cassandra.node.threadPool.memtablePostFlush.activeTasks`) AS 'MemtablePostFlush', average(`cassandra.node.threadPool.memtableReclaimMemory.activeTasks`) AS 'MemtableReclaimMemory', average(`cassandra.node.threadPool.migrationStage.activeTasks`) AS 'MigrationStage', average(`cassandra.node.threadPool.miscStage.activeTasks`) AS 'MiscStage', average(`cassandra.node.threadPool.pendingRangeCalculator.activeTasks`) AS 'PendingRangeCalculator', average(`cassandra.node.threadPool.sampler.activeTasks`) AS 'Sampler', average(`cassandra.node.threadPool.secondaryIndexManagement.activeTasks`) AS 'SecondaryIndexManagement', average(`cassandra.node.threadPool.validationExecutor.activeTasks`) AS 'ValidationExecutor' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Read_latency_(ms)",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Read latency (ms)",
+        "hint" : "Read latency in milliseconds for this column family, 50th percentile.",
+        "query" : "SELECT average(`cassandra.node.query.readLatency50ThPercentileMilliseconds`) as '50th', average(`cassandra.node.query.readLatency75ThPercentileMilliseconds`) as '75th', average(`cassandra.node.query.readLatency95ThPercentileMilliseconds`) as '95th',average(`cassandra.node.query.readLatency98ThPercentileMilliseconds`) as '98th', average(`cassandra.node.query.readLatency99ThPercentileMilliseconds`) as '99th' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Pending_internal_threadpool_tasks",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Pending internal threadpool tasks",
+        "hint" : "Number of pending internal threadpool tasks.",
+        "query" : "SELECT average(`cassandra.node.threadPool.antiEntropyStage.pendingTasks`) AS 'AntiEntropyStage', average(`cassandra.node.threadPool.cacheCleanupExecutor.activeTasks`) AS 'CacheCleanupExecutor', average(`cassandra.node.threadPool.compactionExecutor.activeTasks`) AS 'CompactionExecutor', average(`cassandra.node.threadPool.gossipStage.activeTasks`) AS 'GossipStage', average(`cassandra.node.threadPool.hintsDispatcher.activeTasks`) AS 'HintsDispatcher', average(`cassandra.node.threadPool.internalResponseStage.activeTasks`) AS 'InternalResponseStage', average(`cassandra.node.threadPool.memtableFlushWriter.activeTasks`) AS 'MemtableFlushWriter', average(`cassandra.node.threadPool.memtablePostFlush.activeTasks`) AS 'MemtablePostFlush', average(`cassandra.node.threadPool.memtableReclaimMemory.activeTasks`) AS 'MemtableReclaimMemory', average(`cassandra.node.threadPool.migrationStage.activeTasks`) AS 'MigrationStage', average(`cassandra.node.threadPool.miscStage.activeTasks`) AS 'MiscStage', average(`cassandra.node.threadPool.pendingRangeCalculator.activeTasks`) AS 'PendingRangeCalculator', average(`cassandra.node.threadPool.sampler.activeTasks`) AS 'Sampler', average(`cassandra.node.threadPool.secondaryIndexManagement.activeTasks`) AS 'SecondaryIndexManagement', average(`cassandra.node.threadPool.validationExecutor.activeTasks`) AS 'ValidationExecutor' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Dropped_messages_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Dropped messages per second",
+        "hint" : "Number of dropped batch messages per second.",
+        "query" : "SELECT average(`cassandra.node.droppedBatchRemoveMessagesPerSecond`) AS 'Batch remove', average(`cassandra.node.droppedBatchStoreMessagesPerSecond`) AS 'Batch store', average(`cassandra.node.droppedCounterMutationMessagesPerSecond`) AS 'Counter mutation', average(`cassandra.node.droppedHintMessagesPerSecond`) AS 'Hint', average(`cassandra.node.droppedMutationMessagesPerSecond`) AS 'Mutation', average(`cassandra.node.droppedPagedRangeMessagesPerSecond`) AS 'Paged range', average(`cassandra.node.droppedRangeSliceMessagesPerSecond`) AS 'Range slice', average(`cassandra.node.droppedReadMessagesPerSecond`) AS 'Read', average(`cassandra.node.droppedReadRepairMessagesPerSecond`) AS 'Read repair', average(`cassandra.node.droppedRequestResponseMessagesPerSecond`) AS 'Request response', average(`cassandra.node.droppedTraceMessagesPerSecond`) AS 'Trace' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memtable_sizes",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 15
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Memtable sizes",
+        "hint" : "Total amount of bytes stored in the memtables (2i and pending flush memtables included) that resides off-heap.",
+        "query" : "SELECT average(`cassandra.node.allMemtablesOnHeapSizeBytes`) AS 'On heap', average(`cassandra.node.allMemtablesOffHeapSizeBytes`) AS 'Off heap' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Hints_in_progress.",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 15
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Hints in progress.",
+        "hint" : "Number of hints currently attempting to be sent",
+        "query" : "SELECT average(`cassandra.node.totalHintsInProgress`) AS 'In progress' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

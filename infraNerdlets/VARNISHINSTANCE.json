@@ -1,0 +1,187 @@
+{
+  "template" : {
+    "title" : "VarnishSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Session_connections",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Session connections",
+        "hint" : "",
+        "query" : "SELECT average(`varnish.session.connections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Requests",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Requests",
+        "hint" : "",
+        "query" : "SELECT average(`varnish.net.requests`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Session_drops",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Session drops",
+        "hint" : "",
+        "query" : "SELECT average(`varnish.session.drops`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Expired_objects",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Expired objects",
+        "hint" : "",
+        "query" : "SELECT average(`varnish.varnish.main.expiredMailed`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "LRU_purges",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "LRU purges",
+        "hint" : "",
+        "query" : "SELECT average(`varnish.lru.nuked`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Cache_hits",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Cache hits",
+        "hint" : "",
+        "query" : "SELECT average(`varnish.cache.hits`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Cache_misses",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Cache misses",
+        "hint" : "",
+        "query" : "SELECT average(`varnish.cache.misses`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Cache_hits_for_pass",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Cache hits for pass",
+        "hint" : "",
+        "query" : "SELECT latest(`varnish.cache.passHits`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Cache_grace_hits",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Cache grace hits",
+        "hint" : "",
+        "query" : "SELECT average(`varnish.cache.graceHits`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Cache_hits_for_miss",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Cache hits for miss",
+        "hint" : "",
+        "query" : "SELECT average(`varnish.cache.missHits`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Backend_requests",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Backend requests",
+        "hint" : "",
+        "query" : "SELECT average(`net.varnish.backend.requests`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Backend_connections",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 12
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Backend connections",
+        "hint" : "",
+        "query" : "SELECT latest(`backend.connections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

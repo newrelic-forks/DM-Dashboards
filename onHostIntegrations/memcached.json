@@ -1,0 +1,217 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "Memcached",
+    "filter" : {
+      "key_names" : [ "entityName", "displayName", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "MemcachedSample", "MemcachedSlabSample" ]
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`memcached.server.bytesReadServerPerSecond`) FROM Metric TIMESERIES",
+        "title" : "Bytes Read Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`memcached.server.bytesWrittenServerPerSecond`) FROM Metric TIMESERIES",
+        "title" : "Bytes Written Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **Memcached** \n\nMemcached is a general purpose and high performance caching system, often used to speed up dynamic websites by caching query results in RAM for quicker access.\n\nThe Memcached integration collects a wide array of metrics which facilitate the diagnosis of performance bottlenecks.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`memcached.server.cmdGetRatePerSecond`) AS `Get Rate`, average(`memcached.server.cmdSetRatePerSecond`) AS `Set Rate`, average(`memcached.server.cmdFlushRatePerSecond`) AS `Flush Rate` FROM Metric TIMESERIES",
+        "title" : "Command Rates",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`memcached.server.connectionRateServerPerSecond`) FROM Metric TIMESERIES",
+        "title" : "Connection Rate",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`memcached.slab.getHitRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID",
+        "title" : "Get Hit Rate By Slab",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSlabSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`memcached.slab.cmdSetRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID",
+        "title" : "Set Rate By Slab",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSlabSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(memcached.server.uptimeInMilliseconds)/1000/3600 AS 'Hours' FROM Metric",
+        "title" : "Uptime",
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`memcached.slab.incrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID",
+        "title" : "Incr Modify Rate By Slab",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSlabSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`memcached.slab.decrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID",
+        "title" : "Decr Modify Rate By Slab",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSlabSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`memcached.server.openConnectionsServer`) AS `Connections` FROM Metric",
+        "title" : "Open Connections",
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(memcached.server.storingItemsPercentMemory) AS `Percent` FROM Metric",
+        "title" : "Percent Max Memory Used",
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MemcachedSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

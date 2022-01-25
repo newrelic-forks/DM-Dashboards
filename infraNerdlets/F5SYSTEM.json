@@ -1,0 +1,82 @@
+{
+  "template" : {
+    "title" : "F5BigIpSystemSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Average_percentage_of_time_the_CPU_is_used_by_user_processes",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Average percentage of time the CPU is used by user processes",
+        "hint" : "",
+        "query" : "SELECT average(`f5.system.cpuUserUtilization`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Average_percentage_of_time_the_CPU_is_used_by_the_kernel",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Average percentage of time the CPU is used by the kernel",
+        "hint" : "",
+        "query" : "SELECT average(`f5.system.cpuSystemUtilization`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Average_percentage_of_time_the_CPU_is_idle",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Average percentage of time the CPU is idle",
+        "hint" : "",
+        "query" : "SELECT average(`f5.system.cpuIdleUtilization`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_amount_of_memory_used_in_bytes",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total amount of memory used in bytes",
+        "hint" : "",
+        "query" : "SELECT average(`f5.system.memoryUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Swap_space_used_in_bytes",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Swap space used in bytes",
+        "hint" : "",
+        "query" : "SELECT average(`f5.system.swapUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

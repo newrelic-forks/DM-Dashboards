@@ -1,0 +1,127 @@
+{
+  "template" : {
+    "title" : "VSphereVmSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Power_state",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Power state",
+        "hint" : "",
+        "query" : "SELECT latest(`powerState`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Overall_status",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Overall status",
+        "hint" : "",
+        "query" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Host_CPU_utilization_%",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Host CPU utilization %",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.vm.cpu.hostUsagePercent`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "CPU_overall_usage_and_allocation_limit_MHz",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 9,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "CPU overall usage and allocation limit MHz",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.vm.cpu.overallUsage`),filter(average(`vsphere.vm.cpu.allocationLimit`),WHERE `vsphere.vm.cpu.allocationLimit` >= 0) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "CPU_cores",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "CPU cores",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.vm.cpu.cores`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Memory_utilization_%",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Memory utilization %",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.vm.mem.usage`/`vsphere.vm.mem.size`)*100 FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memory_usage_and_size_MiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 6,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Memory usage and size MiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.vm.mem.usage`),average(`vsphere.vm.mem.size`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_storage_space_MiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 9,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Total storage space MiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.vm.disk.totalMiB`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    } ]
+  }
+}

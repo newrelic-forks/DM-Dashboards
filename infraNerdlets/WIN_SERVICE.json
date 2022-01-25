@@ -1,0 +1,148 @@
+{
+  "template": {
+    "title": "Metric",
+    "filter": {},
+    "widgets": [
+      {
+        "name": "'Running'_state_over_time",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 12,
+          "x": 0,
+          "y": 0
+        },
+        "props": {
+          "type": "area",
+          "title": "'Running' state over time",
+          "hint": "When the service is running a 1 value is shown. On the other hand in case the service is in a different state or no data is available the chart will assume a null value.",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "SELECT filter(latest(windows_service_state), where `state`='running') from Metric where `entity.guid` = '{{entity.id}}' TIMESERIES since 6 hours ago",
+            "offset": 300000
+          }
+        }
+      },
+      {
+        "name": "Service_current_state",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 3,
+          "x": 0,
+          "y": 3
+        },
+        "props": {
+          "type": "billboard",
+          "title": "Service current state",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "FROM Metric SELECT latest(state) as 'Windows Service State' WHERE `entity.guid` = '{{entity.id}}'",
+            "offset": 300000
+          }
+        }
+      },
+      {
+        "name": "Service_parent_process_ID",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 3,
+          "x": 3,
+          "y": 3
+        },
+        "props": {
+          "type": "billboard",
+          "title": "Service parent process ID",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "FROM Metric SELECT latest(process_id) as 'Windows Service Process ID' WHERE `entity.guid` = '{{entity.id}}'",
+            "offset": 300000
+          }
+        }
+      },
+      {
+        "name": "Service_name",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 3,
+          "x": 6,
+          "y": 3
+        },
+        "props": {
+          "type": "billboard",
+          "title": "Service name",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "FROM Metric SELECT latest(service_name) as 'Windows Service Name' WHERE `entity.guid` = '{{entity.id}}'",
+            "offset": 300000
+          }
+        }
+      },
+      {
+        "name": "Service_start_Mode",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 3,
+          "x": 9,
+          "y": 3
+        },
+        "props": {
+          "type": "billboard",
+          "title": "Service start Mode",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "FROM Metric SELECT latest(start_mode) as 'Windows Service Start Mode' WHERE `entity.guid` = '{{entity.id}}'",
+            "offset": 300000
+          }
+        }
+      },
+      {
+        "name": "Service_hostname",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 3,
+          "x": 0,
+          "y": 6
+        },
+        "props": {
+          "type": "billboard",
+          "title": "Service hostname",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "FROM Metric SELECT latest(hostname) as 'Windows Service Hostname' WHERE `entity.guid` = '{{entity.id}}'",
+            "offset": 300000
+          }
+        }
+      },
+      {
+        "name": "Account_name",
+        "renderer": "vizco",
+        "layout": {
+          "height": 3,
+          "width": 3,
+          "x": 3,
+          "y": 6
+        },
+        "props": {
+          "type": "billboard",
+          "title": "Account name",
+          "hint": "Account name under which a service runs. Depending on the service type, the account name may be in the form of DomainName/Username or UPN format (Username@DomainName). It corresponds to the StartName attribute of the Win32_Service class. StartName attribute can be NULL and in such case the label is reported as an empty string. Notice that if the attribute is NULL the service is logged on as the LocalSystem account or, for kernel or system-level drive, it runs with a default object name created by the I/O system based on the service name, for example, DWDOM/Admin.",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "FROM Metric SELECT latest(run_as) as 'Windows Service Run As' WHERE `entity.guid` = '{{entity.id}}'",
+            "offset": 300000
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "template" : {
+    "title" : "CouchbaseBucketSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Current_connections",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Current connections",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.currentConnections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_operations_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total operations per second",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.totalOperationsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Data_used",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Data used",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.dataUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Active_resident_items_ratio",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Active resident items ratio",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.activeResidentItemsRatio`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Ejections_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Ejections per second",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.ejectionsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Read_rate_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Read rate per second",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.readRatePerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Read_operations_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Read operations per second",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.readOperationsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Write_rate_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Write rate per second",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.writeRatePerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Write_operations_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 9
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Write operations per second",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.writeOperationsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memory_usage",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Memory usage",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.memoryUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Quota_utilization",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Quota utilization",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.quotaUtilization`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Disk_usage",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Disk usage",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.diskUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Disk_write_queue",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 15
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Disk write queue",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.diskWriteQueue`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Out_of_memory_errors_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 15
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Out of memory errors per second",
+        "hint" : "",
+        "query" : "SELECT average(`couchbase.bucket.outOfMemoryErrorsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

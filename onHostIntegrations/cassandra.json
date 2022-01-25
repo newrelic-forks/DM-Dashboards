@@ -1,0 +1,331 @@
+{
+  "template" : {
+    "filter" : {
+      "event_types" : [ "CassandraSample" ],
+      "filter_first" : false,
+      "key_names" : [ "cluster.name", "entityName", "label.env", "label.role", "software.version", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ]
+    },
+    "id" : "{{dashboard_id}}",
+    "title" : "Cassandra",
+    "widgets" : [ {
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 0
+      },
+      "name" : "1",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.query.casWriteRequestsPerSecond`) * uniqueCount(entityName) AS 'Cas Write', average(`cassandra.node.query.casReadRequestsPerSecond`) * uniqueCount(entityName) AS 'Cas Read', average(`cassandra.node.query.viewWriteRequestsPerSecond`) * uniqueCount(entityName) AS 'View Write', average(`cassandra.node.query.rangeSliceRequestsPerSecond`) * uniqueCount(entityName) AS 'Range Slice', average(`cassandra.node.query.readRequestsPerSecond`) * uniqueCount(entityName) AS 'Read', average(`cassandra.node.query.writeRequestsPerSecond`) * uniqueCount(entityName) AS 'Write' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Client Request Rates",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "name" : "2",
+      "props" : {
+        "actions" : false,
+        "containerNames" : [ "beyond" ],
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **Cassandra** \n\nApache Cassandra is one of the most popular NoSQL database management system. It offers high scalability and performance, strong security, and continuous availability with no single point of failure.\n\nThe Cassandra integration provides node metrics in the CassandraSample event type and column family metrics in the CassandraColumnFamilySample event type.\n\n\n:::",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        }
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "name" : "3",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.threadPool.counterMutationStage.pendingTasks`) * uniqueCount(entityName) AS 'Counter Mutation Stage', average(`cassandra.node.threadPool.viewMutationStage.pendingTasks`) * uniqueCount(entityName) AS 'View Mutation Stage', average(`cassandra.node.threadPool.readRepairStage.pendingTasks`) * uniqueCount(entityName) AS 'Read Repair Stage', average(`cassandra.node.threadPool.readStage.pendingTasks`) * uniqueCount(entityName) AS 'Read Stage', average(`cassandra.node.threadPool.requestResponseStage.pendingTasks`) * uniqueCount(entityName) AS 'Request Response Stage', average(`cassandra.node.threadPool.mutationStage.pendingTasks`) * uniqueCount(entityName) AS 'Mutation Stage' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Avg Pending Request Pool Tasks",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "name" : "4",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.threadPool.counterMutationStage.activeTasks`) * uniqueCount(entityName) AS 'Counter Mutation Stage', average(`cassandra.node.threadPool.viewMutationStage.activeTasks`) * uniqueCount(entityName) AS 'View Mutation Stage', average(`cassandra.node.threadPool.readRepairStage.activeTasks`) * uniqueCount(entityName) AS 'Read Repair Stage', average(`cassandra.node.threadPool.readStage.activeTasks`) * uniqueCount(entityName) AS 'Read Stage', average(`cassandra.node.threadPool.requestResponseStage.activeTasks`) * uniqueCount(entityName) AS 'Request Response Stage', average(`cassandra.node.threadPool.mutationStage.activeTasks`) * uniqueCount(entityName) AS 'Mutation Stage' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Avg Active Request Pool Threads",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "name" : "5",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT max(`cassandra.node.threadPool.readStage.pendingTasks`) AS 'Read Stage' FROM Metric FACET entityName TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Pending Read Tasks, by node",
+        "showTimezone" : true,
+        "type" : "area"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "name" : "6",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT max(`cassandra.node.threadPool.readStage.activeTasks`) AS 'Read Stage' FROM Metric FACET entityName TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Active Read Tasks, by node",
+        "showTimezone" : true,
+        "type" : "area"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "name" : "7",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.query.writeLatency50ThPercentileMilliseconds`) as '50th', average(`cassandra.node.query.writeLatency75ThPercentileMilliseconds`) as '75th', average(`cassandra.node.query.writeLatency95ThPercentileMilliseconds`) as '95th', average(`cassandra.node.query.writeLatency98ThPercentileMilliseconds`) as '98th', average(`cassandra.node.query.writeLatency99ThPercentileMilliseconds`) as '99th' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Write Latency (ms)",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 9
+      },
+      "name" : "8",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.threadPool.antiEntropyStage.activeTasks`) * uniqueCount(entityName) AS 'AntiEntropyStage', average(`cassandra.node.threadPool.cacheCleanupExecutor.activeTasks`) * uniqueCount(entityName) AS 'CacheCleanupExecutor', average(`cassandra.node.threadPool.compactionExecutor.activeTasks`) * uniqueCount(entityName) AS 'CompactionExecutor', average(`cassandra.node.threadPool.gossipStage.activeTasks`) * uniqueCount(entityName) AS 'GossipStage', average(`cassandra.node.threadPool.hintsDispatcher.activeTasks`) * uniqueCount(entityName) AS 'HintsDispatcher', average(`cassandra.node.threadPool.internalResponseStage.activeTasks`) * uniqueCount(entityName) AS 'InternalResponseStage', average(`cassandra.node.threadPool.memtableFlushWriter.activeTasks`) * uniqueCount(entityName) AS 'MemtableFlushWriter', average(`cassandra.node.threadPool.memtablePostFlush.activeTasks`) * uniqueCount(entityName) AS 'MemtablePostFlush', average(`cassandra.node.threadPool.memtableReclaimMemory.activeTasks`) * uniqueCount(entityName) AS 'MemtableReclaimMemory', average(`cassandra.node.threadPool.migrationStage.activeTasks`) * uniqueCount(entityName) AS 'MigrationStage', average(`cassandra.node.threadPool.miscStage.activeTasks`) * uniqueCount(entityName) AS 'MiscStage', average(`cassandra.node.threadPool.pendingRangeCalculator.activeTasks`) * uniqueCount(entityName) AS 'PendingRangeCalculator', average(`cassandra.node.threadPool.sampler.activeTasks`) * uniqueCount(entityName) AS 'Sampler', average(`cassandra.node.threadPool.secondaryIndexManagement.activeTasks`) * uniqueCount(entityName) AS 'SecondaryIndexManagement', average(`cassandra.node.threadPool.validationExecutor.activeTasks`) * uniqueCount(entityName) AS 'ValidationExecutor' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Avg Pending Internal Threadpool Tasks",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "name" : "9",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.query.readLatency50ThPercentileMilliseconds`) as '50th', average(`cassandra.node.query.readLatency75ThPercentileMilliseconds`) as '75th', average(`cassandra.node.query.readLatency95ThPercentileMilliseconds`) as '95th',average(`cassandra.node.query.readLatency98ThPercentileMilliseconds`) as '98th', average(`cassandra.node.query.readLatency99ThPercentileMilliseconds`) as '99th' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Read Latency (ms)",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 12
+      },
+      "name" : "10",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.threadPool.antiEntropyStage.pendingTasks`) * uniqueCount(entityName) AS 'AntiEntropyStage', average(`cassandra.node.threadPool.cacheCleanupExecutor.activeTasks`) * uniqueCount(entityName) AS 'CacheCleanupExecutor', average(`cassandra.node.threadPool.compactionExecutor.activeTasks`) * uniqueCount(entityName) AS 'CompactionExecutor', average(`cassandra.node.threadPool.gossipStage.activeTasks`) * uniqueCount(entityName) AS 'GossipStage', average(`cassandra.node.threadPool.hintsDispatcher.activeTasks`) * uniqueCount(entityName) AS 'HintsDispatcher', average(`cassandra.node.threadPool.internalResponseStage.activeTasks`) * uniqueCount(entityName) AS 'InternalResponseStage', average(`cassandra.node.threadPool.memtableFlushWriter.activeTasks`) * uniqueCount(entityName) AS 'MemtableFlushWriter', average(`cassandra.node.threadPool.memtablePostFlush.activeTasks`) * uniqueCount(entityName) AS 'MemtablePostFlush', average(`cassandra.node.threadPool.memtableReclaimMemory.activeTasks`) * uniqueCount(entityName) AS 'MemtableReclaimMemory', average(`cassandra.node.threadPool.migrationStage.activeTasks`) * uniqueCount(entityName) AS 'MigrationStage', average(`cassandra.node.threadPool.miscStage.activeTasks`) * uniqueCount(entityName) AS 'MiscStage', average(`cassandra.node.threadPool.pendingRangeCalculator.activeTasks`) * uniqueCount(entityName) AS 'PendingRangeCalculator', average(`cassandra.node.threadPool.sampler.activeTasks`) * uniqueCount(entityName) AS 'Sampler', average(`cassandra.node.threadPool.secondaryIndexManagement.activeTasks`) * uniqueCount(entityName) AS 'SecondaryIndexManagement', average(`cassandra.node.threadPool.validationExecutor.activeTasks`) * uniqueCount(entityName) AS 'ValidationExecutor' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Avg Active Internal Threadpool Tasks",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "name" : "11",
+      "props" : {
+        "accountId" : "{{account_id}}",
+        "actions" : {
+          "expand-item" : true,
+          "get-image" : false,
+          "pin-to-insights" : false,
+          "view-cds-query" : false,
+          "view-in-insights" : false,
+          "view-nrql-query" : false
+        },
+        "endpoint" : "/v2/nrql",
+        "filterBySource" : [ "config/cassandra" ],
+        "footerDisabled" : true,
+        "pathsCount" : 600,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "title" : "Cassandra Inventory",
+        "showTimezone" : true
+      },
+      "renderer" : "inventory"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 15
+      },
+      "name" : "12",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraColumnFamilySample" ],
+        "query" : "SELECT average(`cassandra.columnFamily.liveSsTableCount`) * uniqueCount(entityName) FROM Metric FACET `db.keyspace` TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Avg SSTable Count",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 15
+      },
+      "name" : "13",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraColumnFamilySample" ],
+        "query" : "SELECT average(`cassandra.columnFamily.ssTablesPerRead50ThPercentileMilliseconds`) as '50th', average(`cassandra.columnFamily.ssTablesPerRead75ThPercentileMilliseconds`) as '75th', average(`cassandra.columnFamily.ssTablesPerRead95ThPercentileMilliseconds`) as '95th',average(`cassandra.columnFamily.ssTablesPerRead98ThPercentileMilliseconds`) as '98th',average(`cassandra.columnFamily.ssTablesPerRead99ThPercentileMilliseconds`) as '99th' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Percentiles Scanned SSTables per query",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 15
+      },
+      "name" : "14",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.droppedBatchRemoveMessagesPerSecond`) * uniqueCount(entityName) AS 'Batch Remove', average(`cassandra.node.droppedBatchStoreMessagesPerSecond`) * uniqueCount(entityName) AS 'Batch Store', average(`cassandra.node.droppedCounterMutationMessagesPerSecond`) * uniqueCount(entityName) AS 'Counter Mutation', average(`cassandra.node.droppedHintMessagesPerSecond`) * uniqueCount(entityName) AS 'Hint', average(`cassandra.node.droppedMutationMessagesPerSecond`) * uniqueCount(entityName) AS 'Mutation', average(`cassandra.node.droppedPagedRangeMessagesPerSecond`) * uniqueCount(entityName) AS 'Paged Range', average(`cassandra.node.droppedRangeSliceMessagesPerSecond`) * uniqueCount(entityName) AS 'Range Slice', average(`cassandra.node.droppedReadMessagesPerSecond`) * uniqueCount(entityName) AS 'Read', average(`cassandra.node.droppedReadRepairMessagesPerSecond`) * uniqueCount(entityName) AS 'Read Repair', average(`cassandra.node.droppedRequestResponseMessagesPerSecond`) * uniqueCount(entityName) AS 'Request Response', average(`cassandra.node.droppedTraceMessagesPerSecond`) * uniqueCount(entityName) AS 'Trace' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Dropped Messages per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 18
+      },
+      "name" : "15",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.allMemtablesOnHeapSizeBytes`) * uniqueCount(entityName) AS 'On Heap', average(`cassandra.node.allMemtablesOffHeapSizeBytes`) * uniqueCount(entityName) AS 'Off Heap' FROM Metric TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Memtable Sizes",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 18
+      },
+      "name" : "16",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraColumnFamilySample" ],
+        "query" : "SELECT average(`cassandra.columnFamily.pendingCompactions`) * uniqueCount(entityName) * uniqueCount(`db.columnFamily`) FROM Metric FACET `db.keyspace` TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Avg Pending Compactions",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 18
+      },
+      "name" : "17",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CassandraSample" ],
+        "query" : "SELECT average(`cassandra.node.totalHintsInProgress`) * uniqueCount(entityName) AS 'In Progress' FROM Metric FACET entityName TIMESERIES UNTIL 1 minute AGO",
+        "title" : "Hints In Progress, by node",
+        "showTimezone" : true,
+        "type" : "area"
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

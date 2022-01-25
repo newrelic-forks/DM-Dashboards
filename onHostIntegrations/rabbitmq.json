@@ -1,0 +1,264 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "RabbitMQ",
+    "filter" : {
+      "key_names" : [ "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "RabbitmqExchangeSample", "RabbitmqNodeSample", "RabbitmqQueueSample", "RabbitmqVhostSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsTotalUsed`) FROM Metric timeseries 10 minute since 12 hours ago facet displayName",
+        "title" : "Total Used File Descriptors by Node",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqNodeSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsUsedSockets`) FROM Metric timeseries 10 minute since 12 hours ago facet displayName",
+        "title" : "File Descriptors Used as Sockets by Node",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqNodeSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n**RabbitMQ**\n\nRabbitMQ is an open source message broker which supports multiple messaging protocols and utilizes a smart broker, dumb consumer model to deliver messages.\n\nThe RabbitMQ integration provides different configuration options to control the metrics that are captured.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "config" : {
+          "billboard" : {
+            "decimals" : 0,
+            "minWidth" : 100
+          }
+        },
+        "query" : "SELECT uniqueCount(entityName, clusterName) as 'Total', filter(uniqueCount(entityName, clusterName), where `rabbitmq.node.running` = 1) as 'Running', filter(uniqueCount(entityName, clusterName), where `rabbitmq.node.hostMemoryAlarm` = 1) as 'Memory Alarms', filter(uniqueCount(entityName, clusterName), where `rabbitmq.node.diskAlarm` = 1) as 'Disk Alarms' FROM Metric UNTIL 1 minute ago",
+        "title" : "Nodes",
+        "showTimezone" : true,
+        "type" : "billboard",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqNodeSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`rabbitmq.node.totalMemoryUsedInBytes`) FROM Metric timeseries 10 minute since 12 hours ago facet displayName",
+        "title" : "Total Memory Usage by Node",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqNodeSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`rabbitmq.queue.consumers`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "title" : "Consumers by Queue",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqQueueSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "select average(`rabbitmq.queue.consumerMessageUtilizationPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "title" : "Consumer Message Utilization by Queue",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqQueueSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "accountId" : "{{account_id}}",
+        "actions" : {
+          "expand-item" : true,
+          "get-image" : false,
+          "pin-to-insights" : false,
+          "view-cds-query" : false,
+          "view-in-insights" : false,
+          "view-nrql-query" : false
+        },
+        "endpoint" : "/v2/nrql",
+        "filterBySource" : [ "config/rabbitmq" ],
+        "footerDisabled" : true,
+        "pathsCount" : 600,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "title" : "RabbitMQ Inventory",
+        "showTimezone" : true
+      },
+      "renderer" : "inventory"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "select average(`rabbitmq.queue.totalMessages`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "title" : "Total Messages by Queue",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqQueueSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "select average(`rabbitmq.rabbitmq.queue.totalMessagesPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "title" : "Total Message Throughput by Queue",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqQueueSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "select average(`rabbitmq.queue.erlangBytesConsumedInBytes`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "title" : "Bytes Consumed by Queue",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqQueueSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "select average(`rabbitmq.queue.messagesPublished`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "title" : "Published Messages by Queue",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqQueueSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "select average(`rabbitmq.rabbitmq.queue.messagesPublishedPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "title" : "Published Message Throughput by Queue",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RabbitmqQueueSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

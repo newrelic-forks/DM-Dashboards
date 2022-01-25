@@ -1,0 +1,112 @@
+{
+  "template" : {
+    "title" : "MemcachedSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Bytes_read",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 6,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Bytes read",
+        "hint" : "",
+        "query" : "SELECT average(`memcached.server.bytesReadServerPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Bytes_written",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 6,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Bytes written",
+        "hint" : "",
+        "query" : "SELECT average(`memcached.server.bytesWrittenServerPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Command_rates",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 6,
+        "x" : 0,
+        "y" : 4
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Command rates",
+        "hint" : "",
+        "query" : "SELECT average(`memcached.server.cmdGetRatePerSecond`), average(`memcached.server.cmdSetRatePerSecond`), average(`memcached.server.cmdFlushRatePerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Connection_rate",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 6,
+        "x" : 6,
+        "y" : 4
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Connection rate",
+        "hint" : "",
+        "query" : "SELECT average(`memcached.server.connectionRateServerPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Uptime_(Hours)",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 8
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Uptime (Hours)",
+        "hint" : "",
+        "query" : "SELECT latest(memcached.server.uptimeInMilliseconds)/1000/3600 AS `Hours` FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Open_connections_(Connections)",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 8
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Open connections (Connections)",
+        "hint" : "",
+        "query" : "SELECT latest(`memcached.server.openConnectionsServer`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Percent_max_memory_used_(%)",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 8
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Percent max memory used (%)",
+        "hint" : "",
+        "query" : "SELECT latest(`memcached.server.storingItemsPercentMemory`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    } ]
+  }
+}

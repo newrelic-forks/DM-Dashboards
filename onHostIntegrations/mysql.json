@@ -1,0 +1,192 @@
+{
+  "template" : {
+    "filter" : {
+      "event_types" : [ "MysqlSample" ],
+      "filter_first" : false,
+      "key_names" : [ "cluster.nodeType", "entityName", "label.env", "label.role", "software.version", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ]
+    },
+    "id" : "{{dashboard_id}}",
+    "title" : "MySQL",
+    "widgets" : [ {
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 0
+      },
+      "name" : "1",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MysqlSample" ],
+        "query" : "SELECT average(`mysql.node.query.insertPerSecond`) * uniqueCount(entityName) as 'Insert Commands', average(`mysql.node.query.selectPerSecond`) * uniqueCount(entityName) as 'Select Commands', average(`mysql.node.query.updatePerSecond`) * uniqueCount(entityName) as 'Update Comands', average(`mysql.node.query.deletePerSecond`) * uniqueCount(entityName) as 'Delete Commands' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Operations per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "name" : "2",
+      "props" : {
+        "actions" : false,
+        "containerNames" : [ "beyond" ],
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **MySQL** \n\nMySQL is the world's most popular open source database. With its proven performance, reliability, and ease-of-use, MySQL has become the leading database choice for web-based applications.\n\nThe MySQL integration provides different parameters to control the metrics that are captured.\n\n\n:::",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        }
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "name" : "3",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MysqlSample" ],
+        "query" : "SELECT average(`mysql.node.query.queriesPerSecond`) * uniqueCount(entityName) as 'Queries' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Queries per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "name" : "4",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MysqlSample" ],
+        "query" : "SELECT average(`mysql.node.query.slowQueriesPerSecond`) * 60 as 'Slow Queries' FROM Metric TIMESERIES until 1 minutes ago facet entityName",
+        "title" : "Slow Queries per minute, by node",
+        "showTimezone" : true,
+        "type" : "area"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "name" : "5",
+      "props" : {
+        "actions" : true,
+        "config" : {
+          "bar" : {
+            "tooltipEnabled" : false
+          }
+        },
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MysqlSample" ],
+        "query" : "SELECT latest(`mysql.node.net.threadsConnected`) as 'Active Connections' FROM Metric until 1 minutes ago facet entityName",
+        "title" : "Active Connections, by node",
+        "showTimezone" : true,
+        "type" : "bar"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "name" : "6",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MysqlSample" ],
+        "query" : "SELECT max(`mysql.node.net.threadsConnected`) as 'Max Connections' FROM Metric TIMESERIES facet entityName",
+        "title" : "Max Connections, by node",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "name" : "7",
+      "props" : {
+        "accountId" : "{{account_id}}",
+        "actions" : {
+          "expand-item" : true,
+          "get-image" : false,
+          "pin-to-insights" : false,
+          "view-cds-query" : false,
+          "view-in-insights" : false,
+          "view-nrql-query" : false
+        },
+        "endpoint" : "/v2/nrql",
+        "filterBySource" : [ "config/mysql" ],
+        "footerDisabled" : true,
+        "pathsCount" : 600,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "title" : "MySQL Inventory",
+        "showTimezone" : true
+      },
+      "renderer" : "inventory"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "name" : "8",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MysqlSample" ],
+        "query" : "SELECT average(`mysql.node.innodb.dataReadBytesPerSecond`) * uniqueCount(entityName) as 'Read InnoDB Data', average(`mysql.node.innodb.dataWrittenBytesPerSecond`) * uniqueCount(entityName) as 'Write InnoDB Data' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Read vs Written InnoDB Bytes per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "name" : "9",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "MysqlSample" ],
+        "query" : "SELECT average(`mysql.node.net.bytesReceivedPerSecond`) * uniqueCount(entityName) as 'Bytes Received', average(`mysql.node.net.bytesSentPerSecond`) * uniqueCount(entityName) as 'Bytes Sent' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Received vs Sent Bytes per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

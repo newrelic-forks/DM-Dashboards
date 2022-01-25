@@ -1,0 +1,265 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "OracleDB",
+    "filter" : {
+      "key_names" : [ "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "OracleDatabaseSample", "OracleTablespaceSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.database.disk.readsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Physical Reads Rate",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT max(`oracle.database.disk.writesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Physical Writes Rate",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n**Oracle Database**\n\nOracle Database is a database management system produced by Oracle Corporation. \n\nThe Oracle Database integration collects key metrics about a database and its associated tablespaces. The integration provides several configuration options to control which metrics are collected.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.database.disk.physicalReadBytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Physical Read Bytes Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.database.executionsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Executions Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.tablespace.spaceUsedPercentage`) FROM Metric TIMESERIES 1 hour FACET displayName SINCE 1 week ago",
+        "title" : "Tablespace Used (%)",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleTablespaceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`oracle.tablespace.isOffline`) AS `Is Offline` FROM Metric FACET displayName",
+        "title" : "Tablespace Offline",
+        "showTimezone" : true,
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleTablespaceSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.database.hostCpuUtilization`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Host CPU Utilization (%)",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.database.disk.physicalReadsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Physical Reads Direct Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.database.disk.physicalWritesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "Physical Writes Direct Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.database.network.ioMegabytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "title" : "IO Megabytes Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.database.query.transactionsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName SINCE 60 minutes ago",
+        "title" : "User Transactions Per Second",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`oracle.database.sessionCount`) AS `Sessions` FROM Metric TIMESERIES 10 minutes FACET displayName SINCE 1 day ago",
+        "title" : "Session Count",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "14",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`oracle.database.memory.pgaMaxSizeInBytes`) FROM Metric TIMESERIES 1 hour FACET displayName SINCE 1 week ago",
+        "title" : "Global Memory Bound",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "OracleDatabaseSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

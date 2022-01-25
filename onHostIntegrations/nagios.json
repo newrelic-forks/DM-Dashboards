@@ -1,0 +1,138 @@
+{
+  "template": {
+    "id": "{{dashboard_id}}",
+    "title": "Nagios",
+    "filter": {
+      "key_names": [
+        "entityName",
+        "displayName",
+        "clusterName",
+        "containerImage",
+        "containerName",
+        "deploymentName",
+        "namespaceName",
+        "nodeName",
+        "podName"
+      ],
+      "event_types": [
+        "NagiosServiceCheckSample"
+      ]
+    },
+    "widgets": [
+      {
+        "name": "1",
+        "layout": {
+          "height": 6,
+          "width": 8,
+          "x": 0,
+          "y": 0
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT latest(`serviceCheck.status`), latest(`serviceCheck.message`) FROM NagiosServiceCheckSample FACET `serviceCheck.name`"
+          },
+          "title": "Service Check Statuses",
+          "type": "table",
+          "endpoint": "/v2/nrql",
+          "event_types": [
+            "NagiosServiceCheckSample"
+          ]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "2",
+        "layout": {
+          "height": 6,
+          "width": 4,
+          "x": 8,
+          "y": 0
+        },
+        "props": {
+          "actions": false,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": null
+          },
+          "endpoint": "/v2/nrql",
+          "markdown": "::: beyond\n **Nagios** \n\nNagios is an application that monitors systems, networks, and infrastructure with pluggable scripts known as service checks. \n\nThe Nagios integration runs and collects the results of these service checks and imports them into Infrastructure to aid visibility into infrastructure failures. \n\n\n:::",
+          "containerNames": [
+            "beyond"
+          ]
+        },
+        "renderer": "vizco-markdown"
+      },
+      {
+        "name": "3",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 0,
+          "y": 6
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT count(`serviceCheck.status`) FROM NagiosServiceCheckSample WHERE `serviceCheck.status` = 0 TIMESERIES"
+          },
+          "title": "Status OK Per Minute",
+          "type": "line",
+          "endpoint": "/v2/nrql",
+          "event_types": [
+            "NagiosServiceCheckSample"
+          ]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "4",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 4,
+          "y": 6
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT count(`serviceCheck.status`) FROM NagiosServiceCheckSample WHERE `serviceCheck.status` = 1 TIMESERIES"
+          },
+          "title": "Status WARNING Per Minute",
+          "type": "line",
+          "endpoint": "/v2/nrql",
+          "event_types": [
+            "NagiosServiceCheckSample"
+          ]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "5",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 8,
+          "y": 6
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT count(`serviceCheck.status`) FROM NagiosServiceCheckSample WHERE `serviceCheck.status` = 2 TIMESERIES"
+          },
+          "title": "Status CRITICAL Per Minute",
+          "type": "line",
+          "endpoint": "/v2/nrql",
+          "event_types": [
+            "NagiosServiceCheckSample"
+          ]
+        },
+        "renderer": "vizco"
+      }
+    ]
+  }
+}

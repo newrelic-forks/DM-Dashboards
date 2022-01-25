@@ -1,0 +1,447 @@
+{
+  "template": {
+    "id": "{{dashboard_id}}",
+    "title": "VMware Tanzu",
+    "filter": {
+      "key_names": [],
+      "event_types": [
+        "PCFCapacity",
+        "PCFContainerMetric",
+        "PCFCounterEvent",
+        "PCFHttpStartStop",
+        "PCFLogMessage",
+        "PCFValueMetric"
+      ],
+      "filter_first": false
+    },
+    "widgets": [
+      {
+        "name": "1",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 0,
+          "y": 0
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT count(*) AS 'Event Count' FROM PCFCapacity, PCFContainerMetric, PCFCounterEvent, PCFHttpStartStop, PCFLogMessage, PCFValueMetric facet pcf.domain"
+          },
+          "title": "Domains",
+          "type": "table",
+          "endpoint": "/v2/nrql",
+          "event_types": [
+            "PCFCapacity",
+            "PCFContainerMetric",
+            "PCFCounterEvent",
+            "PCFHttpStartStop",
+            "PCFLogMessage",
+            "PCFValueMetric"
+          ]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "2",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 4,
+          "y": 0
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "select uniqueCount(`app.space.name`) as 'Spaces', count(*) as 'Events' from PCFContainerMetric facet `app.org.name` limit 1000"
+          },
+          "title": "Apps by Org",
+          "type": "table",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFContainerMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "3",
+        "layout": {
+          "height": 6,
+          "width": 4,
+          "x": 8,
+          "y": 0
+        },
+        "props": {
+          "actions": false,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": null
+          },
+          "endpoint": "/v2/nrql",
+          "markdown": "::: beyond\n **VMware Tanzu (ex PCF)** \n\nThis dashboard provides an overview of your VMware Tanzu platform health. Apply filters to focus on a specific application or domain.\n\n\n:::",
+
+          "containerNames": ["beyond"]
+        },
+        "renderer": "vizco-markdown"
+      },
+      {
+        "name": "4",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 0,
+          "y": 3
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "select uniqueCount(`app.instance.uid`) as 'Instances', count(*) as 'Events' from PCFContainerMetric facet app.name limit 1000"
+          },
+          "title": "Apps by name",
+          "type": "table",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFContainerMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "5",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 4,
+          "y": 3
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "select uniqueCount(`app.name`) as 'Apps', count(*) as 'Events' from PCFContainerMetric facet `app.space.name` limit 1000"
+          },
+          "title": "Apps by Space",
+          "type": "table",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFContainerMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "6",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 0,
+          "y": 6
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "select average(metric.sum / `metric.samples.count`) from PCFContainerMetric WHERE metric.name = `app.cpu` facet `app.name` timeseries"
+          },
+          "title": "Application CPU Usage %",
+          "type": "line",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFContainerMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "7",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 4,
+          "y": 6
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "select average(`app.memory.used`) from PCFContainerMetric WHERE metric.name = `app.memory` facet `app.instance.uid` timeseries"
+          },
+          "title": "Memory Usage % by Apps",
+          "type": "line",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFContainerMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "8",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 8,
+          "y": 6
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "select average(`app.disk.used`) from PCFContainerMetric WHERE `metric.name` = 'app.disk' facet `app.instance.uid` timeseries"
+          },
+          "title": "Disk Usage % by Application",
+          "type": "line",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFContainerMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "9",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 0,
+          "y": 9
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT count(*) as 'Crashes' from PCFLogMessage where `log.message` like '%CRASHED%' facet app.name"
+          },
+          "title": "Crash count by Apps",
+          "type": "table",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFLogMessage"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "10",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 4,
+          "y": 9
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT count(*) FROM PCFLogMessage facet `app.instance.uid` WHERE `log.message.type` = 'ERR'"
+          },
+          "title": "Error count per App",
+          "type": "bar",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFLogMessage"],
+          "config": {
+            "bar": {
+              "tooltipEnabled": false
+            }
+          }
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "11",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 8,
+          "y": 9
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT count(*) as 'Crashes' from PCFLogMessage where `log.message` like '%CRASHED%' facet app.name timeseries"
+          },
+          "title": "Apps Crash History",
+          "type": "line",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFLogMessage"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "12",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 0,
+          "y": 12
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT sum(`metric.sum`) as `Failed Task Placements` FROM PCFCounterEvent WHERE `metric.name` = `AuctioneerTaskAuctionsFailed`"
+          },
+          "title": "Auctioneer Task Placement Failures",
+          "type": "billboard",
+          "endpoint": "/v2/nrql",
+          "hint": "The number of Tasks that the auctioneer failed to place on Diego cells. This metric is cumulative over the lifetime of the auctioneer job.",
+          "event_types": ["PCFCounterEvent"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "13",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 4,
+          "y": 12
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "select count(*) from PCFHttpStartStop FACET http.status"
+          },
+          "title": "Http Status Codes",
+          "type": "bar",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFHttpStartStop"],
+          "config": {
+            "bar": {
+              "tooltipEnabled": false
+            }
+          }
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "14",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 8,
+          "y": 12
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT sum(`metric.sum`) as `Started Auctioneer LRPs` FROM `PCFCounterEvent` WHERE `metric.name` = `AuctioneerLRPAuctionsStarted`"
+          },
+          "title": "Auctioneer App Instance Starts",
+          "type": "billboard",
+          "endpoint": "/v2/nrql",
+          "hint": "The number of LRP instances that the auctioneer successfully placed on Diego cells. This metric is cumulative over the lifetime of the auctioneer job.",
+          "event_types": ["PCFCounterEvent"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "15",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 0,
+          "y": 15
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT max(`metric.max`)  FROM `PCFValueMetric` SINCE 5 minutes ago WHERE `metric.name` = `UnhealthyCell`"
+          },
+          "title": "Diego Cell - Unhealthy Cells",
+          "type": "billboard",
+          "endpoint": "/v2/nrql",
+          "hint": "The Diego cell periodically checks its health against the garden backend. For Diego cells, 0 means healthy, and 1 means unhealthy.",
+          "event_types": ["PCFValueMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "16",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 4,
+          "y": 15
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT latest(`metric.sample.last.value`) AS 'Remaining Memory GB' FROM PCFValueMetric FACET pcf.IP WHERE `metric.name` = 'CapacityRemainingMemory' AND `pcf.job` ='diego_cell'"
+          },
+          "title": "Diego Cell Remaining Memory in GB",
+          "type": "table",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFValueMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "17",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 8,
+          "y": 15
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT latest(`metric.sample.last.value`)/1024 AS 'Remaining Disk GB' FROM PCFValueMetric FACET pcf.IP  WHERE `metric.name` = 'CapacityRemainingDisk' AND `pcf.job` ='diego_cell'"
+          },
+          "title": "Diego Cell Remaining Disk in GB",
+          "type": "table",
+          "endpoint": "/v2/nrql",
+          "event_types": ["PCFValueMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "18",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 0,
+          "y": 18
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT sum(metric.sum) as 'Dropped Messages' FROM PCFValueMetric SINCE 5 minutes AGO WHERE metric.name = `opentsdb.nozzle.DopplerServer.doppler.shedEnvelopes`"
+          },
+          "title": "Firehose Dropped Messages",
+          "type": "billboard",
+          "endpoint": "/v2/nrql",
+          "hint": "The lifetime total number of messages intentionally dropped by Doppler due to back pressure.",
+          "event_types": ["PCFValueMetric"]
+        },
+        "renderer": "vizco"
+      },
+      {
+        "name": "19",
+        "layout": {
+          "height": 3,
+          "width": 4,
+          "x": 4,
+          "y": 18
+        },
+        "props": {
+          "actions": true,
+          "query": {
+            "account_id": "{{account_id}}",
+            "nrql": "SELECT count(*) as 'All Events' FROM PCFCapacity, PCFContainerMetric, PCFCounterEvent, PCFHttpStartStop, PCFLogMessage, PCFValueMetric TIMESERIES"
+          },
+          "title": "Number of Events",
+          "type": "line",
+          "endpoint": "/v2/nrql",
+          "event_types": [
+            "PCFCapacity",
+            "PCFContainerMetric",
+            "PCFCounterEvent",
+            "PCFHttpStartStop",
+            "PCFLogMessage",
+            "PCFValueMetric"
+          ]
+        },
+        "renderer": "vizco"
+      }
+    ]
+  }
+}

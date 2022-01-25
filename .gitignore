@@ -1,0 +1,7 @@
+*.exe
+*.swp
+output/
+.vscode
+.idea
+*.syso
+.DS_Store

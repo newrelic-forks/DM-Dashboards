@@ -1,0 +1,222 @@
+{
+  "template" : {
+    "filter" : {
+      "event_types" : [ "ApacheSample" ],
+      "filter_first" : false,
+      "key_names" : [ "entityName", "label.env", "label.role", "software.version", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ]
+    },
+    "id" : "{{dashboard_id}}",
+    "title" : "Apache",
+    "widgets" : [ {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "name" : "1",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ApacheSample" ],
+        "query" : "SELECT uniqueCount(entityName) as 'Servers' FROM Metric",
+        "title" : "Servers Reporting",
+        "showTimezone" : true,
+        "type" : "billboard"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "name" : "2",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ApacheSample" ],
+        "query" : "SELECT average(`apache.server.net.requestsPerSecond`) * uniqueCount(entityName) as 'Requests' FROM Metric TIMESERIES until 1 minute ago",
+        "title" : "Total Requests per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "name" : "3",
+      "props" : {
+        "actions" : false,
+        "containerNames" : [ "beyond" ],
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **Apache** \n\nApache is a freely available Web server that is distributed under an open source license. According to a Netcraft (www.netcraft.com) Web server survey 60% of all Web sites on the Internet are using Apache (62% including Apache derivatives), making Apache more widely used than all other Web servers combined.\n\n\n:::",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        }
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "name" : "4",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ApacheSample" ],
+        "query" : "SELECT average(`apache.server.net.requestsPerSecond`) as 'Requests' FROM Metric facet entityName TIMESERIES until 1 minute ago",
+        "title" : "Requests per second, by server",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "name" : "5",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ApacheSample" ],
+        "query" : "SELECT (average(`apache.server.net.bytesPerSecond`)/average(`apache.server.net.requestsPerSecond`)) as 'Bytes Sent Per Req' FROM Metric TIMESERIES until 1 minute ago",
+        "title" : "Bytes Sent per request",
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 12,
+        "x" : 0,
+        "y" : 6
+      },
+      "name" : "6",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ApacheSample" ],
+        "query" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entityName) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entityName) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entityName) as 'Total Workers', average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entityName) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entityName) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entityName) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entityName) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entityName) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entityName) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entityName) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entityName) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entityName) as 'Starting' FROM Metric since 5 minutes ago until 1 minute ago",
+        "title" : "Worker Status",
+        "showTimezone" : true,
+        "type" : "billboard"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "name" : "7",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ApacheSample" ],
+        "query" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entityName) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entityName) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entityName) as 'Total Workers' FROM Metric TIMESERIES until 1 minute ago",
+        "title" : "Total vs Idle vs Busy Workers",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "name" : "8",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ApacheSample" ],
+        "query" : "SELECT average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entityName) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entityName) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entityName) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entityName) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entityName) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entityName) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entityName) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entityName) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entityName) as 'Starting' FROM Metric TIMESERIES until 1 minute ago",
+        "title" : "Busy Worker Status",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "name" : "9",
+      "props" : {
+        "accountId" : "{{account_id}}",
+        "actions" : {
+          "expand-item" : true,
+          "get-image" : false,
+          "pin-to-insights" : false,
+          "view-cds-query" : false,
+          "view-in-insights" : false,
+          "view-nrql-query" : false
+        },
+        "endpoint" : "/v2/nrql",
+        "filterBySource" : [ "config/apache" ],
+        "footerDisabled" : true,
+        "pathsCount" : 600,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "title" : "Apache Inventory",
+        "showTimezone" : true
+      },
+      "renderer" : "inventory"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "name" : "10",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ApacheSample" ],
+        "query" : "SELECT average(`apache.server.net.bytesPerSecond`) * uniqueCount(entityName) as 'Bytes Sent' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Total Bytes Sent per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "name" : "11",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ApacheSample" ],
+        "query" : "SELECT average(`apache.server.net.bytesPerSecond`) as 'Bytes Sent' FROM Metric facet entityName TIMESERIES until 1 minutes ago",
+        "title" : "Bytes Sent per second, by server",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

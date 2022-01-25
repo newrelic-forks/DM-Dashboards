@@ -1,0 +1,112 @@
+{
+  "template" : {
+    "title" : "RabbitmqQueueSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Total_messages",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total messages",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.queue.totalMessages`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Published_messages",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Published messages",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.queue.messagesPublished`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Published_messages_throughput",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Published messages throughput",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.rabbitmq.queue.messagesPublishedPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_messages_throughput",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total messages throughput",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.rabbitmq.queue.totalMessagesPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Consumer_messages",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Consumer messages",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.queue.consumerMessageUtilizationPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Bytes_consumed",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Bytes consumed",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.queue.erlangBytesConsumedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Consumers",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Consumers",
+        "hint" : "",
+        "query" : "SELECT average(`rabbitmq.queue.consumers`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

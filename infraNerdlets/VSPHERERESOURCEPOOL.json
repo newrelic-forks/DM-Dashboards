@@ -1,0 +1,112 @@
+{
+  "template" : {
+    "title" : "VSphereResourcePoolSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Overall_status",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Overall status",
+        "hint" : "",
+        "query" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Virtual_machines_count",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "bar",
+        "title" : "Virtual machines count",
+        "hint" : "",
+        "query" : "SELECT latest(`vsphere.resourcePool.vmCount`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "CPU_overall_usage_and_total_MHz",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "CPU overall usage and total MHz",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.resourcePool.cpu.overallUsage`),average(`vsphere.resourcePool.cpu.totalMhz`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memory_usage_and_size_MiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 9,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Memory usage and size MiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.resourcePool.mem.usage`),average(`vsphere.resourcePool.mem.size`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memory_free_MiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Memory free MiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.resourcePool.mem.free`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memory_ballooned_MiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Memory ballooned MiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.resourcePool.mem.ballooned`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Memory_swapped_MiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 6,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Memory swapped MiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.resourcePool.mem.swapped`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

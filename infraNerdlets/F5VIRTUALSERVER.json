@@ -1,0 +1,82 @@
+{
+  "template" : {
+    "title" : "F5BigIpVirtualServerSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Virtual_server_availability_status",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Virtual server availability status",
+        "hint" : "",
+        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 2) AS `Online` FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Virtual_server_connections",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 4,
+        "width" : 8,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "bar",
+        "title" : "Virtual server connections",
+        "hint" : "",
+        "query" : "SELECT latest(`f5.virtualserver.connections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Virtual_server_requests",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 6,
+        "width" : 6,
+        "x" : 0,
+        "y" : 4
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Virtual server requests",
+        "hint" : "",
+        "query" : "SELECT average(`f5.virtualserver.requestsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Virtual_server_data_in",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 4
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Virtual server data in",
+        "hint" : "",
+        "query" : "SELECT average(`f5.virtualserver.inDataInBytesPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Virtual_server_data_out",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 7
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Virtual server data out",
+        "hint" : "",
+        "query" : "SELECT average(`f5.virtualserver.outDataInBytesPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

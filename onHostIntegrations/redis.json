@@ -1,0 +1,312 @@
+{
+  "template" : {
+    "filter" : {
+      "event_types" : [ "RedisSample" ],
+      "filter_first" : false,
+      "key_names" : [ "cluster.role", "entityName", "software.version", "label.env", "label.role", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ]
+    },
+    "id" : "{{dashboard_id}}",
+    "title" : "Redis",
+    "widgets" : [ {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "name" : "1",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT filter(uniqueCount(entityName), WHERE `cluster.role` = 'master') as 'Masters', filter(uniqueCount(entityName), WHERE `cluster.role` = 'slave') as 'Slaves' FROM Metric until 1 minute ago",
+        "title" : "Reporting Nodes",
+        "showTimezone" : true,
+        "type" : "billboard"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "name" : "2",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.net.commandsProcessedPerSecond`) * uniqueCount(entityName) as 'Commands' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Commands per second",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "name" : "3",
+      "props" : {
+        "actions" : false,
+        "containerNames" : [ "beyond" ],
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **Redis** \n\nRedis is an open source, in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs and spatial indexes.\n\nThe Redis integration provides different parameters to control the metrics that are captured.\n\n\n:::",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        }
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 3
+      },
+      "name" : "4",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.net.commandsProcessedPerSecond`) as 'Commands' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "title" : "Commands per second, by node",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "name" : "5",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.net.connectedClients`) * uniqueCount(entityName) as 'Connected clients' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Connected Clients",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "name" : "6",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.net.connectedClients`) as 'Connected clients' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "title" : "Connected Clients, by node",
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "name" : "7",
+      "props" : {
+        "accountId" : "{{account_id}}",
+        "actions" : {
+          "expand-item" : true,
+          "get-image" : false,
+          "pin-to-insights" : false,
+          "view-cds-query" : false,
+          "view-in-insights" : false,
+          "view-nrql-query" : false
+        },
+        "endpoint" : "/v2/nrql",
+        "filterBySource" : [ "config/redis" ],
+        "footerDisabled" : true,
+        "pathsCount" : 600,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "title" : "Redis Inventory",
+        "showTimezone" : true
+      },
+      "renderer" : "inventory"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "name" : "8",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.net.blockedClients`) * uniqueCount(entityName) AS 'Blocked Clients' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Blocked Clients",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "name" : "9",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.system.usedMemoryBytes`) as 'Used memory' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "title" : "Redis Used Memory (bytes), by node",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "name" : "10",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.rdbChangesSinceLastSave`) as 'Rdb changes' FROM Metric TIMESERIES until 1 minutes ago FACET(entityName)",
+        "title" : "Changes Since Last Save, by node",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "name" : "11",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.keyspaceHitsPerSecond`) / (average(`redis.instance.keyspaceMissesPerSecond`) + average(`redis.instance.keyspaceHitsPerSecond`)) as 'Hit Ratio' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "title" : "Keyspace Hit Ratio, by node",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "name" : "12",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.evictedKeysPerSecond`) as 'Evicted keys' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "title" : "Evicted Keys per second, by node",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "name" : "13",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.expiredKeysPerSecond`) as 'Expired keys' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "title" : "Expired Keys per second, by node",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 15
+      },
+      "name" : "14",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.net.inputBytesPerSecond`) * uniqueCount(entityName) as 'Input', average(`redis.instance.net.outputBytesPerSecond`) * uniqueCount(entityName) as 'Output' FROM Metric TIMESERIES until 1 minutes ago",
+        "title" : "Network I/O per second (bytes)",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 15
+      },
+      "name" : "15",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.net.outputBytesPerSecond`) as 'Output' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "title" : "Output Bytes per second, by node",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    }, {
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 15
+      },
+      "name" : "16",
+      "props" : {
+        "actions" : true,
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "RedisSample" ],
+        "query" : "SELECT average(`redis.instance.net.inputBytesPerSecond`) as 'Input' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "title" : "Input Bytes per second, by node",
+        "showTimezone" : true,
+        "type" : "line"
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

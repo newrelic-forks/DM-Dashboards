@@ -1,0 +1,252 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "Varnish Cache",
+    "filter" : {
+      "key_names" : [ "entityName", "displayName", "varnishInstance", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "VarnishSample", "VarnishBackendSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.session.connections`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Session Connections",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.net.requests`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Requests",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **Varnish Cache** \n\nVarnish Cache is a web application accelerator also known as a caching HTTP reverse proxy. \n\nThe Varnish Cache integration collects a wide array of metrics which facilitate the diagnosis of performance bottlenecks.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.session.drops`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Session Drops",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.varnish.main.expiredMailed`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Expired Objects",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.cache.hits`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Cache Hits",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.cache.misses`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Cache Misses",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT uniqueCount(`displayName`) as 'Backends' FROM Metric facet varnishInstance since 5 minutes ago",
+        "title" : "Backends Per Instance",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.cache.missHits`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Cache Hits for Miss",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`varnish.cache.passHits`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Cache Hits for Pass",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.backend.net.requests`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Backend Requests",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.cache.graceHits`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Cache Grace Hits",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`varnish.lru.nuked`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "LRU Purges",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "14",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`varnish.backend.connections`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "title" : "Backend Connections",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "VarnishBackendSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

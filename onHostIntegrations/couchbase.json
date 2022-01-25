@@ -1,0 +1,391 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "Couchbase",
+    "filter" : {
+      "key_names" : [ "entityName", "displayName", "host", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "CouchbaseNodeSample", "CouchbaseClusterSample", "CouchbaseQueryEngineSample", "CouchbaseBucketSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.node.cpuUtilization`) FROM Metric timeseries facet displayName",
+        "title" : "CPU Utilization by Node",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseNodeSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.readOperationsPerSecond`) FROM Metric timeseries facet displayName",
+        "title" : "Read Operations Per Second by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **Couchbase** \n\nCouchbase is an open-source, distributed, NoSQL database built for large-scale interactivity.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.dataUsedInBytes`) FROM Metric timeseries facet displayName",
+        "title" : "Data Used by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.readRatePerSecond`) FROM Metric timeseries facet displayName",
+        "title" : "Read Rate Per Second by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.memoryUsedInBytes`) FROM Metric timeseries facet displayName",
+        "title" : "Memory Usage by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.quotaUtilization`) FROM Metric timeseries facet displayName",
+        "title" : "Quota Utilization by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.diskUsedInBytes`) FROM Metric timeseries facet displayName",
+        "title" : "Disk Usage by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.totalOperationsPerSecond`) FROM Metric timeseries facet displayName",
+        "title" : "Total Operations Per Second by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.currentConnections`) FROM Metric timeseries facet displayName",
+        "title" : "Current Connections by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.diskWriteQueue`) FROM Metric timeseries facet displayName",
+        "title" : "Disk Write Queue by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.writeOperationsPerSecond`) FROM Metric timeseries facet displayName",
+        "title" : "Write Operations Per Second by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.outOfMemoryErrorsPerSecond`) FROM Metric timeseries facet displayName",
+        "title" : "Out of Memory Errors Per Second by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "14",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.queryengine.activeRequests`) FROM Metric timeseries facet displayName",
+        "title" : "Active Requests by Query Engine",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseQueryEngineSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "15",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.activeResidentItemsRatio`) FROM Metric timeseries facet displayName",
+        "title" : "Active Resident Items Ratio by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "16",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.queryengine.systemCpuUtilization`) FROM Metric timeseries facet displayName",
+        "title" : "CPU Utilization by Query Engine",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseQueryEngineSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "17",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.queryengine.completedRequests`) FROM Metric timeseries facet displayName",
+        "title" : "Completed Requests by Query Engine",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseQueryEngineSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "18",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.ejectionsPerSecond`) FROM Metric timeseries facet displayName",
+        "title" : "Ejections Per Second by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "19",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.queryengine.usedMemoryInBytes`) FROM Metric timeseries facet displayName",
+        "title" : "Used Memory by Query Engine",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseQueryEngineSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "20",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.queryengine.preparedStatementUtilization`) FROM Metric timeseries facet displayName",
+        "title" : "Prepared Statement Utilization by Query Engine",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseQueryEngineSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "21",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`couchbase.bucket.writeRatePerSecond`) FROM Metric timeseries facet displayName",
+        "title" : "Write Rate Per Second by Bucket",
+        "showTimezone" : true,
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "CouchbaseBucketSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

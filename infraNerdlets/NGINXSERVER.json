@@ -1,0 +1,67 @@
+{
+  "template" : {
+    "title" : "NginxSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Requests_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Requests per second",
+        "hint" : "Number of requests per second.",
+        "query" : "SELECT average(`nginx.server.net.requestsPerSecond`) as 'Requests' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Active_connections",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Active connections",
+        "hint" : "Number of connections that are currently active.",
+        "query" : "SELECT average(`nginx.server.net.connectionsActive`) as 'Active connections' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Connections_accepted_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Connections accepted per second",
+        "hint" : "Number of accepted client connections per second.",
+        "query" : "SELECT average(`nginx.server.net.connectionsAcceptedPerSecond`) as 'Connections accepted' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Connections_dropped_per_second",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Connections dropped per second",
+        "hint" : "Number of connections per second that were accepted but could not be handled and hence dropped.",
+        "query" : "SELECT average(`nginx.server.net.connectionsDroppedPerSecond`) as 'Connections dropped' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "template" : {
+    "title" : "MssqlInstanceSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Connections",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Connections",
+        "hint" : "The number of user connections.",
+        "query" : "SELECT average(`mssql.instance.stats.connections`) as 'Connections' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "SQL_compilations_and_re-compilations",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "SQL compilations and re-compilations",
+        "hint" : "The number of MS SQL compilations and re-compilations per second.",
+        "query" : "SELECT average(`stats.sqlCompilations`) as `Compilations`, average(`mssql.instance.stats.sqlRecompilationsPerSecond`) as `Re-compilations` FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Buffer_cache_hit_percentage",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Buffer cache hit percentage",
+        "hint" : "The percentage of buffer pools hits on the instance.",
+        "query" : "SELECT average(`mssql.instance.system.bufferPoolHitPercent`) as 'Cache hit' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Average_batch_requests",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Average batch requests",
+        "hint" : "The number of batch requests per second on the buffer pool.",
+        "query" : "SELECT average(`mssql.instance.bufferpool.batchRequestsPerSecond`) as 'Batch requests' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Page_life_expectancy",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Page life expectancy",
+        "hint" : "The life expectancy of a page in the buffer pool, in milliseconds.",
+        "query" : "SELECT average(`mssql.instance.bufferpool.pageLifeExpectancyInMilliseconds`) as 'Page life expentancy' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Number_of_blocked_processes",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Number of blocked processes",
+        "hint" : "The number of blocked processes on the instance.",
+        "query" : "SELECT average(`mssql.instance.instance.blockedProcessesCount`) as 'Blocked processes' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Lock_waits",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Lock waits",
+        "hint" : "The number of times per second that MS SQL Server is unable to retain a lock right away for a resource.",
+        "query" : "SELECT average(`mssql.instance.stats.lockWaitsPerSecond`) as 'Times' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Total_wait_time",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Total wait time",
+        "hint" : "The number of milliseconds per second spent waiting across the instance.",
+        "query" : "SELECT average(`mssql.instance.system.waitTimeInMillisecondsPerSecond`) as 'Wait time' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Page_splits",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Page splits",
+        "hint" : "The number of page splits per second.",
+        "query" : "SELECT average(`mssql.instance.access.pageSplitsPerSecond`) as 'Page splits' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Checkpoint_pages",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 6,
+        "x" : 6,
+        "y" : 9
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Checkpoint pages",
+        "hint" : "The number of pages flushed to disk per second by a checkpoint or other operation that require all dirty pages to be flushed.",
+        "query" : "SELECT average(`mssql.instance.buffer.checkpointPagesPerSecond`) as 'Checkpoint pages' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

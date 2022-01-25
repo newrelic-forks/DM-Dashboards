@@ -1,0 +1,357 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "HAProxy",
+    "filter" : {
+      "key_names" : [ "entityName", "displayName", "clusterName", "containerImage", "containerName", "deploymentName", "namespaceName", "nodeName", "podName" ],
+      "event_types" : [ "HAProxyBackendSample", "HAProxyFrontendSample", "HAProxyServerSample" ]
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 8,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "# Frontend Metrics",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 6,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "::: beyond\n **HAProxy** \n\nHAProxy is a high performance load balancer for TCP- and HTTP-based applications.\n\nThe HAProxy integration collects a wide array of metrics which facilitate the diagnosis of performance bottlenecks.\n\n\n:::",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.frontend.bytesInPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Bytes Received Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyFrontendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.frontend.bytesOutPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Bytes Sent Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyFrontendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.frontend.requestErrorsPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Request Errors Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyFrontendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.frontend.http200ResponsesPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "HTTP 2xx Responses Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyFrontendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.frontend.http100ResponsesPerSecond`) + average(`haproxy.frontend.http300ResponsesPerSecond`) + average(`haproxy.frontend.http400ResponsesPerSecond`) + average(`haproxy.frontend.http500ResponsesPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Non-2xx HTTP Responses Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyFrontendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`frontend.status`) FROM Metric FACET displayName",
+        "title" : "Frontend Statuses",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyFrontendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.frontend.connectionsPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Connections Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyFrontendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.frontend.sessionsPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Sessions Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyFrontendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 12,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : false,
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : null
+        },
+        "endpoint" : "/v2/nrql",
+        "markdown" : "# Backend Metrics",
+        "containerNames" : [ "beyond" ]
+      },
+      "renderer" : "vizco-markdown"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`haproxy.backend.activeServers`) FROM Metric FACET `backend.proxyName`",
+        "title" : "Active Servers",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`haproxy.backend.backupServers`) FROM Metric FACET displayName",
+        "title" : "Backup Servers",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "14",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.backend.bytesInPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Bytes Received Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "15",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.backend.bytesOutPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Bytes Sent Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "16",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.backend.httpResponseBytesFedToCompressorPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Bytes Compressed Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "17",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.backend.http200ResponsesPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "HTTP 2xx Responses Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "18",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.backend.http100ResponsesPerSecond`) + average(`haproxy.backend.http300ResponsesPerSecond`) + average(`haproxy.backend.http400ResponsesPerSecond`) + average(`haproxy.backend.http500ResponsesPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Non-2xx HTTP Responses Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "19",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(`haproxy.backend.sessionsPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "title" : "Sessions Created Per Second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyBackendSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "20",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT latest(`backend.mode`) FROM Metric FACET displayName",
+        "title" : "Backend Mode",
+        "type" : "table",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "HAProxyBackendSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

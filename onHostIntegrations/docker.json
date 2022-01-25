@@ -1,0 +1,369 @@
+{
+  "template" : {
+    "id" : "{{dashboard_id}}",
+    "title" : "Docker",
+    "filter" : {
+      "key_names" : [ "containerId", "fullHostname", "hostname", "image", "imageName", "name" ],
+      "event_types" : [ "ContainerSample" ],
+      "filter_first" : false
+    },
+    "widgets" : [ {
+      "name" : "1",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.cpuPercent) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "CPU Total (%)",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "2",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.cpuKernelPercent) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "CPU Kernel (%)",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "3",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 0
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.cpuUserPercent) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "CPU User (%)",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "4",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.cpuUsedCores) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "CPU Core",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "5",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.docker.container.cpuUsedCoresPercent) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "CPU Core Usage (%)",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "6",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 3
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.cpuThrottleTimeMs) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "CPU Throttle Time",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "7",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.memoryUsageBytes) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "Memory Usage Bytes",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "8",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.memoryResidentSizeBytes) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "Memory Resident Size Bytes",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "9",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 6
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.memoryCacheBytes) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "Memory Cache Bytes",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "10",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.networkRxBytes) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "Receive Bytes",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "11",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.networkTxBytes) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "Transmit Bytes",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "12",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 9
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.ioTotalBytes) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "I/O Total Bytes",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "13",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.ioReadBytesPerSecond) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "I/O Read Bytes per second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "14",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.ioReadCountPerSecond) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "I/O Read Count per second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "15",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 8,
+        "y" : 12
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.restartCount) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "Container Restart Count",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "16",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.ioWriteBytesPerSecond) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "I/O Write Bytes per second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "17",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 15
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.ioWriteCountPerSecond) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "I/O Write Count per second",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "18",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.ioTotalReadBytes) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "I/O Total Read Bytes",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "19",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 18
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.ioTotalWriteBytes) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "I/O Total Write Bytes",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "20",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 0,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.ioTotalReadCount) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "I/O Total Read Count",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    }, {
+      "name" : "21",
+      "layout" : {
+        "height" : 3,
+        "width" : 4,
+        "x" : 4,
+        "y" : 21
+      },
+      "props" : {
+        "actions" : true,
+        "query" : "SELECT average(docker.container.ioTotalWriteCount) FROM Metric TIMESERIES FACET `name`, `fullHostname`",
+        "title" : "I/O Total Write Count",
+        "type" : "line",
+        "endpoint" : "/v2/nrql",
+        "event_types" : [ "ContainerSample" ]
+      },
+      "renderer" : "vizco"
+    } ]
+  }
+}

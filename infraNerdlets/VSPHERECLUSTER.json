@@ -1,0 +1,97 @@
+{
+  "template" : {
+    "title" : "VSphereClusterSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Overall_status",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Overall status",
+        "hint" : "",
+        "query" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Host_and_effective_host_count",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "bar",
+        "title" : "Host and effective host count",
+        "hint" : "",
+        "query" : "SELECT latest(`vsphere.cluster.hosts`),latest(`vsphere.cluster.effectiveHosts`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "CPU_total_effective_and_total_MHz",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "CPU total effective and total MHz",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.cluster.cpu.totalEffectiveMHz`),average(`vsphere.cluster.cpu.totalMhz`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "CPU_cores",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 9,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "CPU cores",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.cluster.cpu.cores`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "CPU_threads",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "CPU threads",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.cluster.cpu.threads`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Memory_effective_size_and_total_MiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "area",
+        "title" : "Memory effective size and total MiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.cluster.mem.effectiveSize`),average(`vsphere.cluster.mem.size`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "template" : {
+    "title" : "VSphereDatastoreSample",
+    "filter" : { },
+    "widgets" : [ {
+      "name" : "Host_and_virtual_machines_count",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "bar",
+        "title" : "Host and virtual machines count",
+        "hint" : "",
+        "query" : "SELECT latest(`vsphere.datastore.hostCount`),latest(`vsphere.datastore.vmCount`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Accessible",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 3,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "billboard",
+        "title" : "Accessible",
+        "hint" : "",
+        "query" : "SELECT latest(`accessible`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+      }
+    }, {
+      "name" : "Capacity_GiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 6,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Capacity GiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datastore.capacity`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Uncommitted_space_GiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 9,
+        "y" : 0
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Uncommitted space GiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datastore.uncommitted`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    }, {
+      "name" : "Free_space_GiB",
+      "renderer" : "vizco",
+      "layout" : {
+        "height" : 3,
+        "width" : 3,
+        "x" : 0,
+        "y" : 3
+      },
+      "props" : {
+        "type" : "line",
+        "title" : "Free space GiB",
+        "hint" : "",
+        "query" : "SELECT average(`vsphere.datastore.freeSpace`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+      }
+    } ]
+  }
+}
