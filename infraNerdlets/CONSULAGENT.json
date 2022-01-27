@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Cache hits",
         "hint" : "",
-        "query" : "SELECT average(`consul.agent.aclCacheHitPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`consul.agent.aclCacheHitPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Cache_misses",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Cache misses",
         "hint" : "",
-        "query" : "SELECT average(`consul.agent.aclCacheMissPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`consul.agent.aclCacheMissPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Stale_queries",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Stale queries",
         "hint" : "",
-        "query" : "SELECT average(`consul.agent.staleQueries`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`consul.agent.staleQueries`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Peers",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Peers",
         "hint" : "",
-        "query" : "SELECT average(`agent.peer`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`agent.peer`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Transaction_time",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Transaction time",
         "hint" : "",
-        "query" : "SELECT average(`agent.txnAvgInMillisecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`agent.txnAvgInMillisecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Transactions",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Transactions",
         "hint" : "",
-        "query" : "SELECT average(`consul.agent.txns`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`consul.agent.txns`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Transaction_max_time_to_apply",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Transaction max time to apply",
         "hint" : "",
-        "query" : "SELECT average(`agent.txnMaxInMillisecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`agent.txnMaxInMillisecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "KV_store_update_time",
@@ -120,7 +148,11 @@
         "type" : "line",
         "title" : "KV store update time",
         "hint" : "",
-        "query" : "SELECT average(`agent.kvStoresAvgInMillisecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`agent.kvStoresAvgInMillisecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "KV_store_Samples",
@@ -135,7 +167,11 @@
         "type" : "line",
         "title" : "KV store Samples",
         "hint" : "",
-        "query" : "SELECT average(`agent.kvStores`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`agent.kvStores`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "KV_max_time_to_update",
@@ -150,7 +186,11 @@
         "type" : "line",
         "title" : "KV max time to update",
         "hint" : "",
-        "query" : "SELECT average(`agent.kvStoresMaxInMillisecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`agent.kvStoresMaxInMillisecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

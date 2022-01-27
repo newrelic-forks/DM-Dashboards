@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Messages",
         "hint" : "Incoming messages per second.",
-        "query" : "SELECT average(`kafka.broker.messagesInPerSecond`) as 'Messages in per second' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`kafka.broker.messagesInPerSecond`) as 'Messages in per second' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Bytes_in_and_out",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Bytes in and out",
         "hint" : "Network IO brokers in the cluster in bytes per second.",
-        "query" : "SELECT average(`kafka.broker.ioInPerSecond`) as 'Bytes in', average(`kafka.broker.ioOutPerSecond`) as 'Bytes out' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`kafka.broker.ioInPerSecond`) as 'Bytes in', average(`kafka.broker.ioOutPerSecond`) as 'Bytes out' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Bytes_written",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Bytes written",
         "hint" : "Number of bytes written to a topic by the broker per second.",
-        "query" : "SELECT average(`kafka.broker.bytesWrittenToTopicPerSecond`) as 'Bytes written' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`kafka.broker.bytesWrittenToTopicPerSecond`) as 'Bytes written' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Unreplicated_partitions",
@@ -60,7 +72,11 @@
         "type" : "bar",
         "title" : "Unreplicated partitions",
         "hint" : "Number of unreplicated partitions.",
-        "query" : "SELECT average(`kafka.broker.replication.unreplicatedPartitions`) as 'Partitions' FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`kafka.broker.replication.unreplicatedPartitions`) as 'Partitions' FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Produce_requests_failed_per_second",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Produce requests failed per second",
         "hint" : "Failed produce requests per second.",
-        "query" : "SELECT average(`kafka.broker.request.produceRequestsFailedPerSecond`) as 'Requests' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`kafka.broker.request.produceRequestsFailedPerSecond`) as 'Requests' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Request_produce_time_99_percentile",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Request produce time 99 percentile",
         "hint" : "Time for produce requests for 99th percentile.",
-        "query" : "SELECT average(`kafka.broker.request.produceTime99Percentile`) as 'Requests' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`kafka.broker.request.produceTime99Percentile`) as 'Requests' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

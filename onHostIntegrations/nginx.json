@@ -19,7 +19,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "NginxSample" ],
-        "query" : "SELECT average(`nginx.server.net.requestsPerSecond`) * uniqueCount(entityName) as 'Requests' FROM Metric TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`nginx.server.net.requestsPerSecond`) * uniqueCount(entity.name) as 'Requests' FROM Metric TIMESERIES until 1 minutes ago"
+        },
         "title" : "Requests per second",
         "showTimezone" : true,
         "type" : "line"
@@ -56,7 +59,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "NginxSample" ],
-        "query" : "SELECT average(`nginx.server.net.requestsPerSecond`) as 'Requests' FROM Metric facet entityName TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`nginx.server.net.requestsPerSecond`) as 'Requests' FROM Metric facet entity.name TIMESERIES until 1 minutes ago"
+        },
         "title" : "Requests per second, by server",
         "showTimezone" : true,
         "type" : "line"
@@ -74,7 +80,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "NginxSample" ],
-        "query" : "SELECT average(`nginx.server.net.connectionsActive`) * uniqueCount(entityName) as 'Active Connections' FROM Metric TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`nginx.server.net.connectionsActive`) * uniqueCount(entity.name) as 'Active Connections' FROM Metric TIMESERIES until 1 minutes ago"
+        },
         "title" : "Active Connections",
         "showTimezone" : true,
         "type" : "line"
@@ -122,7 +131,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "NginxSample" ],
-        "query" : "SELECT average(`nginx.server.net.connectionsAcceptedPerSecond`) * uniqueCount(entityName) as 'Connections Accepted' FROM Metric TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`nginx.server.net.connectionsAcceptedPerSecond`) * uniqueCount(entity.name) as 'Connections Accepted' FROM Metric TIMESERIES until 1 minutes ago"
+        },
         "title" : "Connections Accepted per second",
         "showTimezone" : true,
         "type" : "line"
@@ -140,7 +152,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "NginxSample" ],
-        "query" : "SELECT average(`nginx.server.net.connectionsDroppedPerSecond`) * uniqueCount(entityName) as 'Connections Dropped' FROM Metric TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`nginx.server.net.connectionsDroppedPerSecond`) * uniqueCount(entity.name) as 'Connections Dropped' FROM Metric TIMESERIES until 1 minutes ago"
+        },
         "title" : "Connections Dropped per second",
         "showTimezone" : true,
         "type" : "line"

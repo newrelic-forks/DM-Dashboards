@@ -15,7 +15,11 @@
         "type" : "bar",
         "title" : "Datacenter resources count",
         "hint" : "",
-        "query" : "SELECT latest(`vsphere.datacenter.hostCount`),latest(`vsphere.datacenter.vmCount`),latest(`vsphere.datacenter.clusters`),latest(`vsphere.datacenter.resourcePools`),latest(`vsphere.datacenter.datastores`),latest(`vsphere.datacenter.networks`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`vsphere.datacenter.hostCount`),latest(`vsphere.datacenter.vmCount`),latest(`vsphere.datacenter.clusters`),latest(`vsphere.datacenter.resourcePools`),latest(`vsphere.datacenter.datastores`),latest(`vsphere.datacenter.networks`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Overall_status",
@@ -30,7 +34,11 @@
         "type" : "billboard",
         "title" : "Overall status",
         "hint" : "",
-        "query" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "CPU_cores",
@@ -45,7 +53,11 @@
         "type" : "billboard",
         "title" : "CPU cores",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datacenter.cpu.cores`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datacenter.cpu.cores`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "CPU_overall_usage_and_total_MHz",
@@ -60,7 +72,11 @@
         "type" : "area",
         "title" : "CPU overall usage and total MHz",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datacenter.cpu.overallUsage`),average(`vsphere.datacenter.cpu.totalMhz`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datacenter.cpu.overallUsage`),average(`vsphere.datacenter.cpu.totalMhz`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "CPU_overall_usage_%",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "CPU overall usage %",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datacenter.vsphere.datacenter.cpu.overallUsagePercentage`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datacenter.vsphere.datacenter.cpu.overallUsagePercentage`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Datastore_capacity_GiB",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Datastore capacity GiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datacenter.datastore.totalGiB`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datacenter.datastore.totalGiB`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Datastore_used_space_GiB",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Datastore used space GiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datacenter.datastore.totalUsedGiB`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datacenter.datastore.totalUsedGiB`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Datastore_free_space_GiB",
@@ -120,7 +148,11 @@
         "type" : "line",
         "title" : "Datastore free space GiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datacenter.datastore.totalFreeGiB`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datacenter.datastore.totalFreeGiB`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_usage_%",
@@ -135,7 +167,11 @@
         "type" : "line",
         "title" : "Memory usage %",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datacenter.vsphere.datacenter.mem.usagePercentage`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datacenter.vsphere.datacenter.mem.usagePercentage`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_usage_and_size_MiB",
@@ -150,7 +186,11 @@
         "type" : "area",
         "title" : "Memory usage and size MiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datacenter.mem.usage`),average(`vsphere.datacenter.mem.size`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datacenter.mem.usage`),average(`vsphere.datacenter.mem.size`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

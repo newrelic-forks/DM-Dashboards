@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Executions",
         "hint" : "Executions per second.",
-        "query" : "SELECT average(`oracle.database.executionsPerSecond`) as 'Executions' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`oracle.database.executionsPerSecond`) as 'Executions' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Session_count",
@@ -30,7 +34,11 @@
         "type" : "area",
         "title" : "Session count",
         "hint" : "Session count.",
-        "query" : "SELECT latest(`oracle.database.sessionCount`) AS `Sessions` FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`oracle.database.sessionCount`) AS `Sessions` FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Transactions",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Transactions",
         "hint" : "User transaction per second.",
-        "query" : "SELECT average(`oracle.database.query.transactionsPerSecond`) as 'Transactions' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`oracle.database.query.transactionsPerSecond`) as 'Transactions' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Disk_reads_and_writes",
@@ -60,7 +72,11 @@
         "type" : "area",
         "title" : "Disk reads and writes",
         "hint" : "Total number of physical reads and writes.",
-        "query" : "SELECT average(`oracle.database.disk.readsPerSecond`) as 'Reads',average(`oracle.database.disk.writesPerSecond`) as 'Writes' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`oracle.database.disk.readsPerSecond`) as 'Reads',average(`oracle.database.disk.writesPerSecond`) as 'Writes' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_physical_reads_and_writes_in_bytes",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Total physical reads and writes in bytes",
         "hint" : "Total physical reads and writes in bytes per second.",
-        "query" : "SELECT average(`oracle.database.disk.physicalReadBytesPerSecond`) as 'Physical reads', average(`oracle.database.disk.physicalWritesPerSecond`) as 'Physical writes' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`oracle.database.disk.physicalReadBytesPerSecond`) as 'Physical reads', average(`oracle.database.disk.physicalWritesPerSecond`) as 'Physical writes' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "IO_megabytes",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "IO megabytes",
         "hint" : "I/O megabytes per second.",
-        "query" : "SELECT average(`oracle.database.network.ioMegabytesPerSecond`) as 'IO megabytes' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`oracle.database.network.ioMegabytesPerSecond`) as 'IO megabytes' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Host_CPU_utilization",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Host CPU utilization",
         "hint" : "Host CPU utilization (percentage).",
-        "query" : "SELECT average(`oracle.database.hostCpuUtilization`) as 'CPU utilization' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`oracle.database.hostCpuUtilization`) as 'CPU utilization' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Global_bound_memory",
@@ -120,7 +148,11 @@
         "type" : "area",
         "title" : "Global bound memory",
         "hint" : "Maximum size of a work area executed in automatic mode.",
-        "query" : "SELECT average(`memory.pgaMaxSize`) as 'Max size' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`memory.pgaMaxSize`) as 'Max size' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

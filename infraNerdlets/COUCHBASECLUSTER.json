@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Used disk space",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.diskUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.diskUsedInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_disk_space",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Total disk space",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.diskTotalInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.diskTotalInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Disk_space",
@@ -45,7 +53,11 @@
         "type" : "billboard",
         "title" : "Disk space",
         "hint" : "",
-        "query" : "SELECT average(`cluster.diskUsedbyDataInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`cluster.diskUsedbyDataInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_RAM",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Total RAM",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.memoryTotalInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.memoryTotalInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Used_RAM_by_data",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Used RAM by data",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.memoryUsedByDataInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.memoryUsedByDataInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Used_RAM",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Used RAM",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.memoryUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.memoryUsedInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "The_number_of_auto_failovers",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "The number of auto failovers",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.autoFailoverCount`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.autoFailoverCount`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Indicates_if_failover_is_enabled",
@@ -120,7 +148,11 @@
         "type" : "line",
         "title" : "Indicates if failover is enabled",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.autoFailoverEnabled`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.autoFailoverEnabled`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Maximum_number_of_buckets",
@@ -135,7 +167,11 @@
         "type" : "line",
         "title" : "Maximum number of buckets",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.maximumBucketCount`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.maximumBucketCount`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "The_percentage_level_within_the_database_at_which_compaction_occurs",
@@ -150,7 +186,11 @@
         "type" : "line",
         "title" : "The percentage level within the database at which compaction occurs",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.databaseFragmentationThreshold`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.databaseFragmentationThreshold`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "The_percentage_level_within_indexes_at_which_compaction_occurs",
@@ -165,7 +205,11 @@
         "type" : "line",
         "title" : "The percentage level within indexes at which compaction occurs",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.indexFragmentationThreshold`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.indexFragmentationThreshold`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "The_percentage_of_fragmentation_within_all_the_view_index_files_at_which_compaction_is_triggered",
@@ -180,7 +224,11 @@
         "type" : "line",
         "title" : "The percentage of fragmentation within all the view index files at which compaction is triggered",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.cluster.viewFragmentationThreshold`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.cluster.viewFragmentationThreshold`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

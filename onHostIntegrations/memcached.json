@@ -16,7 +16,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`memcached.server.bytesReadServerPerSecond`) FROM Metric TIMESERIES",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`memcached.server.bytesReadServerPerSecond`) FROM Metric TIMESERIES"
+        },
         "title" : "Bytes Read Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -33,7 +36,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`memcached.server.bytesWrittenServerPerSecond`) FROM Metric TIMESERIES",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`memcached.server.bytesWrittenServerPerSecond`) FROM Metric TIMESERIES"
+        },
         "title" : "Bytes Written Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -69,7 +75,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`memcached.server.cmdGetRatePerSecond`) AS `Get Rate`, average(`memcached.server.cmdSetRatePerSecond`) AS `Set Rate`, average(`memcached.server.cmdFlushRatePerSecond`) AS `Flush Rate` FROM Metric TIMESERIES",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`memcached.server.cmdGetRatePerSecond`) AS `Get Rate`, average(`memcached.server.cmdSetRatePerSecond`) AS `Set Rate`, average(`memcached.server.cmdFlushRatePerSecond`) AS `Flush Rate` FROM Metric TIMESERIES"
+        },
         "title" : "Command Rates",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -86,7 +95,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`memcached.server.connectionRateServerPerSecond`) FROM Metric TIMESERIES",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`memcached.server.connectionRateServerPerSecond`) FROM Metric TIMESERIES"
+        },
         "title" : "Connection Rate",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -103,7 +115,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`memcached.slab.getHitRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`memcached.slab.getHitRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+        },
         "title" : "Get Hit Rate By Slab",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -120,7 +135,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`memcached.slab.cmdSetRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`memcached.slab.cmdSetRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+        },
         "title" : "Set Rate By Slab",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -137,7 +155,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(memcached.server.uptimeInMilliseconds)/1000/3600 AS 'Hours' FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(memcached.server.uptimeInMilliseconds)/1000/3600 AS 'Hours' FROM Metric"
+        },
         "title" : "Uptime",
         "type" : "billboard",
         "endpoint" : "/v2/nrql",
@@ -154,7 +175,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`memcached.slab.incrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`memcached.slab.incrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+        },
         "title" : "Incr Modify Rate By Slab",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -171,7 +195,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`memcached.slab.decrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`memcached.slab.decrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+        },
         "title" : "Decr Modify Rate By Slab",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -188,7 +215,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`memcached.server.openConnectionsServer`) AS `Connections` FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`memcached.server.openConnectionsServer`) AS `Connections` FROM Metric"
+        },
         "title" : "Open Connections",
         "type" : "billboard",
         "endpoint" : "/v2/nrql",
@@ -205,7 +235,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(memcached.server.storingItemsPercentMemory) AS `Percent` FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(memcached.server.storingItemsPercentMemory) AS `Percent` FROM Metric"
+        },
         "title" : "Percent Max Memory Used",
         "type" : "billboard",
         "endpoint" : "/v2/nrql",

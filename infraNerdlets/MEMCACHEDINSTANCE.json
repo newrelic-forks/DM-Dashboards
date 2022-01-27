@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Bytes read",
         "hint" : "",
-        "query" : "SELECT average(`memcached.server.bytesReadServerPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`memcached.server.bytesReadServerPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Bytes_written",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Bytes written",
         "hint" : "",
-        "query" : "SELECT average(`memcached.server.bytesWrittenServerPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`memcached.server.bytesWrittenServerPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Command_rates",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Command rates",
         "hint" : "",
-        "query" : "SELECT average(`memcached.server.cmdGetRatePerSecond`), average(`memcached.server.cmdSetRatePerSecond`), average(`memcached.server.cmdFlushRatePerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`memcached.server.cmdGetRatePerSecond`), average(`memcached.server.cmdSetRatePerSecond`), average(`memcached.server.cmdFlushRatePerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Connection_rate",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Connection rate",
         "hint" : "",
-        "query" : "SELECT average(`memcached.server.connectionRateServerPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`memcached.server.connectionRateServerPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Uptime_(Hours)",
@@ -75,7 +91,11 @@
         "type" : "billboard",
         "title" : "Uptime (Hours)",
         "hint" : "",
-        "query" : "SELECT latest(memcached.server.uptimeInMilliseconds)/1000/3600 AS `Hours` FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(memcached.server.uptimeInMilliseconds)/1000/3600 AS `Hours` FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Open_connections_(Connections)",
@@ -90,7 +110,11 @@
         "type" : "billboard",
         "title" : "Open connections (Connections)",
         "hint" : "",
-        "query" : "SELECT latest(`memcached.server.openConnectionsServer`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`memcached.server.openConnectionsServer`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Percent_max_memory_used_(%)",
@@ -105,7 +129,11 @@
         "type" : "billboard",
         "title" : "Percent max memory used (%)",
         "hint" : "",
-        "query" : "SELECT latest(`memcached.server.storingItemsPercentMemory`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`memcached.server.storingItemsPercentMemory`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     } ]
   }

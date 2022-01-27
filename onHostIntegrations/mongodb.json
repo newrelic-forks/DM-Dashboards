@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`mongo.totalDatabases`) AS `Databases` FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`mongo.totalDatabases`) AS `Databases` FROM Metric"
+        },
         "title" : "",
         "showTimezone" : true,
         "type" : "billboard",
@@ -35,7 +38,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniqueCount(collection) FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(collection) FROM Metric"
+        },
         "title" : "",
         "showTimezone" : true,
         "type" : "billboard",
@@ -72,7 +78,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`mongo.mongos.commands.countPerSecond`) + latest(`mongo.mongos.commands.deletePerSecond`) + latest(`mongo.mongos.commands.createIndexesPerSecond`) + latest(`mongo.mongos.commands.evalPerSecond`) + latest(`mongo.mongos.commands.findAndModifyPerSecond`) + latest(`mongo.mongos.commands.insertPerSecond`) + latest(`mongo.mongos.commands.updatePerSecond`) FROM Metric FACET displayName TIMESERIES 1 MINUTE",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`mongo.mongos.commands.countPerSecond`) + latest(`mongo.mongos.commands.deletePerSecond`) + latest(`mongo.mongos.commands.createIndexesPerSecond`) + latest(`mongo.mongos.commands.evalPerSecond`) + latest(`mongo.mongos.commands.findAndModifyPerSecond`) + latest(`mongo.mongos.commands.insertPerSecond`) + latest(`mongo.mongos.commands.updatePerSecond`) FROM Metric FACET entity.name TIMESERIES 1 MINUTE"
+        },
         "title" : "Total Commands",
         "showTimezone" : true,
         "type" : "line",
@@ -91,7 +100,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`mongo.mongos.commands.countFailedPerSecond`) + latest(`mongo.mongos.commands.deleteFailedPerSecond`) + latest(`mongo.mongos.commands.createIndexesFailedPerSecond`) + latest(`mongo.mongos.commands.evalFailedPerSecond`) + latest(`mongo.mongos.commands.findAndModifyFailedPerSecond`) + latest(`mongo.mongos.commands.insertFailedPerSecond`) + latest(`mongo.mongos.commands.updateFailedPerSecond`) FROM Metric FACET displayName TIMESERIES 1 MINUTE",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`mongo.mongos.commands.countFailedPerSecond`) + latest(`mongo.mongos.commands.deleteFailedPerSecond`) + latest(`mongo.mongos.commands.createIndexesFailedPerSecond`) + latest(`mongo.mongos.commands.evalFailedPerSecond`) + latest(`mongo.mongos.commands.findAndModifyFailedPerSecond`) + latest(`mongo.mongos.commands.insertFailedPerSecond`) + latest(`mongo.mongos.commands.updateFailedPerSecond`) FROM Metric FACET entity.name TIMESERIES 1 MINUTE"
+        },
         "title" : "Failed Commands Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -109,7 +121,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mongo.mongos.network.bytesInPerSecond`) AS 'Bytes In' FROM Metric TIMESERIES 1 MINUTE FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mongo.mongos.network.bytesInPerSecond`) AS 'Bytes In' FROM Metric TIMESERIES 1 MINUTE FACET entity.name"
+        },
         "title" : "Bytes In Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -127,7 +142,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mongo.mongos.network.bytesOutPerSecond`) AS `Bytes Out` FROM Metric FACET displayName TIMESERIES 1 MINUTE",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mongo.mongos.network.bytesOutPerSecond`) AS `Bytes Out` FROM Metric FACET entity.name TIMESERIES 1 MINUTE"
+        },
         "title" : "Bytes Out Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -145,7 +163,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mongo.mongos.network.requestsPerSecond`) FROM Metric FACET displayName TIMESERIES 1 MINUTE",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mongo.mongos.network.requestsPerSecond`) FROM Metric FACET entity.name TIMESERIES 1 MINUTE"
+        },
         "title" : "Requests Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -163,7 +184,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`mongo.database.dataInBytes`) AS `Size in Bytes`, latest(`mongo.database.objects`) AS `Objects` FROM Metric FACET displayName LIMIT 1000",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`mongo.database.dataInBytes`) AS `Size in Bytes`, latest(`mongo.database.objects`) AS `Objects` FROM Metric FACET entity.name LIMIT 1000"
+        },
         "title" : "Database Sizes",
         "showTimezone" : true,
         "type" : "table",
@@ -181,7 +205,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`mongo.mongos.connections.available`) FROM Metric FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`mongo.mongos.connections.available`) FROM Metric FACET entity.name"
+        },
         "title" : "Available Connections",
         "showTimezone" : true,
         "type" : "bar",
@@ -204,7 +231,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mongo.mongod.usage.totalInMillisecondsPerSecond`) FROM Metric TIMESERIES 1 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mongo.mongod.usage.totalInMillisecondsPerSecond`) FROM Metric TIMESERIES 1 minutes FACET entity.name"
+        },
         "title" : "Time Running Commands",
         "showTimezone" : true,
         "type" : "line",
@@ -223,7 +253,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`mongo.database.indexes`) AS `Indexes`, latest(`mongo.database.indexInBytes`) AS `Total Index Size` FROM Metric FACET displayName LIMIT 1000",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`mongo.database.indexes`) AS `Indexes`, latest(`mongo.database.indexInBytes`) AS `Total Index Size` FROM Metric FACET entity.name LIMIT 1000"
+        },
         "title" : "Database Indexes",
         "showTimezone" : true,
         "type" : "table",
@@ -241,7 +274,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`mongo.collection.count`) AS `Objects`, latest(`mongo.collection.sizeInBytes`) AS `Storage Bytes` FROM Metric FACET database,displayName where database IS NOT NULL LIMIT 1000",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`mongo.collection.count`) AS `Objects`, latest(`mongo.collection.sizeInBytes`) AS `Storage Bytes` FROM Metric FACET database,entity.name where database IS NOT NULL LIMIT 1000"
+        },
         "title" : "Collection Sizes",
         "showTimezone" : true,
         "type" : "table",
@@ -259,7 +295,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`mongo.collection.sizeInBytes`) FROM Metric LIMIT 10 FACET database,displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`mongo.collection.sizeInBytes`) FROM Metric LIMIT 10 FACET database,entity.name"
+        },
         "title" : "Collection Sizes",
         "showTimezone" : true,
         "type" : "pie",

@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Current connections",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.currentConnections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.currentConnections`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_operations_per_second",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Total operations per second",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.totalOperationsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.totalOperationsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Data_used",
@@ -45,7 +53,11 @@
         "type" : "billboard",
         "title" : "Data used",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.dataUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.dataUsedInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Active_resident_items_ratio",
@@ -60,7 +72,11 @@
         "type" : "billboard",
         "title" : "Active resident items ratio",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.activeResidentItemsRatio`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.activeResidentItemsRatio`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Ejections_per_second",
@@ -75,7 +91,11 @@
         "type" : "billboard",
         "title" : "Ejections per second",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.ejectionsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.ejectionsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Read_rate_per_second",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Read rate per second",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.readRatePerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.readRatePerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Read_operations_per_second",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Read operations per second",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.readOperationsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.readOperationsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Write_rate_per_second",
@@ -120,7 +148,11 @@
         "type" : "line",
         "title" : "Write rate per second",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.writeRatePerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.writeRatePerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Write_operations_per_second",
@@ -135,7 +167,11 @@
         "type" : "line",
         "title" : "Write operations per second",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.writeOperationsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.writeOperationsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_usage",
@@ -150,7 +186,11 @@
         "type" : "line",
         "title" : "Memory usage",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.memoryUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.memoryUsedInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Quota_utilization",
@@ -165,7 +205,11 @@
         "type" : "line",
         "title" : "Quota utilization",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.quotaUtilization`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.quotaUtilization`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Disk_usage",
@@ -180,7 +224,11 @@
         "type" : "line",
         "title" : "Disk usage",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.diskUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.diskUsedInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Disk_write_queue",
@@ -195,7 +243,11 @@
         "type" : "line",
         "title" : "Disk write queue",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.diskWriteQueue`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.diskWriteQueue`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Out_of_memory_errors_per_second",
@@ -210,7 +262,11 @@
         "type" : "line",
         "title" : "Out of memory errors per second",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.bucket.outOfMemoryErrorsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.bucket.outOfMemoryErrorsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

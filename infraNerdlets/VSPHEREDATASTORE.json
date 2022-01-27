@@ -15,7 +15,11 @@
         "type" : "bar",
         "title" : "Host and virtual machines count",
         "hint" : "",
-        "query" : "SELECT latest(`vsphere.datastore.hostCount`),latest(`vsphere.datastore.vmCount`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`vsphere.datastore.hostCount`),latest(`vsphere.datastore.vmCount`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Accessible",
@@ -30,7 +34,11 @@
         "type" : "billboard",
         "title" : "Accessible",
         "hint" : "",
-        "query" : "SELECT latest(`accessible`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`accessible`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Capacity_GiB",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Capacity GiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datastore.capacity`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datastore.capacity`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Uncommitted_space_GiB",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Uncommitted space GiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datastore.uncommitted`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datastore.uncommitted`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Free_space_GiB",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Free space GiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.datastore.freeSpace`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.datastore.freeSpace`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

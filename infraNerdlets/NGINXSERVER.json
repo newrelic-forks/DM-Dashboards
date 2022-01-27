@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Requests per second",
         "hint" : "Number of requests per second.",
-        "query" : "SELECT average(`nginx.server.net.requestsPerSecond`) as 'Requests' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`nginx.server.net.requestsPerSecond`) as 'Requests' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Active_connections",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Active connections",
         "hint" : "Number of connections that are currently active.",
-        "query" : "SELECT average(`nginx.server.net.connectionsActive`) as 'Active connections' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`nginx.server.net.connectionsActive`) as 'Active connections' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Connections_accepted_per_second",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Connections accepted per second",
         "hint" : "Number of accepted client connections per second.",
-        "query" : "SELECT average(`nginx.server.net.connectionsAcceptedPerSecond`) as 'Connections accepted' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`nginx.server.net.connectionsAcceptedPerSecond`) as 'Connections accepted' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Connections_dropped_per_second",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Connections dropped per second",
         "hint" : "Number of connections per second that were accepted but could not be handled and hence dropped.",
-        "query" : "SELECT average(`nginx.server.net.connectionsDroppedPerSecond`) as 'Connections dropped' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`nginx.server.net.connectionsDroppedPerSecond`) as 'Connections dropped' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

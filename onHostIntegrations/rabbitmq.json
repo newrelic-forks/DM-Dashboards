@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsTotalUsed`) FROM Metric timeseries 10 minute since 12 hours ago facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`rabbitmq.node.fileDescriptorsTotalUsed`) FROM Metric timeseries 10 minute since 12 hours ago facet entity.name"
+        },
         "title" : "Total Used File Descriptors by Node",
         "showTimezone" : true,
         "type" : "line",
@@ -35,7 +38,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsUsedSockets`) FROM Metric timeseries 10 minute since 12 hours ago facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`rabbitmq.node.fileDescriptorsUsedSockets`) FROM Metric timeseries 10 minute since 12 hours ago facet entity.name"
+        },
         "title" : "File Descriptors Used as Sockets by Node",
         "showTimezone" : true,
         "type" : "line",
@@ -78,7 +84,10 @@
             "minWidth" : 100
           }
         },
-        "query" : "SELECT uniqueCount(entityName, clusterName) as 'Total', filter(uniqueCount(entityName, clusterName), where `rabbitmq.node.running` = 1) as 'Running', filter(uniqueCount(entityName, clusterName), where `rabbitmq.node.hostMemoryAlarm` = 1) as 'Memory Alarms', filter(uniqueCount(entityName, clusterName), where `rabbitmq.node.diskAlarm` = 1) as 'Disk Alarms' FROM Metric UNTIL 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(entity.name, clusterName) as 'Total', filter(uniqueCount(entity.name, clusterName), where `rabbitmq.node.running` = 1) as 'Running', filter(uniqueCount(entity.name, clusterName), where `rabbitmq.node.hostMemoryAlarm` = 1) as 'Memory Alarms', filter(uniqueCount(entity.name, clusterName), where `rabbitmq.node.diskAlarm` = 1) as 'Disk Alarms' FROM Metric UNTIL 1 minute ago"
+        },
         "title" : "Nodes",
         "showTimezone" : true,
         "type" : "billboard",
@@ -96,7 +105,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`rabbitmq.node.totalMemoryUsedInBytes`) FROM Metric timeseries 10 minute since 12 hours ago facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`rabbitmq.node.totalMemoryUsedInBytes`) FROM Metric timeseries 10 minute since 12 hours ago facet entity.name"
+        },
         "title" : "Total Memory Usage by Node",
         "showTimezone" : true,
         "type" : "line",
@@ -114,7 +126,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`rabbitmq.queue.consumers`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`rabbitmq.queue.consumers`) FROM Metric timeseries 10 minutes since 12 hours ago facet entity.name"
+        },
         "title" : "Consumers by Queue",
         "showTimezone" : true,
         "type" : "line",
@@ -132,7 +147,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "select average(`rabbitmq.queue.consumerMessageUtilizationPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "select average(`rabbitmq.queue.consumerMessageUtilizationPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago facet entity.name"
+        },
         "title" : "Consumer Message Utilization by Queue",
         "showTimezone" : true,
         "type" : "line",
@@ -180,7 +198,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "select average(`rabbitmq.queue.totalMessages`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "select average(`rabbitmq.queue.totalMessages`) FROM Metric timeseries 10 minutes since 12 hours ago facet entity.name"
+        },
         "title" : "Total Messages by Queue",
         "showTimezone" : true,
         "type" : "line",
@@ -198,7 +219,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "select average(`rabbitmq.rabbitmq.queue.totalMessagesPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "select average(`rabbitmq.rabbitmq.queue.totalMessagesPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago facet entity.name"
+        },
         "title" : "Total Message Throughput by Queue",
         "showTimezone" : true,
         "type" : "line",
@@ -216,7 +240,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "select average(`rabbitmq.queue.erlangBytesConsumedInBytes`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "select average(`rabbitmq.queue.erlangBytesConsumedInBytes`) FROM Metric timeseries 10 minutes since 12 hours ago facet entity.name"
+        },
         "title" : "Bytes Consumed by Queue",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -233,7 +260,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "select average(`rabbitmq.queue.messagesPublished`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "select average(`rabbitmq.queue.messagesPublished`) FROM Metric timeseries 10 minutes since 12 hours ago facet entity.name"
+        },
         "title" : "Published Messages by Queue",
         "showTimezone" : true,
         "type" : "line",
@@ -251,7 +281,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "select average(`rabbitmq.rabbitmq.queue.messagesPublishedPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "select average(`rabbitmq.rabbitmq.queue.messagesPublishedPerSecond`) FROM Metric timeseries 10 minutes since 12 hours ago facet entity.name"
+        },
         "title" : "Published Message Throughput by Queue",
         "showTimezone" : true,
         "type" : "line",

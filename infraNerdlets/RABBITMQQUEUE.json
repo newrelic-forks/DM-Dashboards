@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Total messages",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.queue.totalMessages`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.queue.totalMessages`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Published_messages",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Published messages",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.queue.messagesPublished`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.queue.messagesPublished`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Published_messages_throughput",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Published messages throughput",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.rabbitmq.queue.messagesPublishedPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.rabbitmq.queue.messagesPublishedPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_messages_throughput",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Total messages throughput",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.rabbitmq.queue.totalMessagesPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.rabbitmq.queue.totalMessagesPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Consumer_messages",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Consumer messages",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.queue.consumerMessageUtilizationPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.queue.consumerMessageUtilizationPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Bytes_consumed",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Bytes consumed",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.queue.erlangBytesConsumedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.queue.erlangBytesConsumedInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Consumers",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Consumers",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.queue.consumers`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.queue.consumers`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

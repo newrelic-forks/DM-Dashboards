@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`consul.datacenter.catalog.registeredNodes`) as 'Registered', latest(`consul.datacenter.catalog.upNodes`) as 'Up', latest(`consul.datacenter.catalog.passingNodes`) as 'Passing', latest(`consul.datacenter.catalog.warningNodes`) as 'Warning', latest(`consul.datacenter.catalog.criticalNodes`) as 'Critical' FROM Metric facet displayName since 5 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`consul.datacenter.catalog.registeredNodes`) as 'Registered', latest(`consul.datacenter.catalog.upNodes`) as 'Up', latest(`consul.datacenter.catalog.passingNodes`) as 'Passing', latest(`consul.datacenter.catalog.warningNodes`) as 'Warning', latest(`consul.datacenter.catalog.criticalNodes`) as 'Critical' FROM Metric facet entity.name since 5 minutes ago"
+        },
         "title" : "Node Status Per Cluster",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -53,7 +56,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`leader`) as 'Current Leader' FROM Metric facet displayName since 5 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`leader`) as 'Current Leader' FROM Metric facet entity.name since 5 minutes ago"
+        },
         "title" : "Current Leader",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -70,7 +76,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`consul.datacenter.raft.lastContactAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`consul.datacenter.raft.lastContactAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET entity.name"
+        },
         "title" : "Average Time Since Leader Contact",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -87,7 +96,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`consul.datacenter.raft.commitTimeAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`consul.datacenter.raft.commitTimeAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET entity.name"
+        },
         "title" : "Average Leader Raft Log Commit",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -104,7 +116,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`consul.datacenter.raft.txns`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`consul.datacenter.raft.txns`) FROM Metric TIMESERIES 10 minutes FACET entity.name"
+        },
         "title" : "Raft Transactions",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -121,7 +136,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`consul.agent.txnAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`consul.agent.txnAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET entity.name"
+        },
         "title" : "Average Transaction Operation Duration",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -138,7 +156,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`consul.agent.consul.agent.runtime.allocationsInBytes`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`consul.agent.consul.agent.runtime.allocationsInBytes`) FROM Metric TIMESERIES 10 minutes FACET entity.name"
+        },
         "title" : "Memory Allocated",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -155,7 +176,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`consul.agent.runtime.virtualAddressSpaceInBytes`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`consul.agent.runtime.virtualAddressSpaceInBytes`) FROM Metric TIMESERIES 10 minutes FACET entity.name"
+        },
         "title" : "Total Virtual Address Space Size",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -172,7 +196,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`consul.agent.kvStoresAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`consul.agent.kvStoresAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET entity.name"
+        },
         "title" : "Average KV Store Update Duration",
         "type" : "line",
         "endpoint" : "/v2/nrql",

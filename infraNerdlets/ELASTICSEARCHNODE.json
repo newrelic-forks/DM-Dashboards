@@ -15,7 +15,11 @@
         "type" : "area",
         "title" : "Running GET requests and Missing requests",
         "hint" : "The number of get requests currently running and the number of get requests where the document was missing",
-        "query" : "SELECT average(`elasticsearch.node.get.currentRequestsRunning`) as 'Running', average(`requestsDocumentMissing`) as 'Missing' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.get.currentRequestsRunning`) as 'Running', average(`requestsDocumentMissing`) as 'Missing' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_I/O_operations",
@@ -30,7 +34,11 @@
         "type" : "area",
         "title" : "Total I/O operations",
         "hint" : "The total I/O operations on the file store.",
-        "query" : "SELECT average(`elasticsearch.node.fs.ioOperations`) as 'I/O operations' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.fs.ioOperations`) as 'I/O operations' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Documents_currently_being_indexed_and_deleted",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Documents currently being indexed and deleted",
         "hint" : "The number of documents currently being indexed and deleted to an index.",
-        "query" : "SELECT average(`elasticsearch.node.indexing.documentsCurrentlyIndexing`) as 'Indexed',average(`elasticsearch.node.indexing.docsCurrentlyDeleted`) as 'Deleted' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.indexing.documentsCurrentlyIndexing`) as 'Indexed',average(`elasticsearch.node.indexing.docsCurrentlyDeleted`) as 'Deleted' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_documents_indexed_and_deleted",
@@ -60,7 +72,11 @@
         "type" : "area",
         "title" : "Total documents indexed and deleted",
         "hint" : "The number of documents indexed and deleted to an index.",
-        "query" : "SELECT average(`elasticsearch.node.indexing.documentsIndexed`) as 'Indexed', average(`elasticsearch.node.indexing.totalDocumentsDeleted`) as 'Deleted' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.indexing.documentsIndexed`) as 'Indexed', average(`elasticsearch.node.indexing.totalDocumentsDeleted`) as 'Deleted' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Time_spent_indexing_and_deleting_documents",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Time spent indexing and deleting documents",
         "hint" : "The time spent indexing and deleting documents from an index in milliseconds.",
-        "query" : "SELECT average(`elasticsearch.node.indexing.timeIndexingDocumentsInMilliseconds`) as 'Indexed', average(`elasticsearch.node.indexing.timeDeletingDocumentsInMilliseconds`) as 'Deleted' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.indexing.timeIndexingDocumentsInMilliseconds`) as 'Indexed', average(`elasticsearch.node.indexing.timeDeletingDocumentsInMilliseconds`) as 'Deleted' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Query_cache_evictions,_hits_and_misses",
@@ -90,7 +110,11 @@
         "type" : "area",
         "title" : "Query cache evictions, hits and misses",
         "hint" : "The number of query cache evictions, hits and misses.",
-        "query" : "SELECT average(`elasticsearch.node.index.queryCacheEvictions`) as 'Evictions', average(`elasticsearch.node.index.queryCacheHits`) as 'Hits', average(`elasticsearch.node.index.queryCacheMisses`) as 'Misses' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.index.queryCacheEvictions`) as 'Evictions', average(`elasticsearch.node.index.queryCacheHits`) as 'Hits', average(`elasticsearch.node.index.queryCacheMisses`) as 'Misses' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Shard_source_ongoing_recoveries",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Shard source ongoing recoveries",
         "hint" : "The number of ongoing recoveries for which a shard serves as a source.",
-        "query" : "SELECT average(`elasticsearch.node.index.recoveryOngoingShardSource`) as 'Ongoing recoveries' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.index.recoveryOngoingShardSource`) as 'Ongoing recoveries' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Doc_merges_across_segments",
@@ -120,7 +148,11 @@
         "type" : "line",
         "title" : "Doc merges across segments",
         "hint" : "The number of documents across segments currently being merged.",
-        "query" : "SELECT average(`elasticsearch.node.merges.docsSegmentsMerging`) as 'Documents' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.merges.docsSegmentsMerging`) as 'Documents' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Current_active_segment_merges",
@@ -135,7 +167,11 @@
         "type" : "line",
         "title" : "Current active segment merges",
         "hint" : "The number of currently active segment merges.",
-        "query" : "SELECT average(`elasticsearch.node.merges.currentActive`) as 'Active segment' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.merges.currentActive`) as 'Active segment' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_garbage_collections_run_by_the_JVM",
@@ -150,7 +186,11 @@
         "type" : "line",
         "title" : "Total garbage collections run by the JVM",
         "hint" : "The number of garbage collections run by the JVM.",
-        "query" : "SELECT average(`jvm.gc.collections`) as 'Garbage collections' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`jvm.gc.collections`) as 'Garbage collections' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_currently_used_by_JVM.",
@@ -165,7 +205,11 @@
         "type" : "line",
         "title" : "Memory currently used by JVM.",
         "hint" : "The percentage of memory currently used by the JVM heap as a value between 0 and 1.",
-        "query" : "SELECT average(`elasticsearch.node.jvm.mem.heapUsed`) as 'Memory used' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.jvm.mem.heapUsed`) as 'Memory used' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Threds_active_in_the_JVM.",
@@ -180,7 +224,11 @@
         "type" : "line",
         "title" : "Threds active in the JVM.",
         "hint" : "The number of active threads in the JVM.",
-        "query" : "SELECT average(`elasticsearch.node.jvm.threadsActive`) as 'Threds active' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`elasticsearch.node.jvm.threadsActive`) as 'Threds active' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

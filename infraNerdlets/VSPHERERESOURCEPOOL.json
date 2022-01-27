@@ -15,7 +15,11 @@
         "type" : "billboard",
         "title" : "Overall status",
         "hint" : "",
-        "query" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Virtual_machines_count",
@@ -30,7 +34,11 @@
         "type" : "bar",
         "title" : "Virtual machines count",
         "hint" : "",
-        "query" : "SELECT latest(`vsphere.resourcePool.vmCount`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`vsphere.resourcePool.vmCount`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "CPU_overall_usage_and_total_MHz",
@@ -45,7 +53,11 @@
         "type" : "area",
         "title" : "CPU overall usage and total MHz",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.resourcePool.cpu.overallUsage`),average(`vsphere.resourcePool.cpu.totalMhz`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.resourcePool.cpu.overallUsage`),average(`vsphere.resourcePool.cpu.totalMhz`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_usage_and_size_MiB",
@@ -60,7 +72,11 @@
         "type" : "area",
         "title" : "Memory usage and size MiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.resourcePool.mem.usage`),average(`vsphere.resourcePool.mem.size`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.resourcePool.mem.usage`),average(`vsphere.resourcePool.mem.size`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_free_MiB",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Memory free MiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.resourcePool.mem.free`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.resourcePool.mem.free`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_ballooned_MiB",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Memory ballooned MiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.resourcePool.mem.ballooned`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.resourcePool.mem.ballooned`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_swapped_MiB",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Memory swapped MiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.resourcePool.mem.swapped`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.resourcePool.mem.swapped`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

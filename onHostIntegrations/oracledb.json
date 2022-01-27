@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.database.disk.readsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.database.disk.readsPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Physical Reads Rate",
         "showTimezone" : true,
         "type" : "line",
@@ -35,7 +38,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT max(`oracle.database.disk.writesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT max(`oracle.database.disk.writesPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Physical Writes Rate",
         "showTimezone" : true,
         "type" : "line",
@@ -72,7 +78,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.database.disk.physicalReadBytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.database.disk.physicalReadBytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Physical Read Bytes Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -90,7 +99,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.database.executionsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.database.executionsPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Executions Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -108,7 +120,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.tablespace.spaceUsedPercentage`) FROM Metric TIMESERIES 1 hour FACET displayName SINCE 1 week ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.tablespace.spaceUsedPercentage`) FROM Metric TIMESERIES 1 hour FACET entity.name SINCE 1 week ago"
+        },
         "title" : "Tablespace Used (%)",
         "showTimezone" : true,
         "type" : "line",
@@ -126,7 +141,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`oracle.tablespace.isOffline`) AS `Is Offline` FROM Metric FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`oracle.tablespace.isOffline`) AS `Is Offline` FROM Metric FACET entity.name"
+        },
         "title" : "Tablespace Offline",
         "showTimezone" : true,
         "type" : "table",
@@ -144,7 +162,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.database.hostCpuUtilization`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.database.hostCpuUtilization`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Host CPU Utilization (%)",
         "showTimezone" : true,
         "type" : "line",
@@ -162,7 +183,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.database.disk.physicalReadsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.database.disk.physicalReadsPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Physical Reads Direct Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -180,7 +204,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.database.disk.physicalWritesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.database.disk.physicalWritesPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Physical Writes Direct Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -198,7 +225,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.database.network.ioMegabytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.database.network.ioMegabytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "IO Megabytes Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -216,7 +246,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.database.query.transactionsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName SINCE 60 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.database.query.transactionsPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name SINCE 60 minutes ago"
+        },
         "title" : "User Transactions Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -234,7 +267,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`oracle.database.sessionCount`) AS `Sessions` FROM Metric TIMESERIES 10 minutes FACET displayName SINCE 1 day ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`oracle.database.sessionCount`) AS `Sessions` FROM Metric TIMESERIES 10 minutes FACET entity.name SINCE 1 day ago"
+        },
         "title" : "Session Count",
         "showTimezone" : true,
         "type" : "line",
@@ -252,7 +288,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`oracle.database.memory.pgaMaxSizeInBytes`) FROM Metric TIMESERIES 1 hour FACET displayName SINCE 1 week ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`oracle.database.memory.pgaMaxSizeInBytes`) FROM Metric TIMESERIES 1 hour FACET entity.name SINCE 1 week ago"
+        },
         "title" : "Global Memory Bound",
         "showTimezone" : true,
         "type" : "line",

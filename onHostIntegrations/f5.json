@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`f5.system.memoryUsedInBytes`) FROM Metric TIMESERIES 10 minutes",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`f5.system.memoryUsedInBytes`) FROM Metric TIMESERIES 10 minutes"
+        },
         "title" : "Memory Used",
         "showTimezone" : true,
         "type" : "line",
@@ -35,7 +38,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`f5.system.cpuUserTicksPerSecond`) FROM Metric TIMESERIES 1 minute",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`f5.system.cpuUserTicksPerSecond`) FROM Metric TIMESERIES 1 minute"
+        },
         "title" : "CPU Usage Ticks: User",
         "showTimezone" : true,
         "type" : "line",
@@ -73,7 +79,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`f5.system.cpuSystemTicksPerSecond`) FROM Metric TIMESERIES 1 minute",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`f5.system.cpuSystemTicksPerSecond`) FROM Metric TIMESERIES 1 minute"
+        },
         "title" : "CPU Usage Ticks: System",
         "showTimezone" : true,
         "type" : "line",
@@ -92,7 +101,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`f5.system.cpuIdleTicksPerSecond`) FROM Metric TIMESERIES 1 minute",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`f5.system.cpuIdleTicksPerSecond`) FROM Metric TIMESERIES 1 minute"
+        },
         "title" : "CPU Usage Ticks: Idle",
         "showTimezone" : true,
         "type" : "line",
@@ -151,7 +163,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 2) AS `Online` FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT filter(uniqueCount(entity.name), WHERE `f5.virtualserver.availabilityState` = 0) AS `Offline`, filter(uniqueCount(entity.name), WHERE `f5.virtualserver.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(entity.name), WHERE `f5.virtualserver.availabilityState` = 2) AS `Online` FROM Metric"
+        },
         "title" : "Virtual Server Availability Status",
         "showTimezone" : true,
         "type" : "billboard",
@@ -169,7 +184,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`f5.virtualserver.inDataInBytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`f5.virtualserver.inDataInBytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Virtual Server Data In",
         "showTimezone" : true,
         "type" : "line",
@@ -187,7 +205,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`f5.virtualserver.outDataInBytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`f5.virtualserver.outDataInBytesPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Virtual Server Data Out",
         "showTimezone" : true,
         "type" : "line",
@@ -205,7 +226,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`f5.virtualserver.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`f5.virtualserver.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Virtual Server Requests",
         "showTimezone" : true,
         "type" : "line",
@@ -263,7 +287,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.pool.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.pool.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.pool.availabilityState` = 2) AS `Online` FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT filter(uniqueCount(entity.name), WHERE `f5.pool.availabilityState` = 0) AS `Offline`, filter(uniqueCount(entity.name), WHERE `f5.pool.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(entity.name), WHERE `f5.pool.availabilityState` = 2) AS `Online` FROM Metric"
+        },
         "title" : "Pool Availability Status",
         "showTimezone" : true,
         "type" : "billboard",
@@ -281,7 +308,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.pool.packetsReceivedPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.pool.packetsReceivedPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Pool Packets In",
         "showTimezone" : true,
         "type" : "line",
@@ -299,7 +329,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.pool.packetsSentPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.pool.packetsSentPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Pool Packets Out",
         "showTimezone" : true,
         "type" : "line",
@@ -317,7 +350,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.pool.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.pool.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Pool Requests",
         "showTimezone" : true,
         "type" : "line",
@@ -354,7 +390,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.poolMember.connections`) FROM Metric FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.poolMember.connections`) FROM Metric FACET entity.name"
+        },
         "title" : "Pool Member Connections",
         "showTimezone" : true,
         "type" : "table",
@@ -372,7 +411,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.poolMember.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.poolMember.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.poolMember.availabilityState` = 2) AS `Online` FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT filter(uniqueCount(entity.name), WHERE `f5.poolMember.availabilityState` = 0) AS `Offline`, filter(uniqueCount(entity.name), WHERE `f5.poolMember.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(entity.name), WHERE `f5.poolMember.availabilityState` = 2) AS `Online` FROM Metric"
+        },
         "title" : "Pool Member Availability Status",
         "showTimezone" : true,
         "type" : "billboard",
@@ -390,7 +432,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.poolMember.packetsReceivedPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.poolMember.packetsReceivedPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Pool Member Packets In",
         "showTimezone" : true,
         "type" : "line",
@@ -408,7 +453,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.poolMember.packetsSentPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.poolMember.packetsSentPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Pool Member Packets Out",
         "showTimezone" : true,
         "type" : "line",
@@ -426,7 +474,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.poolMember.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.poolMember.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Pool Member Requests",
         "showTimezone" : true,
         "type" : "line",
@@ -463,7 +514,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.node.connections`) FROM Metric FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.node.connections`) FROM Metric FACET entity.name"
+        },
         "title" : "Node Connections",
         "showTimezone" : true,
         "type" : "table",
@@ -481,7 +535,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.node.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.node.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.node.availabilityState` = 2) AS `Online` FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT filter(uniqueCount(entity.name), WHERE `f5.node.availabilityState` = 0) AS `Offline`, filter(uniqueCount(entity.name), WHERE `f5.node.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(entity.name), WHERE `f5.node.availabilityState` = 2) AS `Online` FROM Metric"
+        },
         "title" : "Node Availability Status",
         "showTimezone" : true,
         "type" : "billboard",
@@ -499,7 +556,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.poolMember.packetsReceivedPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.poolMember.packetsReceivedPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Node Packets In",
         "showTimezone" : true,
         "type" : "line",
@@ -517,7 +577,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.node.packetsSentPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.node.packetsSentPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Node Packets Out",
         "showTimezone" : true,
         "type" : "line",
@@ -535,7 +598,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`f5.node.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`f5.node.requestsPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Node Requests",
         "showTimezone" : true,
         "type" : "line",

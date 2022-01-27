@@ -19,7 +19,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "ApacheSample" ],
-        "query" : "SELECT uniqueCount(entityName) as 'Servers' FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(entity.name) as 'Servers' FROM Metric"
+        },
         "title" : "Servers Reporting",
         "showTimezone" : true,
         "type" : "billboard"
@@ -37,7 +40,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "ApacheSample" ],
-        "query" : "SELECT average(`apache.server.net.requestsPerSecond`) * uniqueCount(entityName) as 'Requests' FROM Metric TIMESERIES until 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`apache.server.net.requestsPerSecond`) * uniqueCount(entity.name) as 'Requests' FROM Metric TIMESERIES until 1 minute ago"
+        },
         "title" : "Total Requests per second",
         "showTimezone" : true,
         "type" : "line"
@@ -74,7 +80,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "ApacheSample" ],
-        "query" : "SELECT average(`apache.server.net.requestsPerSecond`) as 'Requests' FROM Metric facet entityName TIMESERIES until 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`apache.server.net.requestsPerSecond`) as 'Requests' FROM Metric facet entity.name TIMESERIES until 1 minute ago"
+        },
         "title" : "Requests per second, by server",
         "showTimezone" : true,
         "type" : "line"
@@ -92,7 +101,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "ApacheSample" ],
-        "query" : "SELECT (average(`apache.server.net.bytesPerSecond`)/average(`apache.server.net.requestsPerSecond`)) as 'Bytes Sent Per Req' FROM Metric TIMESERIES until 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT (average(`apache.server.net.bytesPerSecond`)/average(`apache.server.net.requestsPerSecond`)) as 'Bytes Sent Per Req' FROM Metric TIMESERIES until 1 minute ago"
+        },
         "title" : "Bytes Sent per request",
         "type" : "line"
       },
@@ -109,7 +121,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "ApacheSample" ],
-        "query" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entityName) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entityName) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entityName) as 'Total Workers', average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entityName) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entityName) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entityName) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entityName) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entityName) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entityName) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entityName) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entityName) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entityName) as 'Starting' FROM Metric since 5 minutes ago until 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entity.name) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entity.name) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entity.name) as 'Total Workers', average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entity.name) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entity.name) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entity.name) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entity.name) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entity.name) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entity.name) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entity.name) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entity.name) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entity.name) as 'Starting' FROM Metric since 5 minutes ago until 1 minute ago"
+        },
         "title" : "Worker Status",
         "showTimezone" : true,
         "type" : "billboard"
@@ -127,7 +142,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "ApacheSample" ],
-        "query" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entityName) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entityName) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entityName) as 'Total Workers' FROM Metric TIMESERIES until 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entity.name) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entity.name) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entity.name) as 'Total Workers' FROM Metric TIMESERIES until 1 minute ago"
+        },
         "title" : "Total vs Idle vs Busy Workers",
         "showTimezone" : true,
         "type" : "line"
@@ -145,7 +163,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "ApacheSample" ],
-        "query" : "SELECT average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entityName) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entityName) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entityName) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entityName) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entityName) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entityName) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entityName) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entityName) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entityName) as 'Starting' FROM Metric TIMESERIES until 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entity.name) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entity.name) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entity.name) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entity.name) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entity.name) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entity.name) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entity.name) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entity.name) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entity.name) as 'Starting' FROM Metric TIMESERIES until 1 minute ago"
+        },
         "title" : "Busy Worker Status",
         "showTimezone" : true,
         "type" : "line"
@@ -193,7 +214,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "ApacheSample" ],
-        "query" : "SELECT average(`apache.server.net.bytesPerSecond`) * uniqueCount(entityName) as 'Bytes Sent' FROM Metric TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`apache.server.net.bytesPerSecond`) * uniqueCount(entity.name) as 'Bytes Sent' FROM Metric TIMESERIES until 1 minutes ago"
+        },
         "title" : "Total Bytes Sent per second",
         "showTimezone" : true,
         "type" : "line"
@@ -211,7 +235,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "ApacheSample" ],
-        "query" : "SELECT average(`apache.server.net.bytesPerSecond`) as 'Bytes Sent' FROM Metric facet entityName TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`apache.server.net.bytesPerSecond`) as 'Bytes Sent' FROM Metric facet entity.name TIMESERIES until 1 minutes ago"
+        },
         "title" : "Bytes Sent per second, by server",
         "showTimezone" : true,
         "type" : "line"

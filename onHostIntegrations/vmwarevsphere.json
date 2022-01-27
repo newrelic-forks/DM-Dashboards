@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(vsphere.vm.mem.usage)/average(vsphere.vm.mem.size)*100 as 'Memory Usage %', average(vsphere.vm.mem.usage) as 'Memory Usage MiB', average(vsphere.vm.mem.size) as 'Memory Size MiB' FROM Metric facet displayName, vmConfigName, datacenterName , clusterName limit 10 since 1 day ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(vsphere.vm.mem.usage)/average(vsphere.vm.mem.size)*100 as 'Memory Usage %', average(vsphere.vm.mem.usage) as 'Memory Usage MiB', average(vsphere.vm.mem.size) as 'Memory Size MiB' FROM Metric facet entity.name, vmConfigName, datacenterName , clusterName limit 10 since 1 day ago"
+        },
         "title" : "Top 10 Virtual Machines by average memory consumption",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -53,7 +56,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(vsphere.vm.cpu.hostUsagePercent) as 'CPU Usage %', max(vsphere.vm.cpu.cores) as 'CPU cores allocated' FROM Metric facet displayName, vmConfigName, datacenterName , clusterName limit 10 since 1 hour ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(vsphere.vm.cpu.hostUsagePercent) as 'CPU Usage %', max(vsphere.vm.cpu.cores) as 'CPU cores allocated' FROM Metric facet entity.name, vmConfigName, datacenterName , clusterName limit 10 since 1 hour ago"
+        },
         "title" : "Top 10 Virtual Machines by average CPU consumption",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -70,7 +76,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(vsphere.host.mem.usage/vsphere.host.mem.size)*100 as 'MEM consumption %' FROM Metric facet displayName, hypervisorHostname, datacenterName, clusterName limit 10 since 10 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(vsphere.host.mem.usage/vsphere.host.mem.size)*100 as 'MEM consumption %' FROM Metric facet entity.name, hypervisorHostname, datacenterName, clusterName limit 10 since 10 minutes ago"
+        },
         "title" : "Top 10 Hosts by average memory consumption",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -87,7 +96,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT filter(uniqueCount(entityId), where powerState = 'poweredOn') as 'Vm poweredOn' , filter(uniqueCount(entityId), where powerState = 'poweredOff') as 'Vm poweredOff' FROM Metric",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT filter(uniqueCount(entity.id), where powerState = 'poweredOn') as 'Vm poweredOn' , filter(uniqueCount(entity.id), where powerState = 'poweredOff') as 'Vm poweredOff' FROM Metric"
+        },
         "title" : "VM Power Status",
         "type" : "billboard",
         "endpoint" : "/v2/nrql",
@@ -104,7 +116,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(vsphere.host.cpu.percent) as 'CPU consumption %' FROM Metric facet displayName, hypervisorHostname, datacenterName, clusterName limit 10 since 10 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(vsphere.host.cpu.percent) as 'CPU consumption %' FROM Metric facet entity.name, hypervisorHostname, datacenterName, clusterName limit 10 since 10 minutes ago"
+        },
         "title" : "Top 10 Hosts by average CPU consumption",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -121,7 +136,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniqueCount(entityName) FROM Metric facet operatingSystem",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(entity.name) FROM Metric facet operatingSystem"
+        },
         "title" : "Operating system of virtual machines",
         "type" : "pie",
         "endpoint" : "/v2/nrql",
@@ -138,7 +156,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(100-vsphere.datastore.freeSpace/vsphere.datastore.capacity*100) as 'Datastore Utilization %' FROM Metric facet displayName limit 10",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(100-vsphere.datastore.freeSpace/vsphere.datastore.capacity*100) as 'Datastore Utilization %' FROM Metric facet entity.name limit 10"
+        },
         "title" : "Top 10 Datastores by utilization",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -155,7 +176,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT 100-(average(vsphere.datacenter.datastore.totalFreeGiB)/average(vsphere.datacenter.datastore.totalGiB)*100) as 'Datastore utilization (%)' FROM Metric facet displayName as 'datacenter'",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT 100-(average(vsphere.datacenter.datastore.totalFreeGiB)/average(vsphere.datacenter.datastore.totalGiB)*100) as 'Datastore utilization (%)' FROM Metric facet entity.name as 'datacenter'"
+        },
         "title" : "Datastore utilization per datacenter %",
         "type" : "bar",
         "endpoint" : "/v2/nrql",
@@ -177,7 +201,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "select max(vsphere.datacenter.cpu.totalMhz)/1000 as 'total CPU GHz', max(vsphere.datacenter.mem.size)/1024 as 'total Memory GiB', max(vsphere.datacenter.datastore.totalGiB)/1024 as 'total Disk TiB' FROM Metric facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "select max(vsphere.datacenter.cpu.totalMhz)/1000 as 'total CPU GHz', max(vsphere.datacenter.mem.size)/1024 as 'total Memory GiB', max(vsphere.datacenter.datastore.totalGiB)/1024 as 'total Disk TiB' FROM Metric facet entity.name"
+        },
         "title" : "Total CPU, Memory, Disk per datacenter",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -194,7 +221,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(vsphere.datacenter.vsphere.datacenter.mem.usagePercentage) as 'Memory utilization (%)' FROM Metric facet displayName as 'datacenter'",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(vsphere.datacenter.vsphere.datacenter.mem.usagePercentage) as 'Memory utilization (%)' FROM Metric facet entity.name as 'datacenter'"
+        },
         "title" : "Host memory utilization per datacenter %",
         "type" : "bar",
         "endpoint" : "/v2/nrql",
@@ -216,7 +246,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniqueCount(entityId) FROM Metric facet overallStatus",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet overallStatus"
+        },
         "title" : "VMs Overall Status",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -233,7 +266,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniqueCount(entityId) FROM Metric facet overallStatus",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet overallStatus"
+        },
         "title" : "Datastores Overall Status",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -250,7 +286,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(overallStatus) FROM Metric, VSphereDatacenterSample, VSphereDatastoreSample, VSphereHostSample, VSphereResourcePoolSample, VSphereVmSample where overallStatus = 'yellow' OR overallStatus = 'red' facet displayName since 1 hour ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(overallStatus) FROM Metric, VSphereDatacenterSample, VSphereDatastoreSample, VSphereHostSample, VSphereResourcePoolSample, VSphereVmSample where overallStatus = 'yellow' OR overallStatus = 'red' facet entity.name since 1 hour ago"
+        },
         "title" : "List of problematic entities in vSphere",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -267,7 +306,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniqueCount(entityId) FROM Metric facet overallStatus",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet overallStatus"
+        },
         "title" : "Hosts Overall Status",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -284,7 +326,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniqueCount(entityId) FROM Metric facet overallStatus",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet overallStatus"
+        },
         "title" : "Clusters Overall Status",
         "type" : "table",
         "endpoint" : "/v2/nrql",

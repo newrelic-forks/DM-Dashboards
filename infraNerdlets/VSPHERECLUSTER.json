@@ -15,7 +15,11 @@
         "type" : "billboard",
         "title" : "Overall status",
         "hint" : "",
-        "query" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Host_and_effective_host_count",
@@ -30,7 +34,11 @@
         "type" : "bar",
         "title" : "Host and effective host count",
         "hint" : "",
-        "query" : "SELECT latest(`vsphere.cluster.hosts`),latest(`vsphere.cluster.effectiveHosts`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`vsphere.cluster.hosts`),latest(`vsphere.cluster.effectiveHosts`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "CPU_total_effective_and_total_MHz",
@@ -45,7 +53,11 @@
         "type" : "area",
         "title" : "CPU total effective and total MHz",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.cluster.cpu.totalEffectiveMHz`),average(`vsphere.cluster.cpu.totalMhz`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.cluster.cpu.totalEffectiveMHz`),average(`vsphere.cluster.cpu.totalMhz`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "CPU_cores",
@@ -60,7 +72,11 @@
         "type" : "billboard",
         "title" : "CPU cores",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.cluster.cpu.cores`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.cluster.cpu.cores`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "CPU_threads",
@@ -75,7 +91,11 @@
         "type" : "billboard",
         "title" : "CPU threads",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.cluster.cpu.threads`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.cluster.cpu.threads`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_effective_size_and_total_MiB",
@@ -90,7 +110,11 @@
         "type" : "area",
         "title" : "Memory effective size and total MiB",
         "hint" : "",
-        "query" : "SELECT average(`vsphere.cluster.mem.effectiveSize`),average(`vsphere.cluster.mem.size`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`vsphere.cluster.mem.effectiveSize`),average(`vsphere.cluster.mem.size`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

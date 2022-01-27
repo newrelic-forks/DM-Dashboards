@@ -54,7 +54,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.frontend.bytesInPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.frontend.bytesInPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Bytes Received Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -71,7 +74,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.frontend.bytesOutPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.frontend.bytesOutPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Bytes Sent Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -88,7 +94,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.frontend.requestErrorsPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.frontend.requestErrorsPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Request Errors Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -105,7 +114,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.frontend.http200ResponsesPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.frontend.http200ResponsesPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "HTTP 2xx Responses Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -122,7 +134,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.frontend.http100ResponsesPerSecond`) + average(`haproxy.frontend.http300ResponsesPerSecond`) + average(`haproxy.frontend.http400ResponsesPerSecond`) + average(`haproxy.frontend.http500ResponsesPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.frontend.http100ResponsesPerSecond`) + average(`haproxy.frontend.http300ResponsesPerSecond`) + average(`haproxy.frontend.http400ResponsesPerSecond`) + average(`haproxy.frontend.http500ResponsesPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Non-2xx HTTP Responses Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -139,7 +154,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`frontend.status`) FROM Metric FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`frontend.status`) FROM Metric FACET entity.name"
+        },
         "title" : "Frontend Statuses",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -156,7 +174,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.frontend.connectionsPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.frontend.connectionsPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Connections Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -173,7 +194,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.frontend.sessionsPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.frontend.sessionsPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Sessions Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -209,7 +233,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`haproxy.backend.activeServers`) FROM Metric FACET `backend.proxyName`",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`haproxy.backend.activeServers`) FROM Metric FACET `backend.proxyName`"
+        },
         "title" : "Active Servers",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -226,7 +253,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`haproxy.backend.backupServers`) FROM Metric FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`haproxy.backend.backupServers`) FROM Metric FACET entity.name"
+        },
         "title" : "Backup Servers",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -243,7 +273,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.backend.bytesInPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.backend.bytesInPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Bytes Received Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -260,7 +293,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.backend.bytesOutPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.backend.bytesOutPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Bytes Sent Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -277,7 +313,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.backend.httpResponseBytesFedToCompressorPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.backend.httpResponseBytesFedToCompressorPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Bytes Compressed Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -294,7 +333,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.backend.http200ResponsesPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.backend.http200ResponsesPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "HTTP 2xx Responses Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -311,7 +353,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.backend.http100ResponsesPerSecond`) + average(`haproxy.backend.http300ResponsesPerSecond`) + average(`haproxy.backend.http400ResponsesPerSecond`) + average(`haproxy.backend.http500ResponsesPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.backend.http100ResponsesPerSecond`) + average(`haproxy.backend.http300ResponsesPerSecond`) + average(`haproxy.backend.http400ResponsesPerSecond`) + average(`haproxy.backend.http500ResponsesPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Non-2xx HTTP Responses Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -328,7 +373,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`haproxy.backend.sessionsPerSecond`) FROM Metric TIMESERIES FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`haproxy.backend.sessionsPerSecond`) FROM Metric TIMESERIES FACET entity.name"
+        },
         "title" : "Sessions Created Per Second",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -345,7 +393,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`backend.mode`) FROM Metric FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`backend.mode`) FROM Metric FACET entity.name"
+        },
         "title" : "Backend Mode",
         "type" : "table",
         "endpoint" : "/v2/nrql",

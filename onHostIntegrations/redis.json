@@ -19,7 +19,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT filter(uniqueCount(entityName), WHERE `cluster.role` = 'master') as 'Masters', filter(uniqueCount(entityName), WHERE `cluster.role` = 'slave') as 'Slaves' FROM Metric until 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT filter(uniqueCount(entity.name), WHERE `cluster.role` = 'master') as 'Masters', filter(uniqueCount(entity.name), WHERE `cluster.role` = 'slave') as 'Slaves' FROM Metric until 1 minute ago"
+        },
         "title" : "Reporting Nodes",
         "showTimezone" : true,
         "type" : "billboard"
@@ -37,7 +40,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.net.commandsProcessedPerSecond`) * uniqueCount(entityName) as 'Commands' FROM Metric TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.net.commandsProcessedPerSecond`) * uniqueCount(entity.name) as 'Commands' FROM Metric TIMESERIES until 1 minutes ago"
+        },
         "title" : "Commands per second",
         "showTimezone" : true,
         "type" : "line"
@@ -74,7 +80,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.net.commandsProcessedPerSecond`) as 'Commands' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.net.commandsProcessedPerSecond`) as 'Commands' FROM Metric TIMESERIES until 1 minutes ago FACET entity.name"
+        },
         "title" : "Commands per second, by node",
         "showTimezone" : true,
         "type" : "line"
@@ -92,7 +101,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.net.connectedClients`) * uniqueCount(entityName) as 'Connected clients' FROM Metric TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.net.connectedClients`) * uniqueCount(entity.name) as 'Connected clients' FROM Metric TIMESERIES until 1 minutes ago"
+        },
         "title" : "Connected Clients",
         "showTimezone" : true,
         "type" : "line"
@@ -110,7 +122,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.net.connectedClients`) as 'Connected clients' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.net.connectedClients`) as 'Connected clients' FROM Metric TIMESERIES until 1 minutes ago FACET entity.name"
+        },
         "title" : "Connected Clients, by node",
         "type" : "line"
       },
@@ -157,7 +172,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.net.blockedClients`) * uniqueCount(entityName) AS 'Blocked Clients' FROM Metric TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.net.blockedClients`) * uniqueCount(entity.name) AS 'Blocked Clients' FROM Metric TIMESERIES until 1 minutes ago"
+        },
         "title" : "Blocked Clients",
         "showTimezone" : true,
         "type" : "line"
@@ -175,7 +193,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.system.usedMemoryBytes`) as 'Used memory' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.system.usedMemoryBytes`) as 'Used memory' FROM Metric TIMESERIES until 1 minutes ago FACET entity.name"
+        },
         "title" : "Redis Used Memory (bytes), by node",
         "showTimezone" : true,
         "type" : "line"
@@ -193,7 +214,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.rdbChangesSinceLastSave`) as 'Rdb changes' FROM Metric TIMESERIES until 1 minutes ago FACET(entityName)",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.rdbChangesSinceLastSave`) as 'Rdb changes' FROM Metric TIMESERIES until 1 minutes ago FACET(entity.name)"
+        },
         "title" : "Changes Since Last Save, by node",
         "showTimezone" : true,
         "type" : "line"
@@ -211,7 +235,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.keyspaceHitsPerSecond`) / (average(`redis.instance.keyspaceMissesPerSecond`) + average(`redis.instance.keyspaceHitsPerSecond`)) as 'Hit Ratio' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.keyspaceHitsPerSecond`) / (average(`redis.instance.keyspaceMissesPerSecond`) + average(`redis.instance.keyspaceHitsPerSecond`)) as 'Hit Ratio' FROM Metric TIMESERIES until 1 minutes ago FACET entity.name"
+        },
         "title" : "Keyspace Hit Ratio, by node",
         "showTimezone" : true,
         "type" : "line"
@@ -229,7 +256,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.evictedKeysPerSecond`) as 'Evicted keys' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.evictedKeysPerSecond`) as 'Evicted keys' FROM Metric TIMESERIES until 1 minutes ago FACET entity.name"
+        },
         "title" : "Evicted Keys per second, by node",
         "showTimezone" : true,
         "type" : "line"
@@ -247,7 +277,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.expiredKeysPerSecond`) as 'Expired keys' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.expiredKeysPerSecond`) as 'Expired keys' FROM Metric TIMESERIES until 1 minutes ago FACET entity.name"
+        },
         "title" : "Expired Keys per second, by node",
         "showTimezone" : true,
         "type" : "line"
@@ -265,7 +298,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.net.inputBytesPerSecond`) * uniqueCount(entityName) as 'Input', average(`redis.instance.net.outputBytesPerSecond`) * uniqueCount(entityName) as 'Output' FROM Metric TIMESERIES until 1 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.net.inputBytesPerSecond`) * uniqueCount(entity.name) as 'Input', average(`redis.instance.net.outputBytesPerSecond`) * uniqueCount(entity.name) as 'Output' FROM Metric TIMESERIES until 1 minutes ago"
+        },
         "title" : "Network I/O per second (bytes)",
         "showTimezone" : true,
         "type" : "line"
@@ -283,7 +319,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.net.outputBytesPerSecond`) as 'Output' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.net.outputBytesPerSecond`) as 'Output' FROM Metric TIMESERIES until 1 minutes ago FACET entity.name"
+        },
         "title" : "Output Bytes per second, by node",
         "showTimezone" : true,
         "type" : "line"
@@ -301,7 +340,10 @@
         "actions" : true,
         "endpoint" : "/v2/nrql",
         "event_types" : [ "RedisSample" ],
-        "query" : "SELECT average(`redis.instance.net.inputBytesPerSecond`) as 'Input' FROM Metric TIMESERIES until 1 minutes ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`redis.instance.net.inputBytesPerSecond`) as 'Input' FROM Metric TIMESERIES until 1 minutes ago FACET entity.name"
+        },
         "title" : "Input Bytes per second, by node",
         "showTimezone" : true,
         "type" : "line"

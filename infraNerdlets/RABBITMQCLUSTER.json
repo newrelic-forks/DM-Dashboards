@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Node health summary",
         "hint" : "",
-        "query" : "SELECT uniqueCount(entityName) as 'Total', filter(uniqueCount(entityName), where `rabbitmq.node.running` = 1) as 'Running', filter(uniqueCount(entityName), where `rabbitmq.node.hostMemoryAlarm` = 1) as 'Memory Alarms', filter(uniqueCount(entityName), where `rabbitmq.node.diskAlarm` = 1) as 'Disk Alarms' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT uniqueCount(entity.name) as 'Total', filter(uniqueCount(entity.name), where `rabbitmq.node.running` = 1) as 'Running', filter(uniqueCount(entity.name), where `rabbitmq.node.hostMemoryAlarm` = 1) as 'Memory Alarms', filter(uniqueCount(entity.name), where `rabbitmq.node.diskAlarm` = 1) as 'Disk Alarms' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_memory_used",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Total memory used",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.node.totalMemoryUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.node.totalMemoryUsedInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_file_descriptors_used",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Total file descriptors used",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsTotalUsed`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.node.fileDescriptorsTotalUsed`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "File_descriptors_used_as_sockets",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "File descriptors used as sockets",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.node.fileDescriptorsUsedSockets`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.node.fileDescriptorsUsedSockets`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

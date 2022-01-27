@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`postgres.database.connections`) AS `Connections` FROM Metric facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`postgres.database.connections`) AS `Connections` FROM Metric facet entity.name"
+        },
         "title" : "Database Connections",
         "showTimezone" : true,
         "type" : "bar",
@@ -40,7 +43,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.instance.bgwriter.checkpointWriteTimeInMillisecondsPerSecond`) FROM Metric TIMESERIES 10 minutes",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.checkpointWriteTimeInMillisecondsPerSecond`) FROM Metric TIMESERIES 10 minutes"
+        },
         "title" : "Checkpoint Write Time",
         "showTimezone" : true,
         "type" : "line",
@@ -78,7 +84,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.database.bufferHitsPerSecond`) FROM Metric FACET displayName TIMESERIES 5 minutes",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.database.bufferHitsPerSecond`) FROM Metric FACET entity.name TIMESERIES 5 minutes"
+        },
         "title" : "Buffer Hits Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -96,7 +105,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.database.readsPerSecond`) FROM Metric FACET displayName TIMESERIES 5 minutes",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.database.readsPerSecond`) FROM Metric FACET entity.name TIMESERIES 5 minutes"
+        },
         "title" : "Disk Block Reads Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -114,7 +126,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.database.rowsInsertedPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.database.rowsInsertedPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Rows Inserted Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -132,7 +147,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.database.rowsDeletedPerSecond`) FROM Metric TIMESERIES 1 minute facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.database.rowsDeletedPerSecond`) FROM Metric TIMESERIES 1 minute facet entity.name"
+        },
         "title" : "Rows Deleted Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -150,7 +168,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.database.rowsUpdatedPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.database.rowsUpdatedPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Rows Updated Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -168,7 +189,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.database.rowsReturnedPerSecond`) FROM Metric TIMESERIES 1 minute FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.database.rowsReturnedPerSecond`) FROM Metric TIMESERIES 1 minute FACET entity.name"
+        },
         "title" : "Rows Returned Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -186,7 +210,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.database.deadlocksPerSecond`) FROM Metric FACET displayName TIMESERIES 5 minutes",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.database.deadlocksPerSecond`) FROM Metric FACET entity.name TIMESERIES 5 minutes"
+        },
         "title" : "Deadlocks Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -204,7 +231,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.table.rowsInsertedPerSecond`) FROM Metric LIMIT 5 FACET database,schema,displayName TIMESERIES 1 minute",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.table.rowsInsertedPerSecond`) FROM Metric LIMIT 5 FACET database,schema,entity.name TIMESERIES 1 minute"
+        },
         "title" : "Table Rows Inserted Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -222,7 +252,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.database.readTimeInMillisecondsPerSecond`) FROM Metric FACET displayName TIMESERIES 1 minute",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.database.readTimeInMillisecondsPerSecond`) FROM Metric FACET entity.name TIMESERIES 1 minute"
+        },
         "title" : "Time Spent Reading Disk Blocks",
         "showTimezone" : true,
         "type" : "line",
@@ -240,7 +273,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`postgres.database.writeTimeInMillisecondsPerSecond`) FROM Metric FACET displayName TIMESERIES 1 minute",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`postgres.database.writeTimeInMillisecondsPerSecond`) FROM Metric FACET entity.name TIMESERIES 1 minute"
+        },
         "title" : "Time Spent Writing Disk Blocks",
         "showTimezone" : true,
         "type" : "line",
@@ -258,7 +294,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`postgres.index.sizeInBytes`) FROM Metric FACET database,schema,table,displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`postgres.index.sizeInBytes`) FROM Metric FACET database,schema,table,entity.name"
+        },
         "title" : "Index Sizes",
         "showTimezone" : true,
         "type" : "pie",
@@ -276,7 +315,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`postgres.table.totalSizeInBytes`) AS `Total Size`, latest(`postgres.table.indexSizeInBytes`) AS `Index Size` FROM Metric FACET database,schema,displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`postgres.table.totalSizeInBytes`) AS `Total Size`, latest(`postgres.table.indexSizeInBytes`) AS `Index Size` FROM Metric FACET database,schema,entity.name"
+        },
         "title" : "Table Sizes In Bytes",
         "showTimezone" : true,
         "type" : "table",
@@ -294,7 +336,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`postgres.table.bloatSizeInBytes`) AS `Bloat Size`, latest(`postgres.table.bloatRatio`) AS `Bloat Percent` FROM Metric FACET database,schema,displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`postgres.table.bloatSizeInBytes`) AS `Bloat Size`, latest(`postgres.table.bloatRatio`) AS `Bloat Percent` FROM Metric FACET database,schema,entity.name"
+        },
         "title" : "Table Bloat Size and Percent Bloat",
         "showTimezone" : true,
         "type" : "table",

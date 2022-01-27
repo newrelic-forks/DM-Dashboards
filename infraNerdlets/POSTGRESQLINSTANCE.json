@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Scheduled checkpoints",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.checkpointsScheduledPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.checkpointsScheduledPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Requested_checkpoints",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Requested checkpoints",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.checkpointsRequestedPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.checkpointsRequestedPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Buffers_written_for_checkpoint",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Buffers written for checkpoint",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.buffersWrittenForCheckpointsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.buffersWrittenForCheckpointsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Buffers_written_by_background_writer",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Buffers written by background writer",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.buffersWrittenByBackgroundWriterPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.buffersWrittenByBackgroundWriterPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Background_writer_stops",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Background writer stops",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.backgroundWriterStopsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.backgroundWriterStopsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Buffers_written_per_backend",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Buffers written per backend",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.buffersWrittenByBackendPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.buffersWrittenByBackendPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Buffers_allocated",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Buffers allocated",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.buffersAllocatedPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.buffersAllocatedPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Backend_fsync_Calls",
@@ -120,7 +148,11 @@
         "type" : "line",
         "title" : "Backend fsync Calls",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.backendFsyncCallsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.backendFsyncCallsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Checkpoint_write_Time",
@@ -135,7 +167,11 @@
         "type" : "line",
         "title" : "Checkpoint write Time",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.checkpointWriteTimeInMillisecondsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.checkpointWriteTimeInMillisecondsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Checkpoint_sync_Time",
@@ -150,7 +186,11 @@
         "type" : "line",
         "title" : "Checkpoint sync Time",
         "hint" : "",
-        "query" : "SELECT average(`postgres.instance.bgwriter.checkpointSyncTimeInMillisecondsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`postgres.instance.bgwriter.checkpointSyncTimeInMillisecondsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

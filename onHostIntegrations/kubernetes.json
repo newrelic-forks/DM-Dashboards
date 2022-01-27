@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT (average(k8s.node.cpuUsedCores) * uniqueCount(entityName)) AS 'CPU cores', (average(k8s.node.memoryWorkingSetBytes) * uniqueCount(entityName)) / 1000000000 AS 'Mem GB', (average(k8s.node.k8s.node.allocatable*CpuCores) * uniqueCount(entityName)) as 'Allocatable CPU cores', (average(k8s.node.k8s.node.allocatable*MemoryBytes) * uniqueCount(entityName)) / 1000000000 as 'Allocatable Mem GB' FROM Metric UNTIL 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT (average(k8s.node.cpuUsedCores) * uniqueCount(entity.name)) AS 'CPU cores', (average(k8s.node.memoryWorkingSetBytes) * uniqueCount(entity.name)) / 1000000000 AS 'Mem GB', (average(k8s.node.k8s.node.allocatable*CpuCores) * uniqueCount(entity.name)) as 'Allocatable CPU cores', (average(k8s.node.k8s.node.allocatable*MemoryBytes) * uniqueCount(entity.name)) / 1000000000 as 'Allocatable Mem GB' FROM Metric UNTIL 1 minute ago"
+        },
         "title" : "Resources Used",
         "showTimezone" : true,
         "type" : "billboard",
@@ -40,7 +43,10 @@
             "decimals" : 0
           }
         },
-        "query" : "SELECT filter(uniqueCount(K8sNodeSample.entityId), WHERE `label.eks.amazonaws.com/compute-type` IS NULL) AS 'Nodes', filter(uniqueCount(K8sNodeSample.entityId), WHERE `label.eks.amazonaws.com/compute-type` IS NOT NULL) as 'Serverless Nodes', uniqueCount(K8sNamespaceSample.clusterName) as 'Clusters', uniqueCount(K8sNamespaceSample.entityId) as 'Namespaces', uniqueCount(K8sDeploymentSample.entityId) as 'Deployments', uniqueCount(K8sPodSample.entityId) as 'Pods', uniqueCount(K8sContainerSample.containerID) as 'Containers' FROM Metric, K8sNamespaceSample, K8sDeploymentSample, K8sPodSample, K8sContainerSample UNTIL 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT filter(uniqueCount(K8sNodeSample.entity.id), WHERE `label.eks.amazonaws.com/compute-type` IS NULL) AS 'Nodes', filter(uniqueCount(K8sNodeSample.entity.id), WHERE `label.eks.amazonaws.com/compute-type` IS NOT NULL) as 'Serverless Nodes', uniqueCount(K8sNamespaceSample.clusterName) as 'Clusters', uniqueCount(K8sNamespaceSample.entity.id) as 'Namespaces', uniqueCount(K8sDeploymentSample.entity.id) as 'Deployments', uniqueCount(K8sPodSample.entity.id) as 'Pods', uniqueCount(K8sContainerSample.containerID) as 'Containers' FROM Metric, K8sNamespaceSample, K8sDeploymentSample, K8sPodSample, K8sContainerSample UNTIL 1 minute ago"
+        },
         "title" : "# of K8s Objects",
         "showTimezone" : true,
         "type" : "billboard",
@@ -77,7 +83,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "FROM Metric SELECT uniqueCount(namespace) FACET clusterName UNTIL 1 minute ago limit 100",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "FROM Metric SELECT uniqueCount(namespace) FACET clusterName UNTIL 1 minute ago limit 100"
+        },
         "title" : "Namespaces per Cluster",
         "showTimezone" : true,
         "type" : "bar",
@@ -100,7 +109,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "FROM Metric SELECT uniqueCount(entityId) as 'pod' FACET namespace UNTIL 1 minute ago limit 100",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "FROM Metric SELECT uniqueCount(entity.id) as 'pod' FACET namespace UNTIL 1 minute ago limit 100"
+        },
         "title" : "Pods by Namespace",
         "showTimezone" : true,
         "type" : "bar",
@@ -123,7 +135,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "FROM Metric SELECT latest(k8s.container.cpuUsedCores/k8s.container.cpuLimitCores) * 100 as '% CPU' FACET clusterName, podName, containerName UNTIL 1 minute ago TIMESERIES limit 50",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "FROM Metric SELECT latest(k8s.container.cpuUsedCores/k8s.container.cpuLimitCores) * 100 as '% CPU' FACET clusterName, podName, containerName UNTIL 1 minute ago TIMESERIES limit 50"
+        },
         "title" : "Container CPU Usage - % Used vs Limit",
         "showTimezone" : true,
         "type" : "line",
@@ -141,7 +156,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "FROM Metric SELECT latest(k8s.container.memoryWorkingSetUtilization) as '% Memory' FACET clusterName, podName, containerName UNTIL 1 minute ago TIMESERIES limit 50",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "FROM Metric SELECT latest(k8s.container.memoryWorkingSetUtilization) as '% Memory' FACET clusterName, podName, containerName UNTIL 1 minute ago TIMESERIES limit 50"
+        },
         "title" : "Container Memory Usage - % Used vs Limit",
         "showTimezone" : true,
         "type" : "line",
@@ -159,7 +177,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "FROM Metric SELECT max(k8s.container.restartCount)-min(k8s.container.restartCount) as 'Restarts' FACET clusterName, podName, containerName UNTIL 1 minute ago TIMESERIES limit 50",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "FROM Metric SELECT max(k8s.container.restartCount)-min(k8s.container.restartCount) as 'Restarts' FACET clusterName, podName, containerName UNTIL 1 minute ago TIMESERIES limit 50"
+        },
         "title" : "Container Restarts",
         "showTimezone" : true,
         "type" : "area",
@@ -177,7 +198,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(k8s.container.cpuUsedCores) as 'CPU Cores Used' FROM Metric FACET clusterName, podName, containerName timeseries since 60 minutes ago UNTIL 1 minute ago limit 50",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(k8s.container.cpuUsedCores) as 'CPU Cores Used' FROM Metric FACET clusterName, podName, containerName timeseries since 60 minutes ago UNTIL 1 minute ago limit 50"
+        },
         "title" : "Container CPU Cores Used",
         "showTimezone" : true,
         "type" : "line",
@@ -195,7 +219,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(k8s.container.memoryWorkingSetBytes / 1000000) as 'MB of Mem' FROM Metric FACET clusterName, podName, containerName timeseries since 60 minutes ago UNTIL 1 minute ago limit 50",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(k8s.container.memoryWorkingSetBytes / 1000000) as 'MB of Mem' FROM Metric FACET clusterName, podName, containerName timeseries since 60 minutes ago UNTIL 1 minute ago limit 50"
+        },
         "title" : "Container MBytes of Memory Used",
         "showTimezone" : true,
         "type" : "line",
@@ -213,7 +240,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(k8s.replicaset.podsDesired) - latest(k8s.replicaset.podsReady) as 'Missing Pods' FROM Metric since 10 minutes ago UNTIL 1 minute ago facet clusterName, deploymentName timeseries limit 50",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(k8s.replicaset.podsDesired) - latest(k8s.replicaset.podsReady) as 'Missing Pods' FROM Metric since 10 minutes ago UNTIL 1 minute ago facet clusterName, deploymentName timeseries limit 50"
+        },
         "title" : "Missing Pods by Deployment",
         "showTimezone" : true,
         "type" : "area",
@@ -231,7 +261,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(status) as 'Status', max(timestamp) as 'Timestamp' FROM Metric WHERE status NOT IN ('Running', 'Succeeded') facet clusterName, namespace, podName since 10 minutes ago UNTIL 1 minute ago limit 100",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(status) as 'Status', max(timestamp) as 'Timestamp' FROM Metric WHERE status NOT IN ('Running', 'Succeeded') facet clusterName, namespace, podName since 10 minutes ago UNTIL 1 minute ago limit 100"
+        },
         "title" : "Latest pods not Running by Cluster/Namespace",
         "showTimezone" : true,
         "type" : "table",
@@ -249,7 +282,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniqueCount(containerID) FROM Metric SINCE 10 minutes AGO UNTIL 1 minute ago facet namespace TIMESERIES",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(containerID) FROM Metric SINCE 10 minutes AGO UNTIL 1 minute ago facet namespace TIMESERIES"
+        },
         "title" : "Containers by Namespace",
         "showTimezone" : true,
         "type" : "line",
@@ -267,7 +303,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "FROM Metric, K8sPodSample SELECT latest(k8s.node.cpuUsedCores) as 'Used Cores', latest(k8s.node.memoryWorkingSetBytes) / 1000000 as 'Used Memory MB', uniqueCount(podName) as 'Pods' FACET nodeName since 10 minutes ago UNTIL 1 minute ago limit 100",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "FROM Metric, K8sPodSample SELECT latest(k8s.node.cpuUsedCores) as 'Used Cores', latest(k8s.node.memoryWorkingSetBytes) / 1000000 as 'Used Memory MB', uniqueCount(podName) as 'Pods' FACET nodeName since 10 minutes ago UNTIL 1 minute ago limit 100"
+        },
         "title" : "Node Resource Consumption",
         "showTimezone" : true,
         "type" : "table",
@@ -285,7 +324,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniqueCount(podName) FROM Metric where status='Running' SINCE 10 minutes AGO UNTIL 1 minute ago facet clusterName, deploymentName WHERE deploymentName IS NOT NULL TIMESERIES limit 50",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(podName) FROM Metric where status='Running' SINCE 10 minutes AGO UNTIL 1 minute ago facet clusterName, deploymentName WHERE deploymentName IS NOT NULL TIMESERIES limit 50"
+        },
         "title" : "Active Pods by Deployment",
         "showTimezone" : true,
         "type" : "line",
@@ -303,7 +345,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`k8s.pod.netRxBytesPerSecond`)/1000 as 'Received KBps', latest(`k8s.pod.netTxBytesPerSecond`)/1000 as 'Transmitted KBps', latest(`k8s.pod.netErrorsPerSecond`) as 'Errors / sec' FROM Metric FACET podName since 10 minutes ago UNTIL 1 minute ago limit 100",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`k8s.pod.netRxBytesPerSecond`)/1000 as 'Received KBps', latest(`k8s.pod.netTxBytesPerSecond`)/1000 as 'Transmitted KBps', latest(`k8s.pod.netErrorsPerSecond`) as 'Errors / sec' FROM Metric FACET podName since 10 minutes ago UNTIL 1 minute ago limit 100"
+        },
         "title" : "Pod Network Status",
         "showTimezone" : true,
         "type" : "table",
@@ -321,7 +366,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniquecount(podName) FROM Metric where status='Running' facet nodeName since 10 minutes ago UNTIL 1 minute ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniquecount(podName) FROM Metric where status='Running' facet nodeName since 10 minutes ago UNTIL 1 minute ago"
+        },
         "title" : "Pod Count by Node",
         "showTimezone" : true,
         "type" : "bar",
@@ -350,7 +398,10 @@
         "type" : "line",
         "endpoint" : "/v2/nrql",
         "event_types" : [ "K8sVolumeSample" ],
-        "query" : "FROM Metric select latest(k8s.volume.fsUsedPercent) facet podName, volumeName, pvcName timeseries"
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "FROM Metric select latest(k8s.volume.fsUsedPercent) facet podName, volumeName, pvcName timeseries"
+        }
       }
     }, {
       "name" : "19",
@@ -368,7 +419,10 @@
         "type" : "table",
         "endpoint" : "/v2/nrql",
         "event_types" : [ "K8sVolumeSample" ],
-        "query" : "FROM Metric select latest(k8s.volume.fsUsedPercent) facet podName, volumeName, pvcName where k8s.volume.fsUsedPercent > 90 SINCE 10 minutes ago UNTIL 1 minute ago"
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "FROM Metric select latest(k8s.volume.fsUsedPercent) facet podName, volumeName, pvcName where k8s.volume.fsUsedPercent > 90 SINCE 10 minutes ago UNTIL 1 minute ago"
+        }
       }
     }, {
       "name" : "20",
@@ -383,7 +437,10 @@
         "type" : "table",
         "endpoint" : "/v2/nrql",
         "event_types" : [ "K8sNodeSample" ],
-        "query" : "SELECT latest(clusterName) FROM (SELECT uniqueCount(displayName) as 'Nodes' FROM Metric FACET clusterName, nodeName, displayName, cases(WHERE k8s.node.condition*.Ready = 1 as 'True',WHERE k8s.node.condition*.Ready=0 as 'False',WHERE k8s.node.condition*.Ready=-1 as 'Unknown') as 'Ready', cases(WHERE k8s.node.condition*.MemoryPressure=0 as 'False', WHERE k8s.node.condition*.MemoryPressure=1 as 'True',WHERE k8s.node.condition*.MemoryPressure=-1 as 'Unknown') as 'MemoryPressure' , cases(WHERE k8s.node.condition*.DiskPressure = 1 as 'True',WHERE k8s.node.condition*.DiskPressure=0 as 'False',WHERE k8s.node.condition*.DiskPressure=-1 as 'Unknown') as 'DiskPressure' , cases(WHERE k8s.node.condition*.PIDPressure = 1 as 'True',WHERE k8s.node.condition*.PIDPressure=0 as 'False',WHERE k8s.node.condition*.PIDPressure=-1 as 'Unknown') as 'PIDPressure' WHERE (k8s.node.condition*.Ready IN (0,-1) OR k8s.node.condition*.MemoryPressure IN (1,-1) OR k8s.node.condition*.DiskPressure IN (1,-1) OR k8s.node.condition*.PIDPressure IN (1,-1))) WHERE Ready IS NOT NULL ORDER BY displayName FACET displayName, Ready, MemoryPressure, DiskPressure, PIDPressure",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(clusterName) FROM (SELECT uniqueCount(entity.name) as 'Nodes' FROM Metric FACET clusterName, nodeName, entity.name, cases(WHERE k8s.node.condition*.Ready = 1 as 'True',WHERE k8s.node.condition*.Ready=0 as 'False',WHERE k8s.node.condition*.Ready=-1 as 'Unknown') as 'Ready', cases(WHERE k8s.node.condition*.MemoryPressure=0 as 'False', WHERE k8s.node.condition*.MemoryPressure=1 as 'True',WHERE k8s.node.condition*.MemoryPressure=-1 as 'Unknown') as 'MemoryPressure' , cases(WHERE k8s.node.condition*.DiskPressure = 1 as 'True',WHERE k8s.node.condition*.DiskPressure=0 as 'False',WHERE k8s.node.condition*.DiskPressure=-1 as 'Unknown') as 'DiskPressure' , cases(WHERE k8s.node.condition*.PIDPressure = 1 as 'True',WHERE k8s.node.condition*.PIDPressure=0 as 'False',WHERE k8s.node.condition*.PIDPressure=-1 as 'Unknown') as 'PIDPressure' WHERE (k8s.node.condition*.Ready IN (0,-1) OR k8s.node.condition*.MemoryPressure IN (1,-1) OR k8s.node.condition*.DiskPressure IN (1,-1) OR k8s.node.condition*.PIDPressure IN (1,-1))) WHERE Ready IS NOT NULL ORDER BY entity.name FACET entity.name, Ready, MemoryPressure, DiskPressure, PIDPressure"
+        },
         "title" : "Nodes with problematic conditions"
       }
     } ]

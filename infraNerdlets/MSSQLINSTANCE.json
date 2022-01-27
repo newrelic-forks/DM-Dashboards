@@ -15,7 +15,11 @@
         "type" : "area",
         "title" : "Connections",
         "hint" : "The number of user connections.",
-        "query" : "SELECT average(`mssql.instance.stats.connections`) as 'Connections' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mssql.instance.stats.connections`) as 'Connections' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "SQL_compilations_and_re-compilations",
@@ -30,7 +34,11 @@
         "type" : "area",
         "title" : "SQL compilations and re-compilations",
         "hint" : "The number of MS SQL compilations and re-compilations per second.",
-        "query" : "SELECT average(`stats.sqlCompilations`) as `Compilations`, average(`mssql.instance.stats.sqlRecompilationsPerSecond`) as `Re-compilations` FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`stats.sqlCompilations`) as `Compilations`, average(`mssql.instance.stats.sqlRecompilationsPerSecond`) as `Re-compilations` FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Buffer_cache_hit_percentage",
@@ -45,7 +53,11 @@
         "type" : "area",
         "title" : "Buffer cache hit percentage",
         "hint" : "The percentage of buffer pools hits on the instance.",
-        "query" : "SELECT average(`mssql.instance.system.bufferPoolHitPercent`) as 'Cache hit' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mssql.instance.system.bufferPoolHitPercent`) as 'Cache hit' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Average_batch_requests",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Average batch requests",
         "hint" : "The number of batch requests per second on the buffer pool.",
-        "query" : "SELECT average(`mssql.instance.bufferpool.batchRequestsPerSecond`) as 'Batch requests' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mssql.instance.bufferpool.batchRequestsPerSecond`) as 'Batch requests' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Page_life_expectancy",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Page life expectancy",
         "hint" : "The life expectancy of a page in the buffer pool, in milliseconds.",
-        "query" : "SELECT average(`mssql.instance.bufferpool.pageLifeExpectancyInMilliseconds`) as 'Page life expentancy' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mssql.instance.bufferpool.pageLifeExpectancyInMilliseconds`) as 'Page life expentancy' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Number_of_blocked_processes",
@@ -90,7 +110,11 @@
         "type" : "area",
         "title" : "Number of blocked processes",
         "hint" : "The number of blocked processes on the instance.",
-        "query" : "SELECT average(`mssql.instance.instance.blockedProcessesCount`) as 'Blocked processes' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mssql.instance.instance.blockedProcessesCount`) as 'Blocked processes' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Lock_waits",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Lock waits",
         "hint" : "The number of times per second that MS SQL Server is unable to retain a lock right away for a resource.",
-        "query" : "SELECT average(`mssql.instance.stats.lockWaitsPerSecond`) as 'Times' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mssql.instance.stats.lockWaitsPerSecond`) as 'Times' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Total_wait_time",
@@ -120,7 +148,11 @@
         "type" : "line",
         "title" : "Total wait time",
         "hint" : "The number of milliseconds per second spent waiting across the instance.",
-        "query" : "SELECT average(`mssql.instance.system.waitTimeInMillisecondsPerSecond`) as 'Wait time' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mssql.instance.system.waitTimeInMillisecondsPerSecond`) as 'Wait time' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Page_splits",
@@ -135,7 +167,11 @@
         "type" : "line",
         "title" : "Page splits",
         "hint" : "The number of page splits per second.",
-        "query" : "SELECT average(`mssql.instance.access.pageSplitsPerSecond`) as 'Page splits' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mssql.instance.access.pageSplitsPerSecond`) as 'Page splits' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Checkpoint_pages",
@@ -150,7 +186,11 @@
         "type" : "line",
         "title" : "Checkpoint pages",
         "hint" : "The number of pages flushed to disk per second by a checkpoint or other operation that require all dirty pages to be flushed.",
-        "query" : "SELECT average(`mssql.instance.buffer.checkpointPagesPerSecond`) as 'Checkpoint pages' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mssql.instance.buffer.checkpointPagesPerSecond`) as 'Checkpoint pages' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

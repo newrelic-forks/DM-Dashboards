@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Number of bindings",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.exchange.bindings`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.exchange.bindings`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Delivered_and_acknowledged",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Delivered and acknowledged",
         "hint" : "",
-        "query" : "SELECT average(`exchange.messagesDeliveredAcknowledgedPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`exchange.messagesDeliveredAcknowledgedPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Messsages_redelivered",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Messsages redelivered",
         "hint" : "",
-        "query" : "SELECT average(`exchange.messagesRedeliveredPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`exchange.messagesRedeliveredPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Messages_returned_unroutable",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Messages returned unroutable",
         "hint" : "",
-        "query" : "SELECT average(`exchange.messagesReturnedUnroutablePerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`exchange.messagesReturnedUnroutablePerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Messages_published",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Messages published",
         "hint" : "",
-        "query" : "SELECT average(`exchange.messagesPublishedPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`exchange.messagesPublishedPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Messages_published_per_channel",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Messages published per channel",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.rabbitmq.exchange.messagesPublishedPerChannelPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.rabbitmq.exchange.messagesPublishedPerChannelPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Messages_published_into_a_queue",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Messages published into a queue",
         "hint" : "",
-        "query" : "SELECT average(`rabbitmq.rabbitmq.exchange.messagesPublishedQueuePerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`rabbitmq.rabbitmq.exchange.messagesPublishedQueuePerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

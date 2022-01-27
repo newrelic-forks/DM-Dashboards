@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.bufferpool.batchRequestsPerSecond`) FROM Metric SINCE 1 hour AGO TIMESERIES FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.bufferpool.batchRequestsPerSecond`) FROM Metric SINCE 1 hour AGO TIMESERIES FACET entity.name"
+        },
         "title" : "Average Batch Requests Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -35,7 +38,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.stats.connections`) FROM Metric SINCE 1 hour AGO TIMESERIES FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.stats.connections`) FROM Metric SINCE 1 hour AGO TIMESERIES FACET entity.name"
+        },
         "title" : "Average User Connections",
         "showTimezone" : true,
         "type" : "line",
@@ -72,7 +78,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.system.bufferPoolHitPercent`) as 'Buffer Cache Hit Ratio' FROM Metric SINCE 1 hour AGO TIMESERIES FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.system.bufferPoolHitPercent`) as 'Buffer Cache Hit Ratio' FROM Metric SINCE 1 hour AGO TIMESERIES FACET entity.name"
+        },
         "title" : "Buffer Cache Hit Ratio",
         "showTimezone" : true,
         "type" : "line",
@@ -90,7 +99,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.stats.lockWaitsPerSecond`) FROM Metric timeseries since 1 hour ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.stats.lockWaitsPerSecond`) FROM Metric timeseries since 1 hour ago FACET entity.name"
+        },
         "title" : "Lock Waits Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -108,7 +120,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.stats.sqlCompilationsPerSecond`) FROM Metric timeseries since 1 hour ago facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.stats.sqlCompilationsPerSecond`) FROM Metric timeseries since 1 hour ago facet entity.name"
+        },
         "title" : "SQL Compilations Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -126,7 +141,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.bufferpool.pageLifeExpectancyInMilliseconds`) / 1000 FROM Metric SINCE 1 hour AGO TIMESERIES FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.bufferpool.pageLifeExpectancyInMilliseconds`) / 1000 FROM Metric SINCE 1 hour AGO TIMESERIES FACET entity.name"
+        },
         "title" : "Page Life Expectancy in Seconds",
         "showTimezone" : true,
         "type" : "line",
@@ -144,7 +162,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.instance.blockedProcessesCount`) FROM Metric timeseries since 1 hour ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.instance.blockedProcessesCount`) FROM Metric timeseries since 1 hour ago FACET entity.name"
+        },
         "title" : "Number of Blocked Processes",
         "showTimezone" : true,
         "type" : "line",
@@ -162,7 +183,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.stats.sqlRecompilationsPerSecond`) FROM Metric timeseries since 1 hour ago facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.stats.sqlRecompilationsPerSecond`) FROM Metric timeseries since 1 hour ago facet entity.name"
+        },
         "title" : "SQL Recompilations Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -180,7 +204,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.access.pageSplitsPerSecond`) FROM Metric timeseries since 1 hour ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.access.pageSplitsPerSecond`) FROM Metric timeseries since 1 hour ago FACET entity.name"
+        },
         "title" : "Page Splits Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -198,7 +225,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`mssql.instance.buffer.checkpointPagesPerSecond`) FROM Metric timeseries since 1 hour ago FACET entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`mssql.instance.buffer.checkpointPagesPerSecond`) FROM Metric timeseries since 1 hour ago FACET entity.name"
+        },
         "title" : "Checkpoint Pages Per Second",
         "showTimezone" : true,
         "type" : "line",
@@ -216,7 +246,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT sum(`mssql.instance.system.waitTimeInMillisecondsPerSecond`) FROM Metric since 1 hour ago timeseries facet entityName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT sum(`mssql.instance.system.waitTimeInMillisecondsPerSecond`) FROM Metric since 1 hour ago timeseries facet entity.name"
+        },
         "title" : "Total Wait Time in Milliseconds Per Second",
         "showTimezone" : true,
         "type" : "line",

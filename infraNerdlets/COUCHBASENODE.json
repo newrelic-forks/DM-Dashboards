@@ -15,7 +15,11 @@
         "type" : "billboard",
         "title" : "Node status",
         "hint" : "",
-        "query" : "SELECT latest(`node.status`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`node.status`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_free",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Memory free",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.node.memoryFreeInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.node.memoryFreeInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Swap_used",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Swap used",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.node.swapUsedInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.node.swapUsedInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "CPU_utilization",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "CPU utilization",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.node.cpuUtilization`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.node.cpuUtilization`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Memory_total",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Memory total",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.node.memoryTotalInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.node.memoryTotalInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Swap_total",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Swap total",
         "hint" : "",
-        "query" : "SELECT average(`couchbase.node.swapTotalInBytes`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`couchbase.node.swapTotalInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

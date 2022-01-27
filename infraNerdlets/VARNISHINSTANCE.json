@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Session connections",
         "hint" : "",
-        "query" : "SELECT average(`varnish.session.connections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`varnish.session.connections`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Requests",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Requests",
         "hint" : "",
-        "query" : "SELECT average(`varnish.net.requests`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`varnish.net.requests`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Session_drops",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Session drops",
         "hint" : "",
-        "query" : "SELECT average(`varnish.session.drops`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`varnish.session.drops`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Expired_objects",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Expired objects",
         "hint" : "",
-        "query" : "SELECT average(`varnish.varnish.main.expiredMailed`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`varnish.varnish.main.expiredMailed`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "LRU_purges",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "LRU purges",
         "hint" : "",
-        "query" : "SELECT average(`varnish.lru.nuked`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`varnish.lru.nuked`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Cache_hits",
@@ -90,7 +110,11 @@
         "type" : "line",
         "title" : "Cache hits",
         "hint" : "",
-        "query" : "SELECT average(`varnish.cache.hits`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`varnish.cache.hits`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Cache_misses",
@@ -105,7 +129,11 @@
         "type" : "line",
         "title" : "Cache misses",
         "hint" : "",
-        "query" : "SELECT average(`varnish.cache.misses`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`varnish.cache.misses`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Cache_hits_for_pass",
@@ -120,7 +148,11 @@
         "type" : "line",
         "title" : "Cache hits for pass",
         "hint" : "",
-        "query" : "SELECT latest(`varnish.cache.passHits`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`varnish.cache.passHits`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Cache_grace_hits",
@@ -135,7 +167,11 @@
         "type" : "line",
         "title" : "Cache grace hits",
         "hint" : "",
-        "query" : "SELECT average(`varnish.cache.graceHits`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`varnish.cache.graceHits`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Cache_hits_for_miss",
@@ -150,7 +186,11 @@
         "type" : "line",
         "title" : "Cache hits for miss",
         "hint" : "",
-        "query" : "SELECT average(`varnish.cache.missHits`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`varnish.cache.missHits`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Backend_requests",
@@ -165,7 +205,11 @@
         "type" : "line",
         "title" : "Backend requests",
         "hint" : "",
-        "query" : "SELECT average(`net.varnish.backend.requests`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`net.varnish.backend.requests`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Backend_connections",
@@ -180,7 +224,11 @@
         "type" : "line",
         "title" : "Backend connections",
         "hint" : "",
-        "query" : "SELECT latest(`backend.connections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`backend.connections`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

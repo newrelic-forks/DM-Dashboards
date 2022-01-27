@@ -15,7 +15,11 @@
         "type" : "billboard",
         "title" : "Virtual server availability status",
         "hint" : "",
-        "query" : "SELECT filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 0) AS `Offline`, filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(displayName), WHERE `f5.virtualserver.availabilityState` = 2) AS `Online` FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT filter(uniqueCount(entity.name), WHERE `f5.virtualserver.availabilityState` = 0) AS `Offline`, filter(uniqueCount(entity.name), WHERE `f5.virtualserver.availabilityState` = 1) AS `Unknown`, filter(uniqueCount(entity.name), WHERE `f5.virtualserver.availabilityState` = 2) AS `Online` FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Virtual_server_connections",
@@ -30,7 +34,11 @@
         "type" : "bar",
         "title" : "Virtual server connections",
         "hint" : "",
-        "query" : "SELECT latest(`f5.virtualserver.connections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}'"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`f5.virtualserver.connections`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Virtual_server_requests",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Virtual server requests",
         "hint" : "",
-        "query" : "SELECT average(`f5.virtualserver.requestsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`f5.virtualserver.requestsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Virtual_server_data_in",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Virtual server data in",
         "hint" : "",
-        "query" : "SELECT average(`f5.virtualserver.inDataInBytesPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`f5.virtualserver.inDataInBytesPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Virtual_server_data_out",
@@ -75,7 +91,11 @@
         "type" : "line",
         "title" : "Virtual server data out",
         "hint" : "",
-        "query" : "SELECT average(`f5.virtualserver.outDataInBytesPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`f5.virtualserver.outDataInBytesPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

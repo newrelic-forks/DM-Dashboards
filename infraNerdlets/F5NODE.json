@@ -15,7 +15,11 @@
         "type" : "line",
         "title" : "Node connections",
         "hint" : "",
-        "query" : "SELECT average(`f5.node.connections`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`f5.node.connections`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Node_requests",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Node requests",
         "hint" : "",
-        "query" : "SELECT average(`f5.node.requestsPerSecond`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`f5.node.requestsPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Node_packets_out",
@@ -45,7 +53,11 @@
         "type" : "line",
         "title" : "Node packets out",
         "hint" : "",
-        "query" : "SELECT average(`f5.node.sessions`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`f5.node.sessions`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Node_packets_in",
@@ -60,7 +72,11 @@
         "type" : "line",
         "title" : "Node packets in",
         "hint" : "",
-        "query" : "SELECT average(`node.packetsReceived`) FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`node.packetsReceived`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

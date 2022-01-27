@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.node.cpuUtilization`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.node.cpuUtilization`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "CPU Utilization by Node",
         "showTimezone" : true,
         "type" : "line",
@@ -35,7 +38,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.readOperationsPerSecond`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.readOperationsPerSecond`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Read Operations Per Second by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -72,7 +78,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.dataUsedInBytes`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.dataUsedInBytes`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Data Used by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -90,7 +99,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.readRatePerSecond`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.readRatePerSecond`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Read Rate Per Second by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -108,7 +120,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.memoryUsedInBytes`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.memoryUsedInBytes`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Memory Usage by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -126,7 +141,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.quotaUtilization`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.quotaUtilization`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Quota Utilization by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -144,7 +162,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.diskUsedInBytes`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.diskUsedInBytes`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Disk Usage by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -162,7 +183,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.totalOperationsPerSecond`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.totalOperationsPerSecond`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Total Operations Per Second by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -180,7 +204,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.currentConnections`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.currentConnections`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Current Connections by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -198,7 +225,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.diskWriteQueue`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.diskWriteQueue`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Disk Write Queue by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -216,7 +246,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.writeOperationsPerSecond`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.writeOperationsPerSecond`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Write Operations Per Second by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -234,7 +267,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.outOfMemoryErrorsPerSecond`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.outOfMemoryErrorsPerSecond`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Out of Memory Errors Per Second by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -252,7 +288,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.queryengine.activeRequests`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.queryengine.activeRequests`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Active Requests by Query Engine",
         "showTimezone" : true,
         "type" : "line",
@@ -270,7 +309,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.activeResidentItemsRatio`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.activeResidentItemsRatio`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Active Resident Items Ratio by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -288,7 +330,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.queryengine.systemCpuUtilization`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.queryengine.systemCpuUtilization`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "CPU Utilization by Query Engine",
         "showTimezone" : true,
         "type" : "line",
@@ -306,7 +351,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.queryengine.completedRequests`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.queryengine.completedRequests`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Completed Requests by Query Engine",
         "showTimezone" : true,
         "type" : "line",
@@ -324,7 +372,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.ejectionsPerSecond`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.ejectionsPerSecond`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Ejections Per Second by Bucket",
         "showTimezone" : true,
         "type" : "line",
@@ -342,7 +393,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.queryengine.usedMemoryInBytes`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.queryengine.usedMemoryInBytes`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Used Memory by Query Engine",
         "showTimezone" : true,
         "type" : "line",
@@ -360,7 +414,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.queryengine.preparedStatementUtilization`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.queryengine.preparedStatementUtilization`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Prepared Statement Utilization by Query Engine",
         "showTimezone" : true,
         "type" : "line",
@@ -378,7 +435,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`couchbase.bucket.writeRatePerSecond`) FROM Metric timeseries facet displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`couchbase.bucket.writeRatePerSecond`) FROM Metric timeseries facet entity.name"
+        },
         "title" : "Write Rate Per Second by Bucket",
         "showTimezone" : true,
         "type" : "line",

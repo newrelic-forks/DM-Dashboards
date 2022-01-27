@@ -15,7 +15,11 @@
         "type" : "area",
         "title" : "Operations per second",
         "hint" : "Number of INSERT, SELECT, UPDATE and DELETE statements executed per seconds.",
-        "query" : "SELECT average(`mysql.node.query.insertPerSecond`) as 'Insert commands', average(`mysql.node.query.selectPerSecond`) as 'Select commands', average(`mysql.node.query.updatePerSecond`) as 'Update comands', average(`mysql.node.query.deletePerSecond`) as 'Delete commands' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mysql.node.query.insertPerSecond`) as 'Insert commands', average(`mysql.node.query.selectPerSecond`) as 'Select commands', average(`mysql.node.query.updatePerSecond`) as 'Update comands', average(`mysql.node.query.deletePerSecond`) as 'Delete commands' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Queries_per_second",
@@ -30,7 +34,11 @@
         "type" : "line",
         "title" : "Queries per second",
         "hint" : "Number of queries per second.",
-        "query" : "SELECT average(`mysql.node.query.queriesPerSecond`) as 'Queries' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mysql.node.query.queriesPerSecond`) as 'Queries' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Slow_queries_per_minute",
@@ -45,7 +53,11 @@
         "type" : "area",
         "title" : "Slow queries per minute",
         "hint" : "Number of slow queries per minute.",
-        "query" : "SELECT average(`mysql.node.query.slowQueriesPerSecond`) * 60 as 'Slow queries' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mysql.node.query.slowQueriesPerSecond`) * 60 as 'Slow queries' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Active_connections",
@@ -60,7 +72,11 @@
         "type" : "billboard",
         "title" : "Active connections",
         "hint" : "Number of currently open connections.",
-        "query" : "SELECT latest(`mysql.node.net.threadsConnected`) as 'Active connections' FROM Metric WHERE `entityGuid` = '{{entity.id}}'",
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT latest(`mysql.node.net.threadsConnected`) as 'Active connections' FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "offset" : 0
+        },
         "config" : {
           "bar" : {
             "tooltipEnabled" : false
@@ -80,7 +96,11 @@
         "type" : "line",
         "title" : "Max connections",
         "hint" : "Number of max connections.",
-        "query" : "SELECT max(`mysql.node.net.threadsConnected`) as 'Max connections' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT max(`mysql.node.net.threadsConnected`) as 'Max connections' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Read_and_written_InnoDB_bytes_per_second",
@@ -95,7 +115,11 @@
         "type" : "line",
         "title" : "Read and written InnoDB bytes per second",
         "hint" : "Rate at which data is read and written from InnoDB tables in bytes per second.",
-        "query" : "SELECT average(`mysql.node.innodb.dataReadBytesPerSecond`) as 'Read InnoDB data', average(`mysql.node.innodb.dataWrittenBytesPerSecond`) as 'Write InnoDB data' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mysql.node.innodb.dataReadBytesPerSecond`) as 'Read InnoDB data', average(`mysql.node.innodb.dataWrittenBytesPerSecond`) as 'Write InnoDB data' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     }, {
       "name" : "Received_and_sent_bytes_per_second",
@@ -110,7 +134,11 @@
         "type" : "area",
         "title" : "Received and sent bytes per second",
         "hint" : "Byte throughput received and sent from all clients, per second.",
-        "query" : "SELECT average(`mysql.node.net.bytesReceivedPerSecond`) as 'Bytes received', average(`mysql.node.net.bytesSentPerSecond`) as 'Bytes sent' FROM Metric WHERE `entityGuid` = '{{entity.id}}' TIMESERIES auto"
+        "query" : {
+          "account_id" : "{{entity.accountId}}",
+          "nrql" : "SELECT average(`mysql.node.net.bytesReceivedPerSecond`) as 'Bytes received', average(`mysql.node.net.bytesSentPerSecond`) as 'Bytes sent' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "offset" : 0
+        }
       }
     } ]
   }

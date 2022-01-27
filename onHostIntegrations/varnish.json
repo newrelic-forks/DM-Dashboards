@@ -17,7 +17,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.session.connections`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.session.connections`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Session Connections",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -34,7 +37,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.net.requests`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.net.requests`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Requests",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -70,7 +76,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.session.drops`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.session.drops`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Session Drops",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -87,7 +96,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.varnish.main.expiredMailed`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.varnish.main.expiredMailed`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Expired Objects",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -104,7 +116,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.cache.hits`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.cache.hits`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Cache Hits",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -121,7 +136,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.cache.misses`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.cache.misses`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Cache Misses",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -138,7 +156,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT uniqueCount(`displayName`) as 'Backends' FROM Metric facet varnishInstance since 5 minutes ago",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT uniqueCount(`entity.name`) as 'Backends' FROM Metric facet varnishInstance since 5 minutes ago"
+        },
         "title" : "Backends Per Instance",
         "type" : "table",
         "endpoint" : "/v2/nrql",
@@ -155,7 +176,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.cache.missHits`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.cache.missHits`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Cache Hits for Miss",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -172,7 +196,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`varnish.cache.passHits`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`varnish.cache.passHits`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Cache Hits for Pass",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -189,7 +216,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.backend.net.requests`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.backend.net.requests`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Backend Requests",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -206,7 +236,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.cache.graceHits`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.cache.graceHits`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Cache Grace Hits",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -223,7 +256,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT average(`varnish.lru.nuked`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT average(`varnish.lru.nuked`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "LRU Purges",
         "type" : "line",
         "endpoint" : "/v2/nrql",
@@ -240,7 +276,10 @@
       },
       "props" : {
         "actions" : true,
-        "query" : "SELECT latest(`varnish.backend.connections`) FROM Metric TIMESERIES 5 minutes FACET displayName",
+        "query" : {
+          "account_id" : "{{account_id}}",
+          "nrql" : "SELECT latest(`varnish.backend.connections`) FROM Metric TIMESERIES 5 minutes FACET entity.name"
+        },
         "title" : "Backend Connections",
         "type" : "line",
         "endpoint" : "/v2/nrql",
