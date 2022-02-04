@@ -21,7 +21,7 @@
         "event_types" : [ "RedisSample" ],
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT filter(uniqueCount(entity.name), WHERE `cluster.role` = 'master') as 'Masters', filter(uniqueCount(entity.name), WHERE `cluster.role` = 'slave') as 'Slaves' FROM Metric until 1 minute ago"
+          "nrql" : "SELECT filter(uniqueCount(entity.name), WHERE `redis.clusterRole` = 'master') as 'Masters', filter(uniqueCount(entity.name), WHERE `redis.clusterRole` = 'slave') as 'Slaves' FROM Metric until 1 minute ago"
         },
         "title" : "Reporting Nodes",
         "showTimezone" : true,

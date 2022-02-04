@@ -117,7 +117,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT average(`memcached.slab.getHitRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+          "nrql" : "SELECT average(`memcached.slab.getHitRateSlabPerSecond`) FROM Metric TIMESERIES FACET memcached.slabId"
         },
         "title" : "Get Hit Rate By Slab",
         "type" : "line",
@@ -137,7 +137,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT average(`memcached.slab.cmdSetRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+          "nrql" : "SELECT average(`memcached.slab.cmdSetRateSlabPerSecond`) FROM Metric TIMESERIES FACET memcached.slabId"
         },
         "title" : "Set Rate By Slab",
         "type" : "line",
@@ -177,7 +177,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT average(`memcached.slab.incrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+          "nrql" : "SELECT average(`memcached.slab.incrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET memcached.slabId"
         },
         "title" : "Incr Modify Rate By Slab",
         "type" : "line",
@@ -197,7 +197,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT average(`memcached.slab.decrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+          "nrql" : "SELECT average(`memcached.slab.decrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET memcached.slabId"
         },
         "title" : "Decr Modify Rate By Slab",
         "type" : "line",

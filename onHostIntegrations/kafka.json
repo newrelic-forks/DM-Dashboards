@@ -164,7 +164,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT average(`kafka.broker.bytesWrittenToTopicPerSecond`) FROM Metric timeseries 10 minute since 12 hours ago where entity.name like 'broker:%' facet topic"
+          "nrql" : "SELECT average(`kafka.broker.bytesWrittenToTopicPerSecond`) FROM Metric timeseries 10 minute since 12 hours ago where entity.name like 'broker:%' facet kafka.topic"
         },
         "title" : "Topic Bytes Written",
         "showTimezone" : true,

@@ -296,7 +296,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT latest(`postgres.index.sizeInBytes`) FROM Metric FACET database,schema,table,entity.name"
+          "nrql" : "SELECT latest(`postgres.index.sizeInBytes`) FROM Metric FACET postgres.database,postgres.schema,postgres.table,entity.name"
         },
         "title" : "Index Sizes",
         "showTimezone" : true,
@@ -317,7 +317,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT latest(`postgres.table.totalSizeInBytes`) AS `Total Size`, latest(`postgres.table.indexSizeInBytes`) AS `Index Size` FROM Metric FACET database,schema,entity.name"
+          "nrql" : "SELECT latest(`postgres.table.totalSizeInBytes`) AS `Total Size`, latest(`postgres.table.indexSizeInBytes`) AS `Index Size` FROM Metric FACET postgres.database,postgres.schema,entity.name"
         },
         "title" : "Table Sizes In Bytes",
         "showTimezone" : true,
@@ -338,7 +338,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT latest(`postgres.table.bloatSizeInBytes`) AS `Bloat Size`, latest(`postgres.table.bloatRatio`) AS `Bloat Percent` FROM Metric FACET database,schema,entity.name"
+          "nrql" : "SELECT latest(`postgres.table.bloatSizeInBytes`) AS `Bloat Size`, latest(`postgres.table.bloatRatio`) AS `Bloat Percent` FROM Metric FACET postgres.database,postgres.schema,entity.name"
         },
         "title" : "Table Bloat Size and Percent Bloat",
         "showTimezone" : true,

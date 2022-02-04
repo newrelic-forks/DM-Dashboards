@@ -86,7 +86,7 @@
         },
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT uniqueCount(entity.name, clusterName) as 'Total', filter(uniqueCount(entity.name, clusterName), where `rabbitmq.node.running` = 1) as 'Running', filter(uniqueCount(entity.name, clusterName), where `rabbitmq.node.hostMemoryAlarm` = 1) as 'Memory Alarms', filter(uniqueCount(entity.name, clusterName), where `rabbitmq.node.diskAlarm` = 1) as 'Disk Alarms' FROM Metric UNTIL 1 minute ago"
+          "nrql" : "SELECT uniqueCount(entity.name, rabbitmq.clusterName) as 'Total', filter(uniqueCount(entity.name, rabbitmq.clusterName), where `rabbitmq.node.running` = 1) as 'Running', filter(uniqueCount(entity.name, rabbitmq.clusterName), where `rabbitmq.node.hostMemoryAlarm` = 1) as 'Memory Alarms', filter(uniqueCount(entity.name, rabbitmq.clusterName), where `rabbitmq.node.diskAlarm` = 1) as 'Disk Alarms' FROM Metric UNTIL 1 minute ago"
         },
         "title" : "Nodes",
         "showTimezone" : true,

@@ -19,7 +19,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT average(vsphere.vm.mem.usage)/average(vsphere.vm.mem.size)*100 as 'Memory Usage %', average(vsphere.vm.mem.usage) as 'Memory Usage MiB', average(vsphere.vm.mem.size) as 'Memory Size MiB' FROM Metric facet entity.name, vmConfigName, datacenterName , clusterName limit 10 since 1 day ago"
+          "nrql" : "SELECT average(vsphere.vm.mem.usage)/average(vsphere.vm.mem.size)*100 as 'Memory Usage %', average(vsphere.vm.mem.usage) as 'Memory Usage MiB', average(vsphere.vm.mem.size) as 'Memory Size MiB' FROM Metric facet entity.name, vsphere.vmVmConfigName, vsphere.vmDatacenterName , vsphere.vmClusterName limit 10 since 1 day ago"
         },
         "title" : "Top 10 Virtual Machines by average memory consumption",
         "type" : "table",
@@ -78,7 +78,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT average(vsphere.host.mem.usage/vsphere.host.mem.size)*100 as 'MEM consumption %' FROM Metric facet entity.name, hypervisorHostname, datacenterName, clusterName limit 10 since 10 minutes ago"
+          "nrql" : "SELECT average(vsphere.host.mem.usage/vsphere.host.mem.size)*100 as 'MEM consumption %' FROM Metric facet entity.name, vsphere.hostHypervisorHostname, vsphere.hostDatacenterName, vsphere.hostClusterName limit 10 since 10 minutes ago"
         },
         "title" : "Top 10 Hosts by average memory consumption",
         "type" : "table",
@@ -98,7 +98,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT filter(uniqueCount(entity.id), where powerState = 'poweredOn') as 'Vm poweredOn' , filter(uniqueCount(entity.id), where powerState = 'poweredOff') as 'Vm poweredOff' FROM Metric"
+          "nrql" : "SELECT filter(uniqueCount(entity.id), where vsphere.vmPowerState = 'poweredOn') as 'Vm poweredOn' , filter(uniqueCount(entity.id), where vsphere.vmPowerState = 'poweredOff') as 'Vm poweredOff' FROM Metric"
         },
         "title" : "VM Power Status",
         "type" : "billboard",
@@ -118,7 +118,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT average(vsphere.host.cpu.percent) as 'CPU consumption %' FROM Metric facet entity.name, hypervisorHostname, datacenterName, clusterName limit 10 since 10 minutes ago"
+          "nrql" : "SELECT average(vsphere.host.cpu.percent) as 'CPU consumption %' FROM Metric facet entity.name, vsphere.hostHypervisorHostname, vsphere.hostDatacenterName, vsphere.hostClusterName limit 10 since 10 minutes ago"
         },
         "title" : "Top 10 Hosts by average CPU consumption",
         "type" : "table",
@@ -138,7 +138,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT uniqueCount(entity.name) FROM Metric facet operatingSystem"
+          "nrql" : "SELECT uniqueCount(entity.name) FROM Metric facet vsphere.vmOperatingSystem"
         },
         "title" : "Operating system of virtual machines",
         "type" : "pie",
@@ -248,7 +248,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet overallStatus"
+          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet vsphere.vmOverallStatus"
         },
         "title" : "VMs Overall Status",
         "type" : "table",
@@ -268,7 +268,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet overallStatus"
+          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet vsphere.datastoreOverallStatus"
         },
         "title" : "Datastores Overall Status",
         "type" : "table",
@@ -308,7 +308,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet overallStatus"
+          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet vsphere.hostOverallStatus"
         },
         "title" : "Hosts Overall Status",
         "type" : "table",
@@ -328,7 +328,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet overallStatus"
+          "nrql" : "SELECT uniqueCount(entity.id) FROM Metric facet vsphere.clusterOverallStatus"
         },
         "title" : "Clusters Overall Status",
         "type" : "table",

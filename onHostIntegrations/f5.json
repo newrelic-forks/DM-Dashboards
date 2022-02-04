@@ -144,7 +144,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT latest(`virtualserver.connections`) FROM `F5BigIpVirtualServerSample` FACET displayName"
+          "nrql" : "SELECT latest(`f5.virtualserver.connections`) FROM Metric FACET displayName"
         },
         "title" : "Virtual Server Connections",
         "showTimezone" : true,
@@ -268,7 +268,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT latest(`virtualserver.connections`) FROM `F5BigIpVirtualServerSample` FACET displayName"
+          "nrql" : "SELECT latest(`f5.virtualserver.connections`) FROM Metric FACET displayName"
         },
         "title" : "Pool Connections",
         "showTimezone" : true,

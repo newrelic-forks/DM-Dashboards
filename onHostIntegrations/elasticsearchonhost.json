@@ -19,7 +19,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT filter(uniqueCount(`entity.id`), where `cluster.status` = 'green') as 'Green', filter(uniqueCount(`entity.id`), where `cluster.status` = 'yellow') as 'Yellow', filter(uniqueCount(`entity.id`), where `cluster.status` = 'red') as 'Red' FROM Metric Since 1 hour ago"
+          "nrql" : "SELECT filter(uniqueCount(`entity.id`), where `elasticsearch.clusterStatus` = 'green') as 'Green', filter(uniqueCount(`entity.id`), where `elasticsearch.clusterStatus` = 'yellow') as 'Yellow', filter(uniqueCount(`entity.id`), where `elasticsearch.clusterStatus` = 'red') as 'Red' FROM Metric Since 1 hour ago"
         },
         "title" : "Cluster Status Summary",
         "showTimezone" : true,
@@ -164,7 +164,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT filter(uniqueCount(`index.health`), where `index.health` = 'green') as 'Green', filter(uniqueCount(`index.health`), where `index.health` = 'yellow') as 'Yellow', filter(uniqueCount(`index.health`), where `index.health` = 'red') as 'Red' FROM Metric"
+          "nrql" : "SELECT filter(uniqueCount(`elasticsearch.indexHealth`), where `elasticsearch.indexHealth` = 'green') as 'Green', filter(uniqueCount(`elasticsearch.indexHealth`), where `elasticsearch.indexHealth` = 'yellow') as 'Yellow', filter(uniqueCount(`elasticsearch.indexHealth`), where `elasticsearch.indexHealth` = 'red') as 'Red' FROM Metric"
         },
         "title" : "Index Health Summary",
         "showTimezone" : true,

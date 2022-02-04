@@ -235,7 +235,7 @@
         "actions" : true,
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT latest(`haproxy.backend.activeServers`) FROM Metric FACET `backend.proxyName`"
+          "nrql" : "SELECT latest(`haproxy.backend.activeServers`) FROM Metric FACET `haproxy.backendProxyName`"
         },
         "title" : "Active Servers",
         "type" : "table",
