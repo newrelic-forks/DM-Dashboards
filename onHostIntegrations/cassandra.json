@@ -364,7 +364,7 @@
         "event_types" : [ "CassandraSample" ],
         "query" : {
           "account_id" : "{{account_id}}",
-          "nrql" : "SELECT average(`cassandra.node.totalHintsInProgress`) * uniqueCount(entity.name) AS 'In Progress' FROM Metric FACET entity.name TIMESERIES UNTIL 1 minute AGO"
+          "nrql" : "SELECT average(`cassandra.node.totalHintsInProgress`) * uniqueCount(entity.name) AS 'In Progress' FROM Metric FACET entity.name TIM ESERIES UNTIL 1 minute AGO"
         },
         "title" : "Hints In Progress, by node",
         "showTimezone" : true,

@@ -74,7 +74,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`agent.peer`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`consul.agent.peers`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
@@ -93,7 +93,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`agent.txnAvgInMillisecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`consul.agent.txnAvgInMilliseconds`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
@@ -131,7 +131,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`agent.txnMaxInMillisecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`consul.agent.txnMaxInMilliseconds`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
@@ -150,7 +150,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`agent.kvStoresAvgInMillisecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`consul.agent.kvStoresAvgInMilliseconds`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
@@ -169,7 +169,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`agent.kvStores`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`consul.agent.kvStores`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
@@ -188,7 +188,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`agent.kvStoresMaxInMillisecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`consul.agent.kvStoresMaxInMilliseconds`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }

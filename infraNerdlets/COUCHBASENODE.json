@@ -17,7 +17,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT latest(`node.status`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "nrql" : "SELECT latest(`couchbase.nodeStatus`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
           "offset" : 0
         }
       }

@@ -17,7 +17,7 @@
         "hint" : "The number of get requests currently running and the number of get requests where the document was missing",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`elasticsearch.node.get.currentRequestsRunning`) as 'Running', average(`requestsDocumentMissing`) as 'Missing' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`elasticsearch.node.get.currentRequestsRunning`) as 'Running', average(`elasticsearch.node.get.requestsDocumentMissing`) as 'Missing' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
@@ -222,11 +222,11 @@
       },
       "props" : {
         "type" : "line",
-        "title" : "Threds active in the JVM.",
+        "title" : "Threads active in the JVM.",
         "hint" : "The number of active threads in the JVM.",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`elasticsearch.node.jvm.threadsActive`) as 'Threds active' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`elasticsearch.node.jvm.threadsActive`) as 'Threads active' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }

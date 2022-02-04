@@ -55,7 +55,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`cluster.diskUsedbyDataInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "nrql" : "SELECT average(`couchbase.cluster.diskUsedByDataInBytes`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
           "offset" : 0
         }
       }
