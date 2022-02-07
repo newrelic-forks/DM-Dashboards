@@ -36,7 +36,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "nrql" : "SELECT latest(`vsphere.datacenterOverallStatus`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
           "offset" : 0
         }
       }
@@ -93,7 +93,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`vsphere.datacenter.vsphere.datacenter.cpu.overallUsagePercentage`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`vsphere.datacenter.cpu.overallUsagePercentage`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
@@ -169,7 +169,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`vsphere.datacenter.vsphere.datacenter.mem.usagePercentage`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`vsphere.datacenter.mem.usagePercentage`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }

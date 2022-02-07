@@ -36,7 +36,7 @@
         "hint" : "The number of MS SQL compilations and re-compilations per second.",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`stats.sqlCompilations`) as `Compilations`, average(`mssql.instance.stats.sqlRecompilationsPerSecond`) as `Re-compilations` FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`mssql.instance.stats.sqlCompilationsPerSecond`) as `Compilations`, average(`mssql.instance.stats.sqlRecompilationsPerSecond`) as `Re-compilations` FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }

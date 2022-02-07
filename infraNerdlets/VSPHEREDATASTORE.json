@@ -36,7 +36,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT latest(`accessible`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "nrql" : "SELECT latest(`vsphere.datastoreAccessible`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
           "offset" : 0
         }
       }

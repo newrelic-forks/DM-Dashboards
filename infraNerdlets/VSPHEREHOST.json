@@ -17,7 +17,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT latest(`connectionState`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "nrql" : "SELECT latest(`vsphere.hostConnectionState`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
           "offset" : 0
         }
       }
@@ -36,7 +36,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT latest(`overallStatus`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
+          "nrql" : "SELECT latest(`vsphere.hostOverallStatus`) FROM Metric WHERE `entity.guid` = '{{entity.id}}'",
           "offset" : 0
         }
       }

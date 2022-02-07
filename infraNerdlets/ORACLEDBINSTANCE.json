@@ -150,7 +150,7 @@
         "hint" : "Maximum size of a work area executed in automatic mode.",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`memory.pgaMaxSize`) as 'Max size' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`oracle.database.memory.pgaMaxSizeInBytes`) as 'Max size' FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
