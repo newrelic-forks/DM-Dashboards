@@ -1,140 +1,68 @@
 {
-  "template" : {
-    "title" : "RabbitMqExchangeSample",
-    "filter" : { },
-    "widgets" : [ {
-      "name" : "Number_of_bindings",
-      "renderer" : "vizco",
-      "layout" : {
-        "height" : 4,
-        "width" : 6,
-        "x" : 0,
-        "y" : 0
+  "template": {
+    "title": "RabbitMqExchangeSample",
+    "filter": {},
+    "widgets": [
+      {
+        "name": "Number_of_bindings",
+        "renderer": "vizco",
+        "layout": {
+          "height": 4,
+          "width": 4,
+          "x": 0,
+          "y": 0
+        },
+        "props": {
+          "type": "line",
+          "title": "Number of bindings",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "SELECT average(`rabbitmq.exchange.bindings`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+            "offset": 0
+          }
+        }
       },
-      "props" : {
-        "type" : "line",
-        "title" : "Number of bindings",
-        "hint" : "",
-        "query" : {
-          "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`rabbitmq.exchange.bindings`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
-          "offset" : 0
+      {
+        "name": "Messages_published_per_channel",
+        "renderer": "vizco",
+        "layout": {
+          "height": 4,
+          "width": 4,
+          "x": 4,
+          "y": 0
+        },
+        "props": {
+          "type": "line",
+          "title": "Messages published per channel",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "SELECT average(`rabbitmq.exchange.messagesPublishedPerChannelPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+            "offset": 0
+          }
+        }
+      },
+      {
+        "name": "Messages_published_into_a_queue",
+        "renderer": "vizco",
+        "layout": {
+          "height": 4,
+          "width": 4,
+          "x": 8,
+          "y": 0
+        },
+        "props": {
+          "type": "line",
+          "title": "Messages published into a queue",
+          "hint": "",
+          "query": {
+            "account_id": "{{entity.accountId}}",
+            "nrql": "SELECT average(`rabbitmq.exchange.messagesPublishedQueuePerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+            "offset": 0
+          }
         }
       }
-    }, {
-      "name" : "Delivered_and_acknowledged",
-      "renderer" : "vizco",
-      "layout" : {
-        "height" : 4,
-        "width" : 6,
-        "x" : 6,
-        "y" : 0
-      },
-      "props" : {
-        "type" : "line",
-        "title" : "Delivered and acknowledged",
-        "hint" : "",
-        "query" : {
-          "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`exchange.messagesDeliveredAcknowledgedPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
-          "offset" : 0
-        }
-      }
-    }, {
-      "name" : "Messsages_redelivered",
-      "renderer" : "vizco",
-      "layout" : {
-        "height" : 4,
-        "width" : 6,
-        "x" : 0,
-        "y" : 4
-      },
-      "props" : {
-        "type" : "line",
-        "title" : "Messsages redelivered",
-        "hint" : "",
-        "query" : {
-          "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`exchange.messagesRedeliveredPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
-          "offset" : 0
-        }
-      }
-    }, {
-      "name" : "Messages_returned_unroutable",
-      "renderer" : "vizco",
-      "layout" : {
-        "height" : 4,
-        "width" : 6,
-        "x" : 6,
-        "y" : 4
-      },
-      "props" : {
-        "type" : "line",
-        "title" : "Messages returned unroutable",
-        "hint" : "",
-        "query" : {
-          "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`exchange.messagesReturnedUnroutablePerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
-          "offset" : 0
-        }
-      }
-    }, {
-      "name" : "Messages_published",
-      "renderer" : "vizco",
-      "layout" : {
-        "height" : 4,
-        "width" : 4,
-        "x" : 0,
-        "y" : 8
-      },
-      "props" : {
-        "type" : "line",
-        "title" : "Messages published",
-        "hint" : "",
-        "query" : {
-          "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`exchange.messagesPublishedPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
-          "offset" : 0
-        }
-      }
-    }, {
-      "name" : "Messages_published_per_channel",
-      "renderer" : "vizco",
-      "layout" : {
-        "height" : 4,
-        "width" : 4,
-        "x" : 4,
-        "y" : 8
-      },
-      "props" : {
-        "type" : "line",
-        "title" : "Messages published per channel",
-        "hint" : "",
-        "query" : {
-          "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`rabbitmq.exchange.messagesPublishedPerChannelPerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
-          "offset" : 0
-        }
-      }
-    }, {
-      "name" : "Messages_published_into_a_queue",
-      "renderer" : "vizco",
-      "layout" : {
-        "height" : 4,
-        "width" : 4,
-        "x" : 8,
-        "y" : 8
-      },
-      "props" : {
-        "type" : "line",
-        "title" : "Messages published into a queue",
-        "hint" : "",
-        "query" : {
-          "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`rabbitmq.exchange.messagesPublishedQueuePerSecond`) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
-          "offset" : 0
-        }
-      }
-    } ]
+    ]
   }
 }
