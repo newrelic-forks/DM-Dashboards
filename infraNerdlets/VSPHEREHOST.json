@@ -131,7 +131,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`vsphere.host.mem.usage`/`vsphere.host.mem.size`)*100 FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`vsphere.host.mem.usage`)/average(`vsphere.host.mem.size`)*100 FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }

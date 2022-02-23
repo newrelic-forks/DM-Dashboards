@@ -74,7 +74,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`vsphere.vm.cpu.overallUsage`),filter(average(`vsphere.vm.cpu.allocationLimit`),WHERE `vsphere.vm.cpu.allocationLimit` >= 0) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`vsphere.vm.cpu.overallUsage`),filter(average(`vsphere.vm.cpu.allocationLimit`),WHERE vsphere.vm.cpu.allocationLimit[total] >= 0) FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
@@ -112,7 +112,7 @@
         "hint" : "",
         "query" : {
           "account_id" : "{{entity.accountId}}",
-          "nrql" : "SELECT average(`vsphere.vm.mem.usage`/`vsphere.vm.mem.size`)*100 FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
+          "nrql" : "SELECT average(`vsphere.vm.mem.usage`) / average(`vsphere.vm.mem.size`) * 100 FROM Metric WHERE `entity.guid` = '{{entity.id}}' TIMESERIES auto",
           "offset" : 0
         }
       }
