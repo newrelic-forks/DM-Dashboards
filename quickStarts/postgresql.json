@@ -184,7 +184,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`postgres.table.rowsInsertedPerSecond`) FROM Metric LIMIT 5 FACET database,schema,entity.name TIMESERIES 1 minute"
+          "query" : "SELECT average(`postgres.table.rowsInsertedPerSecond`) FROM Metric LIMIT 5 FACET postgres.database, postgres.schema, entity.name TIMESERIES 1 minute"
         } ]
       }
     }, {
@@ -235,7 +235,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT latest(`postgres.index.sizeInBytes`) FROM Metric FACET database,schema,table,entity.name"
+          "query" : "SELECT latest(`postgres.index.sizeInBytes`) FROM Metric FACET postgres.database,postgres.schema,postgres.table,entity.name"
         } ]
       }
     }, {
@@ -252,7 +252,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT latest(`postgres.table.totalSizeInBytes`) AS `Total Size`, latest(`postgres.table.indexSizeInBytes`) AS `Index Size` FROM Metric FACET database,schema,entity.name"
+          "query" : "SELECT latest(`postgres.table.totalSizeInBytes`) AS `Total Size`, latest(`postgres.table.indexSizeInBytes`) AS `Index Size` FROM Metric FACET postgres.database,postgres.schema,entity.name"
         } ]
       }
     }, {
@@ -269,7 +269,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT latest(`postgres.table.bloatSizeInBytes`) AS `Bloat Size`, latest(`postgres.table.bloatRatio`) AS `Bloat Percent` FROM Metric FACET database,schema,entity.name"
+          "query" : "SELECT latest(`postgres.table.bloatSizeInBytes`) AS `Bloat Size`, latest(`postgres.table.bloatRatio`) AS `Bloat Percent` FROM Metric FACET postgres.database,postgres.schema,entity.name"
         } ]
       }
     } ]
