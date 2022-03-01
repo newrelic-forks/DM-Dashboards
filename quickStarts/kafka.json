@@ -133,7 +133,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`kafka.broker.bytesWrittenToTopicPerSecond`) FROM Metric timeseries 10 minute since 12 hours ago where entity.name like 'broker:%' facet topic"
+          "query" : "SELECT average(`kafka.broker.bytesWrittenToTopicPerSecond`) FROM Metric TIMESERIES 10 minute SINCE 12 hours AGO WHERE `entity.name` LIKE 'broker:%' FACET kafka.topic"
         } ]
       }
     }, {
