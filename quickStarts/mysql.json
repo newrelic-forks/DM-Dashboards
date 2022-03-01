@@ -18,7 +18,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`mysql.node.query.insertPerSecond`) * uniqueCount(entity.name) as 'Insert Commands', average(`mysql.node.query.selectPerSecond`) * uniqueCount(entity.name) as 'Select Commands', average(`mysql.node.query.updatePerSecond`) * uniqueCount(entity.name) as 'Update Comands', average(`mysql.node.query.deletePerSecond`) * uniqueCount(entity.name) as 'Delete Commands' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`mysql.node.query.insertPerSecond`) * uniqueCount(entity.name) as 'Insert Commands', average(`mysql.node.query.selectPerSecond`) * uniqueCount(entity.name) as 'Select Commands', average(`mysql.node.query.updatePerSecond`) * uniqueCount(entity.name) as 'Update Comands', average(`mysql.node.query.deletePerSecond`) * uniqueCount(entity.name) as 'Delete Commands' FROM Metric WHERE `metricName` IN ('mysql.node.query.insertPerSecond', 'mysql.node.query.selectPerSecond', 'mysql.node.query.updatePerSecond', 'mysql.node.query.deletePerSecond') TIMESERIES"
         } ]
       }
     }, {
@@ -48,7 +48,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`mysql.node.query.queriesPerSecond`) * uniqueCount(entity.name) as 'Queries' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`mysql.node.query.queriesPerSecond`) * uniqueCount(entity.name) as 'Queries' FROM Metric WHERE `metricName` = 'mysql.node.query.queriesPerSecond' TIMESERIES"
         } ]
       }
     }, {
@@ -116,7 +116,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`mysql.node.innodb.dataReadBytesPerSecond`) * uniqueCount(entity.name) as 'Read InnoDB Data', average(`mysql.node.innodb.dataWrittenBytesPerSecond`) * uniqueCount(entity.name) as 'Write InnoDB Data' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`mysql.node.innodb.dataReadBytesPerSecond`) * uniqueCount(entity.name) as 'Read InnoDB Data', average(`mysql.node.innodb.dataWrittenBytesPerSecond`) * uniqueCount(entity.name) as 'Write InnoDB Data' FROM Metric WHERE `metricName` IN ('mysql.node.innodb.dataReadBytesPerSecond', 'mysql.node.innodb.dataWrittenBytesPerSecond') TIMESERIES"
         } ]
       }
     }, {
@@ -133,7 +133,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`mysql.node.net.bytesReceivedPerSecond`) * uniqueCount(entity.name) as 'Bytes Received', average(`mysql.node.net.bytesSentPerSecond`) * uniqueCount(entity.name) as 'Bytes Sent' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`mysql.node.net.bytesReceivedPerSecond`) * uniqueCount(entity.name) as 'Bytes Received', average(`mysql.node.net.bytesSentPerSecond`) * uniqueCount(entity.name) as 'Bytes Sent' FROM Metric WHERE `metricName` IN ('mysql.node.net.bytesReceivedPerSecond', 'mysql.node.net.bytesSentPerSecond') TIMESERIES"
         } ]
       }
     } ]
