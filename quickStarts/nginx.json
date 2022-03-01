@@ -18,7 +18,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`nginx.server.net.requestsPerSecond`) * uniqueCount(entity.name) as 'Requests' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`nginx.server.net.requestsPerSecond`) * uniqueCount(entity.name) AS 'Requests' FROM Metric WHERE `metricName` = 'nginx.server.net.requestsPerSecond' TIMESERIES"
         } ]
       }
     }, {
@@ -65,7 +65,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`nginx.server.net.connectionsActive`) * uniqueCount(entity.name) as 'Active Connections' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`nginx.server.net.connectionsActive`) * uniqueCount(entity.name) as 'Active Connections' FROM Metric WHERE `metricName` = 'nginx.server.net.connectionsActive' TIMESERIES"
         } ]
       }
     }, {
@@ -82,7 +82,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`nginx.server.net.connectionsAcceptedPerSecond`) * uniqueCount(entity.name) as 'Connections Accepted' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`nginx.server.net.connectionsAcceptedPerSecond`) * uniqueCount(entity.name) as 'Connections Accepted' FROM Metric WHERE `metricName` = 'nginx.server.net.connectionsAcceptedPerSecond' TIMESERIES"
         } ]
       }
     }, {
@@ -99,7 +99,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`nginx.server.net.connectionsDroppedPerSecond`) * uniqueCount(entity.name) as 'Connections Dropped' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`nginx.server.net.connectionsDroppedPerSecond`) * uniqueCount(entity.name) as 'Connections Dropped' FROM Metric WHERE `metricName` = 'nginx.server.net.connectionsDroppedPerSecond' TIMESERIES"
         } ]
       }
     } ]
