@@ -99,7 +99,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`memcached.slab.getHitRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+          "query" : "SELECT average(`memcached.slab.getHitRateSlabPerSecond`) FROM Metric TIMESERIES FACET memcached.slabId"
         } ]
       }
     }, {
@@ -116,7 +116,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`memcached.slab.cmdSetRateSlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+          "query" : "SELECT average(`memcached.slab.cmdSetRateSlabPerSecond`) FROM Metric TIMESERIES FACET memcached.slabId"
         } ]
       }
     }, {
@@ -150,7 +150,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`memcached.slab.incrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+          "query" : "SELECT average(`memcached.slab.incrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET memcached.slabId"
         } ]
       }
     }, {
@@ -167,7 +167,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`memcached.slab.decrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET slabID"
+          "query" : "SELECT average(`memcached.slab.decrsModifySlabPerSecond`) FROM Metric TIMESERIES FACET memcached.slabId"
         } ]
       }
     }, {
