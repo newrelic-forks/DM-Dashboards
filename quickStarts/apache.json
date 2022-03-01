@@ -18,7 +18,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT uniqueCount(entity.name) as 'Servers' FROM Metric"
+          "query" : "SELECT uniqueCount(entity.name) as 'Servers' FROM Metric  WHERE metricName = 'apache.version'"
         } ]
       }
     }, {
@@ -35,7 +35,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`apache.server.net.requestsPerSecond`) * uniqueCount(entity.name) as 'Requests' FROM Metric TIMESERIES until 1 minute ago"
+          "query" : "SELECT average(`apache.server.net.requestsPerSecond`) * uniqueCount(entity.name) as 'Requests' FROM Metric WHERE `metricName` = 'apache.server.net.requestsPerSecond' TIMESERIES until 1 minute ago"
         } ]
       }
     }, {
@@ -99,7 +99,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entity.name) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entity.name) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entity.name) as 'Total Workers', average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entity.name) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entity.name) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entity.name) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entity.name) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entity.name) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entity.name) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entity.name) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entity.name) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entity.name) as 'Starting' FROM Metric since 5 minutes ago until 1 minute ago"
+          "query" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entity.name) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entity.name) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entity.name) as 'Total Workers', average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entity.name) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entity.name) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entity.name) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entity.name) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entity.name) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entity.name) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entity.name) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entity.name) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entity.name) as 'Starting' FROM Metric WHERE `metricName` IN ('apache.server.idleWorkers', 'apache.server.busyWorkers', 'apache.server.scoreboard.totalWorkers', 'apache.server.scoreboard.readingWorkers', 'apache.server.scoreboard.writingWorkers', 'apache.server.scoreboard.loggingWorkers', 'apache.server.scoreboard.finishingWorkers', 'apache.server.scoreboard.closingWorkers', 'apache.server.scoreboard.keepAliveWorkers', 'apache.server.scoreboard.dnsLookupWorkers', 'apache.server.scoreboard.idleCleanupWorkers', 'apache.server.scoreboard.startingWorkers') since 5 minutes ago until 1 minute ago"
         } ]
       }
     }, {
@@ -116,7 +116,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entity.name) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entity.name) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entity.name) as 'Total Workers' FROM Metric TIMESERIES until 1 minute ago"
+          "query" : "SELECT average(`apache.server.idleWorkers`) * uniqueCount(entity.name) as 'Idle Workers', average(`apache.server.busyWorkers`) * uniqueCount(entity.name) as 'Busy Workers', average(`apache.server.scoreboard.totalWorkers`) * uniqueCount(entity.name) as 'Total Workers' FROM Metric WHERE `metricName` IN ('apache.server.idleWorkers', 'apache.server.busyWorkers', 'apache.server.scoreboard.totalWorkers') TIMESERIES until 1 minute ago"
         } ]
       }
     }, {
@@ -133,7 +133,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entity.name) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entity.name) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entity.name) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entity.name) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entity.name) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entity.name) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entity.name) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entity.name) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entity.name) as 'Starting' FROM Metric TIMESERIES until 1 minute ago"
+          "query" : "SELECT average(`apache.server.scoreboard.readingWorkers`) * uniqueCount(entity.name) as 'Reading Request', average(`apache.server.scoreboard.writingWorkers`) * uniqueCount(entity.name) as 'Writing', average(`apache.server.scoreboard.loggingWorkers`) * uniqueCount(entity.name) as 'Logging', average(`apache.server.scoreboard.finishingWorkers`) * uniqueCount(entity.name) as 'Finishing', average(`apache.server.scoreboard.closingWorkers`) * uniqueCount(entity.name) as 'Closing Connection', average(`apache.server.scoreboard.keepAliveWorkers`) * uniqueCount(entity.name) as 'Keep Alive', average(`apache.server.scoreboard.dnsLookupWorkers`) * uniqueCount(entity.name) as 'DNS Lookup', average(`apache.server.scoreboard.idleCleanupWorkers`) * uniqueCount(entity.name) as 'Idle Cleanup', average(`apache.server.scoreboard.startingWorkers`) * uniqueCount(entity.name) as 'Starting' FROM Metric WHERE `metricName` IN ('apache.server.scoreboard.readingWorkers', 'apache.server.scoreboard.writingWorkers', 'apache.server.scoreboard.loggingWorkers', 'apache.server.scoreboard.finishingWorkers', 'apache.server.scoreboard.closingWorkers', 'apache.server.scoreboard.keepAliveWorkers', 'apache.server.scoreboard.dnsLookupWorkers', 'apache.server.scoreboard.idleCleanupWorkers', 'apache.server.scoreboard.startingWorkers') TIMESERIES until 1 minute ago"
         } ]
       }
     }, {
@@ -150,7 +150,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`apache.server.net.bytesPerSecond`) * uniqueCount(entity.name) as 'Bytes Sent' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`apache.server.net.bytesPerSecond`) * uniqueCount(entity.name) as 'Bytes Sent' FROM Metric WHERE `metricName` = 'apache.server.net.bytesPerSecond' TIMESERIES until 1 minutes ago"
         } ]
       }
     }, {
@@ -167,7 +167,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`apache.server.net.bytesPerSecond`) as 'Bytes Sent' FROM Metric facet entity.name TIMESERIES"
+          "query" : "SELECT average(`apache.server.net.bytesPerSecond`) as 'Bytes Sent' FROM Metric facet entity.name TIMESERIES until 1 minutes ago"
         } ]
       }
     } ]
