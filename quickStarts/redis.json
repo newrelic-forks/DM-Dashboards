@@ -18,7 +18,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT filter(uniqueCount(entity.name), WHERE collector.name='cloudwatch-metric-streams' AND `cluster.role` = 'master') as 'Masters', filter(uniqueCount(entity.name), WHERE `cluster.role` = 'slave') as 'Slaves' FROM Metric until 1 minute ago"
+          "query" : "SELECT filter(uniqueCount(entity.name), WHERE `cluster.role` = 'master') as 'Masters', filter(uniqueCount(entity.name), WHERE `cluster.role` = 'slave') as 'Slaves' FROM Metric WHERE `metricName` = 'redis.clusterRole' until 1 minute ago"
         } ]
       }
     }, {
@@ -35,7 +35,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`redis.instance.net.commandsProcessedPerSecond`) * uniqueCount(entity.name) as 'Commands' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`redis.instance.net.commandsProcessedPerSecond`) * uniqueCount(entity.name) as 'Commands' FROM Metric WHERE `metricName` = 'redis.instance.net.commandsProcessedPerSecond' TIMESERIES until 1 minutes ago"
         } ]
       }
     }, {
@@ -82,7 +82,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`redis.instance.net.connectedClients`) * uniqueCount(entity.name) as 'Connected clients' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`redis.instance.net.connectedClients`) * uniqueCount(entity.name) as 'Connected clients' FROM Metric WHERE `metricName` = 'redis.instance.net.connectedClients' TIMESERIES until 1 minutes ago"
         } ]
       }
     }, {
@@ -116,7 +116,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`redis.instance.net.blockedClients`) * uniqueCount(entity.name) AS 'Blocked Clients' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`redis.instance.net.blockedClients`) * uniqueCount(entity.name) AS 'Blocked Clients' FROM Metric WHERE `metricName` = 'redis.instance.net.blockedClients' TIMESERIES until 1 minutes ago"
         } ]
       }
     }, {
@@ -218,7 +218,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT average(`redis.instance.net.inputBytesPerSecond`) * uniqueCount(entity.name) as 'Input', average(`redis.instance.net.outputBytesPerSecond`) * uniqueCount(entity.name) as 'Output' FROM Metric TIMESERIES"
+          "query" : "SELECT average(`redis.instance.net.inputBytesPerSecond`) * uniqueCount(entity.name) as 'Input', average(`redis.instance.net.outputBytesPerSecond`) * uniqueCount(entity.name) as 'Output' FROM Metric WHERE `metricName` IN ('redis.instance.net.inputBytesPerSecond', 'redis.instance.net.outputBytesPerSecond') TIMESERIES until 1 minutes ago"
         } ]
       }
     }, {
