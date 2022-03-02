@@ -65,7 +65,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT uniqueCount(entity.name, rabbitmq.clusterName) as 'Total', filter(uniqueCount(entity.name, rabbitmq.clusterName), where rabbitmq.node.running[total] > 0) as 'Running', filter(uniqueCount(entity.name, rabbitmq.clusterName), where rabbitmq.node.hostMemoryAlarm[total] > 0) as 'Memory Alarms', filter(uniqueCount(entity.name, rabbitmq.clusterName), where rabbitmq.node.diskAlarm[total] > 0) as 'Disk Alarms' FROM Metric UNTIL 1 minute ago"
+          "query" : "SELECT uniqueCount(entity.name) as 'Total', filter(uniqueCount(entity.name), where rabbitmq.node.running[latest] > 0) as 'Running', filter(uniqueCount(entity.name), where rabbitmq.node.hostMemoryAlarm[latest] > 0) as 'Memory Alarms', filter(uniqueCount(entity.name), where rabbitmq.node.diskAlarm[latest] > 0) as 'Disk Alarms' FROM Metric WHERE metricName='rabbitmq.node.running' UNTIL 1 minute ago"
         } ]
       }
     }, {
