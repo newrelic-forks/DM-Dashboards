@@ -133,7 +133,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT uniqueCount(`entity.name`) as 'Backends' FROM Metric facet varnishInstance since 5 minutes ago"
+          "query" : "SELECT uniqueCount(`entity.name`) as 'Backends' FROM Metric  WHERE `metricName` = 'varnish.session.connections' facet varnish.varnishInstance since 5 minutes ago"
         } ]
       }
     }, {
