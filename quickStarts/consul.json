@@ -48,7 +48,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT latest(`leader`) as 'Current Leader' FROM Metric facet entity.name since 5 minutes ago"
+          "query" : "SELECT latest(`consul.leader`) as 'Current Leader' FROM Metric facet entity.name since 5 minutes ago"
         } ]
       }
     }, {
@@ -116,7 +116,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT latest(`consul.agent.txnAvgInMilliseconds`) FROM Metric TIMESERIES 10 minutes FACET entity.name"
+          "query" : "SELECT latest(`consul.agent.runtime.allocationsInBytes`) FROM Metric TIMESERIES 10 minutes FACET entity.name"
         } ]
       }
     }, {
