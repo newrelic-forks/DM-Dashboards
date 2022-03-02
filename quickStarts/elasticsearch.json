@@ -36,7 +36,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(cluster.status) AS 'Cluster Status', latest(elasticsearch.cluster.nodes) AS 'Cluster Nodes', latest(elasticsearch.cluster.dataNodes) AS 'Data Nodes' FACET entity.name"
+          "query" : "FROM Metric SELECT latest(elasticsearch.clusterStatus) AS 'Cluster Status', latest(elasticsearch.cluster.nodes) AS 'Cluster Nodes', latest(elasticsearch.cluster.dataNodes) AS 'Data Nodes' FACET entity.name"
         } ]
       }
     }, {
@@ -119,7 +119,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(elasticsearch.node.fs.unallocatedBytes)/1024/1024/1024 AS 'Free GB', latest(elasticsearch.node.fs.totalSizeInBytes)/1024/1024/1024 AS 'Total GB', latest(fs.readOperations) AS 'Read IO Operations', latest(elasticsearch.node.fs.writeOperations) AS 'Write IO Operations' FACET hostname"
+          "query" : "FROM Metric SELECT latest(elasticsearch.node.fs.unallocatedBytes)/1024/1024/1024 AS 'Free GB', latest(elasticsearch.node.fs.totalSizeInBytes)/1024/1024/1024 AS 'Total GB', latest(elasticsearch.node.fs.readOperations) AS 'Read IO Operations', latest(elasticsearch.node.fs.writeOperations) AS 'Write IO Operations' FACET host.hostname"
         } ]
       }
     }, {
@@ -141,7 +141,7 @@
         } ],
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(elasticsearch.node.http.openedConnections) AS 'Total' FACET hostname SINCE 10 MINUTES AGO"
+          "query" : "FROM Metric SELECT latest(elasticsearch.node.http.openedConnections) AS 'Total' FACET host.hostname SINCE 10 MINUTES AGO"
         } ],
         "thresholds" : [ ]
       }
@@ -165,7 +165,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(elasticsearch.node.http.currentOpenConnections) AS 'Total' FACET hostname TIMESERIES SINCE 1 WEEK AGO"
+          "query" : "FROM Metric SELECT latest(elasticsearch.node.http.currentOpenConnections) AS 'Total' FACET host.hostname TIMESERIES SINCE 1 WEEK AGO"
         } ],
         "yAxisLeft" : {
           "zero" : false
@@ -189,7 +189,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(elasticsearch.node.jvm.mem.heapUsed) AS 'Percent' FACET hostname SINCE 10 MINUTES AGO COMPARE WITH 1 HOUR AGO"
+          "query" : "FROM Metric SELECT latest(elasticsearch.node.jvm.mem.heapUsed) AS 'Percent' FACET host.hostname SINCE 10 MINUTES AGO COMPARE WITH 1 HOUR AGO"
         } ],
         "thresholds" : [ ]
       }
@@ -222,7 +222,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(elasticsearch.node.jvm.mem.heapUsedInBytes)/1024/1024 AS 'Heap Used (GB)', latest(elasticsearch.node.jvm.mem.heapMaxInBytes)/1024/1024 AS 'Max Heap (GB)' FACET hostname SINCE 1 WEEK AGO TIMESERIES"
+          "query" : "FROM Metric SELECT latest(elasticsearch.node.jvm.mem.heapUsedInBytes)/1024/1024 AS 'Heap Used (GB)', latest(elasticsearch.node.jvm.mem.heapMaxInBytes)/1024/1024 AS 'Max Heap (GB)' FACET host.hostname SINCE 1 WEEK AGO TIMESERIES"
         } ],
         "yAxisLeft" : {
           "zero" : false
@@ -248,7 +248,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(elasticsearch.node.openFd) FACET hostname TIMESERIES SINCE 1 WEEK AGO"
+          "query" : "FROM Metric SELECT latest(elasticsearch.node.openFd) FACET host.hostname TIMESERIES SINCE 1 WEEK AGO"
         } ],
         "yAxisLeft" : {
           "zero" : false
@@ -276,7 +276,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(index.health) AS 'CURRENT HEALTH' FACET hostname, entity.name LIMIT MAX"
+          "query" : "FROM Metric SELECT latest(elasticsearch.indexHealth) AS 'CURRENT HEALTH' FACET host.hostname, entity.name LIMIT MAX"
         } ]
       }
     }, {
@@ -305,7 +305,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(elasticsearch.index.docs) AS 'Total Docs', latest(elasticsearch.index.docsDeleted) AS 'Deleted Docs', latest(elasticsearch.index.primaryShards) AS 'Primary Shards', latest(elasticsearch.index.primaryStoreSizeInBytes)/1024/1024/1024 AS 'Primary Store (GB)', latest(elasticsearch.index.replicaShards) AS 'Replica Shards', (latest(elasticsearch.index.storeSizeInBytes) - latest(elasticsearch.index.primaryStoreSizeInBytes))/1024/1024/1024 AS 'Replica Store (GB)' FACET hostname, entity.name LIMIT MAX"
+          "query" : "FROM Metric SELECT latest(elasticsearch.index.docs) AS 'Total Docs', latest(elasticsearch.index.docsDeleted) AS 'Deleted Docs', latest(elasticsearch.index.primaryShards) AS 'Primary Shards', latest(elasticsearch.index.primaryStoreSizeInBytes)/1024/1024/1024 AS 'Primary Store (GB)', latest(elasticsearch.index.replicaShards) AS 'Replica Shards', (latest(elasticsearch.index.storeSizeInBytes) - latest(elasticsearch.index.primaryStoreSizeInBytes))/1024/1024/1024 AS 'Replica Store (GB)' FACET host.hostname, entity.name"
         } ]
       }
     } ]
@@ -332,7 +332,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT (latest(elasticsearch.node.activeSearches) - earliest(elasticsearch.node.activeSearches))/(latest(elasticsearch.node.activeSearchesInMilliseconds) - earliest(elasticsearch.node.activeSearchesInMilliseconds)) FACET hostname TIMESERIES SINCE 1 WEEK AGO"
+          "query" : "FROM Metric SELECT (latest(elasticsearch.node.activeSearches) - earliest(elasticsearch.node.activeSearches))/(latest(elasticsearch.node.activeSearchesInMilliseconds) - earliest(elasticsearch.node.activeSearchesInMilliseconds)) FACET host.hostname TIMESERIES SINCE 1 WEEK AGO"
         } ],
         "yAxisLeft" : {
           "zero" : false
@@ -358,7 +358,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT (latest(elasticsearch.node.get.totalGetRequests) - earliest(elasticsearch.node.get.totalGetRequests))/(latest(elasticsearch.node.get.timeGetRequestsInMilliseconds) - earliest(elasticsearch.node.get.timeGetRequestsInMilliseconds)) AS 'Total', (latest(elasticsearch.node.get.requestsDocumentExists) - earliest(elasticsearch.node.get.requestsDocumentExists))/(latest(elasticsearch.node.get.requestsDocumentExistsInMilliseconds) - earliest(elasticsearch.node.get.requestsDocumentExistsInMilliseconds)) AS 'Document Exists', (latest(elasticsearch.node.get.requestsDocumentMissing) - earliest(elasticsearch.node.get.requestsDocumentMissing))/(latest(elasticsearch.node.get.requestsDocumentMissingInMilliseconds) - earliest(elasticsearch.node.get.requestsDocumentMissingInMilliseconds)) AS 'Document Missing' FACET hostname TIMESERIES SINCE 1 WEEK AGO"
+          "query" : "FROM Metric SELECT (latest(elasticsearch.node.get.totalGetRequests) - earliest(elasticsearch.node.get.totalGetRequests))/(latest(elasticsearch.node.get.timeGetRequestsInMilliseconds) - earliest(elasticsearch.node.get.timeGetRequestsInMilliseconds)) AS 'Total', (latest(elasticsearch.node.get.requestsDocumentExists) - earliest(elasticsearch.node.get.requestsDocumentExists))/(latest(elasticsearch.node.get.requestsDocumentExistsInMilliseconds) - earliest(elasticsearch.node.get.requestsDocumentExistsInMilliseconds)) AS 'Document Exists', (latest(elasticsearch.node.get.requestsDocumentMissing) - earliest(elasticsearch.node.get.requestsDocumentMissing))/(latest(elasticsearch.node.get.requestsDocumentMissingInMilliseconds) - earliest(elasticsearch.node.get.requestsDocumentMissingInMilliseconds)) AS 'Document Missing' FACET host.hostname TIMESERIES SINCE 1 WEEK AGO"
         } ],
         "yAxisLeft" : {
           "zero" : false
@@ -382,7 +382,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT latest(elasticsearch.node.index.indexingOperationsFailed) - earliest(elasticsearch.node.index.indexingOperationsFailed) AS 'Failed Operations' FACET hostname"
+          "query" : "FROM Metric SELECT latest(elasticsearch.node.index.indexingOperationsFailed) - earliest(elasticsearch.node.index.indexingOperationsFailed) AS 'Failed Operations' FACET host.hostname"
         } ]
       }
     }, {
@@ -405,7 +405,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT (latest(elasticsearch.node.indexing.documentsIndexed) - earliest(elasticsearch.node.indexing.documentsIndexed))/(latest(elasticsearch.node.indexing.timeIndexingDocumentsInMilliseconds) - earliest(elasticsearch.node.indexing.timeIndexingDocumentsInMilliseconds)) FACET hostname TIMESERIES SINCE 1 WEEK AGO"
+          "query" : "FROM Metric SELECT (latest(elasticsearch.node.indexing.documentsIndexed) - earliest(elasticsearch.node.indexing.documentsIndexed))/(latest(elasticsearch.node.indexing.timeIndexingDocumentsInMilliseconds) - earliest(elasticsearch.node.indexing.timeIndexingDocumentsInMilliseconds)) FACET host.hostname TIMESERIES SINCE 1 WEEK AGO"
         } ],
         "yAxisLeft" : {
           "zero" : false
@@ -431,7 +431,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT (latest(elasticsearch.node.merges.segmentMerges) - earliest(elasticsearch.node.merges.segmentMerges))/(latest(elasticsearch.node.merges.totalSegmentMergingInMilliseconds) - earliest(elasticsearch.node.merges.totalSegmentMergingInMilliseconds)) FACET hostname TIMESERIES SINCE 1 WEEK AGO"
+          "query" : "FROM Metric SELECT (latest(elasticsearch.node.merges.segmentMerges) - earliest(elasticsearch.node.merges.segmentMerges))/(latest(elasticsearch.node.merges.totalSegmentMergingInMilliseconds) - earliest(elasticsearch.node.merges.totalSegmentMergingInMilliseconds)) FACET host.hostname TIMESERIES SINCE 1 WEEK AGO"
         } ],
         "yAxisLeft" : {
           "zero" : false
@@ -457,7 +457,7 @@
         },
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "FROM Metric SELECT (latest(elasticsearch.node.refresh.total) - earliest(elasticsearch.node.refresh.total))/(latest(elasticsearch.node.refresh.totalInMilliseconds) - earliest(elasticsearch.node.refresh.totalInMilliseconds)) FACET hostname TIMESERIES SINCE 1 WEEK AGO"
+          "query" : "FROM Metric SELECT (latest(elasticsearch.node.refresh.total) - earliest(elasticsearch.node.refresh.total))/(latest(elasticsearch.node.refresh.totalInMilliseconds) - earliest(elasticsearch.node.refresh.totalInMilliseconds)) FACET host.hostname TIMESERIES SINCE 1 WEEK AGO"
         } ],
         "yAxisLeft" : {
           "zero" : false
