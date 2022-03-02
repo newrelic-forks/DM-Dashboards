@@ -129,7 +129,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT latest(`frontend.status`) FROM Metric FACET entity.name"
+          "query" : "SELECT latest(`haproxy.frontendStatus`) FROM Metric FACET entity.name"
         } ]
       }
     }, {
@@ -193,7 +193,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT latest(`haproxy.backend.activeServers`) FROM Metric FACET `backend.proxyName`"
+          "query" : "SELECT latest(`haproxy.backend.activeServers`) FROM Metric FACET `haproxy.backendProxyName`"
         } ]
       }
     }, {
@@ -329,7 +329,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT latest(`backend.mode`) FROM Metric FACET entity.name"
+          "query" : "SELECT latest(`haproxy.backendMode`) FROM Metric FACET entity.name"
         } ]
       }
     } ]
