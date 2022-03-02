@@ -18,7 +18,7 @@
       "rawConfiguration" : {
         "nrqlQueries" : [ {
           "accountId" : 0,
-          "query" : "SELECT uniqueCount(entity.name) as 'Servers' FROM Metric  WHERE metricName = 'apache.version'"
+          "query" : "SELECT uniqueCount(entity.name) as 'Servers' FROM Metric  WHERE metricName ='apache.server.net.requestsPerSecond'"
         } ]
       }
     }, {
